@@ -1,3 +1,7 @@
+/*
+    Stores general data that applies to all blocks and chunks
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +9,8 @@ using UnityEngine;
 public class BlockData
 {
 
-    public static readonly int width = 8;
-    public static readonly int height = 8;
+    public static readonly int chunkWidth = 8;
+    public static readonly int chunkHeight = 8;
 
     // anything involving faces of the cube is done in this order:
     // Back, Front, Top, Bottom, Left, Right

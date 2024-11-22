@@ -1,29 +1,48 @@
+/*
+    Represents one chunk (a subdivided block)
+    Instantiates a GameObject into the scene when the constructor is called
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chunk : MonoBehaviour
+public class Chunk
 {
+    public ChunkCoord coord;
 
-    public MeshRenderer rend;
-    public MeshFilter filter;
+    BlockType type;
+    GameObject obj;
+    MeshRenderer rend;
+    MeshFilter filter;
 
     int vertexIndex = 0;
     List<Vector3> vertices = new List<Vector3> ();
     List<int> triangles = new List<int> ();
     List<Vector2> uvs = new List<Vector2> ();
 
-    byte[,,] blockMap = new byte[BlockData.width, BlockData.height, BlockData.width];
+    byte[,,] blockMap = new byte[BlockData.chunkWidth, BlockData.chunkHeight, BlockData.chunkWidth];
 
     World world;
 
-    void Start()
+    public Chunk (ChunkCoord coord, World world, BlockType type)
     {
-        // get a reference to the World object
-        world = GameObject.Find ("World").GetComponent<World> ();
+        // get a reference to each of these components
+        this.coord = coord;
+        this.world = world;
+        this.type = type;
+        obj = new GameObject ();
+        filter = obj.AddComponent<MeshFilter> ();
+        rend = obj.AddComponent<MeshRenderer> ();
 
-        // decide what blocks there will be in this chunk
-        PopulateBlockMap ();
+        // set material, parent, location, name
+        rend.material = world.material;
+        obj.transform.SetParent (world.transform);
+        obj.transform.position = coord.ToVector3 ();
+        obj.name = coord.ToString ();
+
+        // get the placements of sub-blocks based on what type of block this is
+        blockMap = type.blockMap;
 
         // create the data necessary to create a mesh
         CreateBlockData ();
@@ -32,29 +51,14 @@ public class Chunk : MonoBehaviour
         CreateMesh ();
     }
 
-    // update blockMap with the correct block ids
-    void PopulateBlockMap ()
-    {
-        for (int y = 0; y < BlockData.height; ++y)
-        {
-            for (int x = 0; x < BlockData.width; ++x)
-            {
-                for (int z = 0; z < BlockData.width; ++z)
-                {
-                    blockMap[x, y, z] = 4;
-                }
-            }
-        }
-    }
-
     // generate mesh data for all blocks in this chunk
     void CreateBlockData ()
     {
-        for (int y = 0; y < BlockData.height; ++y)
+        for (int y = 0; y < BlockData.chunkHeight; ++y)
         {
-            for (int x = 0; x < BlockData.width; ++x)
+            for (int x = 0; x < BlockData.chunkWidth; ++x)
             {
-                for (int z = 0; z < BlockData.width; ++z)
+                for (int z = 0; z < BlockData.chunkWidth; ++z)
                 {
                     AddBlockData (new Vector3 (x, y, z));
                 }
@@ -65,12 +69,16 @@ public class Chunk : MonoBehaviour
     // add one block to this chunk at a position
     void AddBlockData (Vector3 pos)
     {
+        byte blockID = blockMap[(int) pos.x, (int) pos.y, (int) pos.z];
+
+        // air blocks do not need to be added
+        if (blockID == 0)
+            return;
+
         for (int i = 0; i < 6; ++i)
         {
             if (!HasBlock (pos + BlockData.faces[i]))
             {
-                byte blockID = blockMap[(int) pos.x, (int) pos.y, (int) pos.z];
-
                 // draw 2 triangles, using only 4 vertices
                 for (int j = 0; j < 4; ++j)
                 {
@@ -100,13 +108,22 @@ public class Chunk : MonoBehaviour
         int y = (int) pos.y;
         int z = (int) pos.z;
 
-        if (x < 0 || x >= BlockData.width || y < 0 || y >= BlockData.height || z < 0 || z >= BlockData.width)
-            return false;
+        if (InChunk (x, y, z))
+            return world.blockTypes[blockMap[x, y, z]].isSolid;
 
-    return world.blockTypes[blockMap[x, y, z]].isSolid;
+        return false;
+    }
+
+    // check if a position is within the chunk
+    bool InChunk (int x, int y, int z)
+    {
+        if (x < 0 || x >= BlockData.chunkWidth || y < 0 || y >= BlockData.chunkHeight || z < 0 || z >= BlockData.chunkWidth)
+            return false;
+        return true;
     }
 
     // adds the uvs of a certain texture for one face
+    // should be called in the order: Back, Front, Top, Bottom, Left, Right
     void AddTexture (int id)
     {
         float y = id / BlockData.atlasSize;
@@ -136,4 +153,28 @@ public class Chunk : MonoBehaviour
         filter.mesh = mesh;
     }
 
+}
+
+public class ChunkCoord
+{
+    public int x;
+    public int y;
+    public int z;
+
+    public ChunkCoord (int x, int y, int z)
+    {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public Vector3 ToVector3 ()
+    {
+        return new Vector3 (x * BlockData.chunkWidth, y * BlockData.chunkHeight, z * BlockData.chunkWidth);
+    }
+
+    public override string ToString ()
+    {
+        return "Chunk " + ToVector3 ();
+    }
 }
