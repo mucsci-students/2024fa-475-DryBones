@@ -8,6 +8,8 @@ public class BlockData
     public static readonly int width = 8;
     public static readonly int height = 8;
 
+    // anything involving textuers is done in this order:
+    // Back, Front, Top, Bottom, Left, Right
     /*
         3 - - - 2
         | \     | \
@@ -45,6 +47,12 @@ public class BlockData
         {4, 7, 0, 3}, // left face
         {1, 2, 5, 6}  // right face
     };
+
+
+    public static int atlasSize = 16; // the atlas is made of 16 x 16 textures
+    public static float normalizedTextureSize { // size of texture in atlas, relative to size of the atlas
+        get { return 1f / (float) atlasSize; }
+    }
 
     public static readonly Vector2[] uvs= new Vector2[4]
     {

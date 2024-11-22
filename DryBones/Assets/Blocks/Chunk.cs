@@ -13,11 +13,16 @@ public class Chunk : MonoBehaviour
     List<int> triangles = new List<int> ();
     List<Vector2> uvs = new List<Vector2> ();
 
-    bool[,,] blockMap = new bool[BlockData.width, BlockData.height, BlockData.width];
+    byte[,,] blockMap = new byte[BlockData.width, BlockData.height, BlockData.width];
+
+    World world;
 
     void Start()
     {
-        // decide where there will be blocks in this chunk
+        // get a reference to the World object
+        world = GameObject.Find ("World").GetComponent<World> ();
+
+        // decide what blocks there will be in this chunk
         PopulateBlockMap ();
 
         // create the data necessary to create a mesh
@@ -27,7 +32,7 @@ public class Chunk : MonoBehaviour
         CreateMesh ();
     }
 
-    // set blockMap to true where there should be a block
+    // update blockMap with the correct block ids
     void PopulateBlockMap ()
     {
         for (int y = 0; y < BlockData.height; ++y)
@@ -36,7 +41,7 @@ public class Chunk : MonoBehaviour
             {
                 for (int z = 0; z < BlockData.width; ++z)
                 {
-                    blockMap[x, y, z] = true;
+                    blockMap[x, y, z] = 4;
                 }
             }
         }
@@ -64,13 +69,14 @@ public class Chunk : MonoBehaviour
         {
             if (!HasBlock (pos + BlockData.faces[i]))
             {
+                byte blockID = blockMap[(int) pos.x, (int) pos.y, (int) pos.z];
+
                 // draw 2 triangles, using only 4 vertices
                 for (int j = 0; j < 4; ++j)
                 {
                     int triangleIndex = BlockData.triangles [i, j];
                     vertices.Add (BlockData.vertices [triangleIndex] + pos);
 
-                    uvs.Add (BlockData.uvs[j]);
                 }
 
                 triangles.Add (vertexIndex + 0);
@@ -80,6 +86,8 @@ public class Chunk : MonoBehaviour
                 triangles.Add (vertexIndex + 1);
                 triangles.Add (vertexIndex + 3);
                 vertexIndex += 4;
+
+                AddTexture (world.blockTypes[blockID].GetTextureID (i));
             }
         }
     }
@@ -95,7 +103,7 @@ public class Chunk : MonoBehaviour
         if (x < 0 || x >= BlockData.width || y < 0 || y >= BlockData.height || z < 0 || z >= BlockData.width)
             return false;
 
-        return blockMap[x, y, z];
+    return world.blockTypes[blockMap[x, y, z]].isSolid;
     }
 
     // create a mesh for the chunk, using data generated from CreateBlockData()
@@ -109,6 +117,23 @@ public class Chunk : MonoBehaviour
         mesh.RecalculateNormals ();
 
         filter.mesh = mesh;
+    }
+
+    // adds the uvs of a certain texture for one face
+    void AddTexture (int id)
+    {
+        float y = id / BlockData.atlasSize;
+        float x = id - (y * BlockData.atlasSize);
+
+        x *= BlockData.normalizedTextureSize;
+        y *= BlockData.normalizedTextureSize;
+
+        y = 1f - y - BlockData.normalizedTextureSize;
+
+        uvs.Add (new Vector2 (x, y));
+        uvs.Add (new Vector2 (x, y + BlockData.normalizedTextureSize));
+        uvs.Add (new Vector2 (x + BlockData.normalizedTextureSize, y));
+        uvs.Add (new Vector2 (x + BlockData.normalizedTextureSize, y + BlockData.normalizedTextureSize));
     }
 
 }
