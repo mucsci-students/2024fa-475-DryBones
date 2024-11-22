@@ -247,6 +247,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 0}
   blockTypes:
+  - blockName: Air
+    isSolid: 0
+    backFaceTexture: 0
+    frontFaceTexture: 0
+    topFaceTexture: 0
+    bottomFaceTexture: 0
+    leftFaceTexture: 0
+    rightFaceTexture: 0
   - blockName: Default
     isSolid: 1
     backFaceTexture: 0

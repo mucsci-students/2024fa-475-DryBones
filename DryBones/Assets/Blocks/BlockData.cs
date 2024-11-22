@@ -8,7 +8,7 @@ public class BlockData
     public static readonly int width = 8;
     public static readonly int height = 8;
 
-    // anything involving textuers is done in this order:
+    // anything involving faces of the cube is done in this order:
     // Back, Front, Top, Bottom, Left, Right
     /*
         3 - - - 2

@@ -106,19 +106,6 @@ public class Chunk : MonoBehaviour
     return world.blockTypes[blockMap[x, y, z]].isSolid;
     }
 
-    // create a mesh for the chunk, using data generated from CreateBlockData()
-    void CreateMesh ()
-    {
-        Mesh mesh = new Mesh ();
-        mesh.vertices = vertices.ToArray ();
-        mesh.triangles = triangles.ToArray ();
-        mesh.uv = uvs.ToArray ();
-
-        mesh.RecalculateNormals ();
-
-        filter.mesh = mesh;
-    }
-
     // adds the uvs of a certain texture for one face
     void AddTexture (int id)
     {
@@ -134,6 +121,19 @@ public class Chunk : MonoBehaviour
         uvs.Add (new Vector2 (x, y + BlockData.normalizedTextureSize));
         uvs.Add (new Vector2 (x + BlockData.normalizedTextureSize, y));
         uvs.Add (new Vector2 (x + BlockData.normalizedTextureSize, y + BlockData.normalizedTextureSize));
+    }
+
+    // create a mesh for the chunk, using data generated from CreateBlockData()
+    void CreateMesh ()
+    {
+        Mesh mesh = new Mesh ();
+        mesh.vertices = vertices.ToArray ();
+        mesh.triangles = triangles.ToArray ();
+        mesh.uv = uvs.ToArray ();
+
+        mesh.RecalculateNormals ();
+
+        filter.mesh = mesh;
     }
 
 }
