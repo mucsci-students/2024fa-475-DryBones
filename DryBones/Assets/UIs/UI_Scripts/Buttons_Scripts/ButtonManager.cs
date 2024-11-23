@@ -8,6 +8,8 @@ public class ButtonManager : MonoBehaviour
     [Header("Canvases")]
     [SerializeField] private GameObject _mainMenuCanvas;  
     [SerializeField] private GameObject _settingMenuCanvas;
+    [SerializeField] private GameObject _tutorialMenuCanvas;
+    [SerializeField] private GameObject _informationMenuCanvas;
 
     [Header("Information Panel")]
     [SerializeField] private GameObject _renderObjectSliderPanel;
@@ -42,14 +44,36 @@ public class ButtonManager : MonoBehaviour
     {
         _mainMenuCanvas.SetActive(true);
         _settingMenuCanvas.SetActive(false);
+        _tutorialMenuCanvas.SetActive(false);
+        _informationMenuCanvas.SetActive(false);
     }
 
     // Setting menu
     public void SettingMenu()
     {
         TurnOffPanel();
+        _informationMenuCanvas.SetActive(false);
         _mainMenuCanvas.SetActive(false);
+        _tutorialMenuCanvas.SetActive(false);
         _settingMenuCanvas.SetActive(true);
+    }
+
+    // Tutorial menu
+    public void TutorialMenu()
+    {
+        _informationMenuCanvas.SetActive(false);
+        _mainMenuCanvas.SetActive(false);
+        _settingMenuCanvas.SetActive(false);
+        _tutorialMenuCanvas.SetActive(true);
+    }
+
+    // Information menu
+    public void InformationMenu()
+    {
+        _mainMenuCanvas.SetActive(false);
+        _settingMenuCanvas.SetActive(false);
+        _tutorialMenuCanvas.SetActive(false);
+        _informationMenuCanvas.SetActive(true);
     }
 
     public void ClosePanelButton()
