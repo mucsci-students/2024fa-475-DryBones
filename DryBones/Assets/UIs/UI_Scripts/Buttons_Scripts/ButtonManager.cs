@@ -30,7 +30,7 @@ public class ButtonManager : MonoBehaviour
     // Method to start playing game
     public void PlayButton()
     {
-        SceneManager.LoadScene("Player Test");
+        SceneManager.LoadScene("PlayerTest");
     }
 
     // Method to quit the game

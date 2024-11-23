@@ -5,7 +5,7 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    public static AudioManager Instance { get; private set; }
 
     //[SerializeField] private AudioMixer _masterVolumMixer; 
     //[SerializeField] private Slider _masterVolumSlider;
@@ -24,12 +24,6 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-
-    private void Start()
-    {
-        PlayThemeMusic("AllMenuAudio");
     }
 
     public void PlayThemeMusic(string audioName)
