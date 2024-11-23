@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,9 +18,9 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject _sfxVolumeSliderPanel;
 
     [Header("Texts")]
-    [SerializeField] private GameObject _renderObjectSliderText;
-    [SerializeField] private GameObject _masterVolumeSliderText;
-    [SerializeField] private GameObject _sfxVolumeSliderText;
+    [SerializeField] private TMP_Text _renderObjectSliderText;
+    [SerializeField] private TMP_Text _masterVolumeSliderText;
+    [SerializeField] private TMP_Text _sfxVolumeSliderText;
 
     private void Start()
     {
@@ -76,24 +77,30 @@ public class ButtonManager : MonoBehaviour
         _informationMenuCanvas.SetActive(true);
     }
 
-    public void ClosePanelButton()
-    {
-        TurnOffPanel();
-    }
+    
 
     public void RenderObjectInfoButton()
     {
         _renderObjectSliderPanel.SetActive(true);
+        _masterVolumeSliderPanel.SetActive(false);
+        _sfxVolumeSliderPanel.SetActive(false);
+        _renderObjectSliderText.text = "Adjusts how many objects are rendered in the game. Higher values show more objects, while lower values show fewer.";
     }
 
     public void MasterVolumeInfoButton()
     {
         _masterVolumeSliderPanel.SetActive(true);
+        _masterVolumeSliderText.text = "Controls the overall volume of the game, affecting all audio, including music and sound effects.";
+        _renderObjectSliderPanel.SetActive(false);
+        _sfxVolumeSliderPanel.SetActive(false);
     }
 
     public void SFXVolumeInfoButton()
     {
         _sfxVolumeSliderPanel.SetActive(true);
+        _sfxVolumeSliderText.text = "Adjusts the volume of sound effects in the game, such as footsteps, gunshots, and environment sounds.";
+        _renderObjectSliderPanel.SetActive(false);
+        _masterVolumeSliderPanel.SetActive(false);
     }
 
     public void TurnOffPanel()
@@ -102,5 +109,10 @@ public class ButtonManager : MonoBehaviour
         _renderObjectSliderPanel.SetActive(false);
         _masterVolumeSliderPanel.SetActive(false);
         _sfxVolumeSliderPanel.SetActive(false);
+    }
+
+    public void ClosePanelButton()
+    {
+        TurnOffPanel();
     }
 }
