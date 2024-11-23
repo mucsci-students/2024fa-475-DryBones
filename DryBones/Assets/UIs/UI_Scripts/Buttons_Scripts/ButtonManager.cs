@@ -5,8 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
+    [Header("Canvases")]
     [SerializeField] private GameObject _mainMenuCanvas;  
     [SerializeField] private GameObject _settingMenuCanvas;
+
+    [Header("Information Panel")]
+    [SerializeField] private GameObject _renderObjectSliderPanel;
+    [SerializeField] private GameObject _masterVolumeSliderPanel;
+    [SerializeField] private GameObject _sfxVolumeSliderPanel;
+
+    [Header("Texts")]
+    [SerializeField] private GameObject _renderObjectSliderText;
+    [SerializeField] private GameObject _masterVolumeSliderText;
+    [SerializeField] private GameObject _sfxVolumeSliderText;
 
     private void Start()
     {
@@ -36,7 +47,36 @@ public class ButtonManager : MonoBehaviour
     // Setting menu
     public void SettingMenu()
     {
+        TurnOffPanel();
         _mainMenuCanvas.SetActive(false);
         _settingMenuCanvas.SetActive(true);
+    }
+
+    public void ClosePanelButton()
+    {
+        TurnOffPanel();
+    }
+
+    public void RenderObjectInfoButton()
+    {
+        _renderObjectSliderPanel.SetActive(true);
+    }
+
+    public void MasterVolumeInfoButton()
+    {
+        _masterVolumeSliderPanel.SetActive(true);
+    }
+
+    public void SFXVolumeInfoButton()
+    {
+        _sfxVolumeSliderPanel.SetActive(true);
+    }
+
+    public void TurnOffPanel()
+    {
+        // Initially set all panels active status to be false
+        _renderObjectSliderPanel.SetActive(false);
+        _masterVolumeSliderPanel.SetActive(false);
+        _sfxVolumeSliderPanel.SetActive(false);
     }
 }
