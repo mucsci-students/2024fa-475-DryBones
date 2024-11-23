@@ -17,6 +17,7 @@ public class World : MonoBehaviour
     public List<List<Chunk>> chunksToInit = new List<List<Chunk>> ();
     public List<Chunk> chunksToHide = new List<Chunk> ();
     bool runningCoroutine = false;
+    public Vector3 position = new Vector3 (0f, 0f, 0f);
 
     private float scale;
 

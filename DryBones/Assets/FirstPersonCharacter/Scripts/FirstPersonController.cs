@@ -194,7 +194,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+            if (Time.timeScale > 0f)
+                m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
 
 
