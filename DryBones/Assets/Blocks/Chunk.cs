@@ -15,6 +15,7 @@ public class Chunk
     GameObject obj;
     MeshRenderer rend;
     MeshFilter filter;
+    MeshCollider coll;
 
     float scale;
     int vertexIndex = 0;
@@ -37,6 +38,7 @@ public class Chunk
         obj = new GameObject ();
         filter = obj.AddComponent<MeshFilter> ();
         rend = obj.AddComponent<MeshRenderer> ();
+        coll = obj.AddComponent<MeshCollider> ();
 
         // set material, parent, location, scale, name
         rend.material = world.material;
@@ -159,6 +161,7 @@ public class Chunk
         mesh.RecalculateNormals ();
 
         filter.mesh = mesh;
+        coll.sharedMesh = filter.mesh;
     }
 
     // divde this block into many smaller blocks
