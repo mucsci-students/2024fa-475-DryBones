@@ -1,5 +1,6 @@
 /*
     The World class stores all of the possible blocks, as well as the starting block
+    It also instantiates new chunks in a coroutine (to avoid lag)
     The BlockType class represents a type of block (default block, Menger sponge, etc)
 */
 
@@ -12,6 +13,12 @@ public class World : MonoBehaviour
     public Material material;
     public BlockType[] blockTypes;
     public int startingBlockID = 1;
+    public List<Chunk> startingChunks = new List<Chunk> ();
+    public List<List<Chunk>> chunksToInit = new List<List<Chunk>> ();
+    public List<Chunk> chunksToHide = new List<Chunk> ();
+    bool runningCoroutine = false;
+
+    private float scale;
 
     void Start ()
     {
@@ -44,7 +51,55 @@ public class World : MonoBehaviour
                 }
             }
         }
-        Chunk chunk1 = new Chunk (new ChunkCoord (0, 0, 0), this, blockTypes[startingBlockID]);
+
+        scale = transform.localScale.x;
+        for (int i = -1; i <= 1; ++i)
+        {
+            for (int j = -1; j <= 1; ++j)
+            {
+                for (int k = -1; k <= 1; ++k)
+                {
+                    startingChunks.Add (new Chunk (new ChunkCoord (i, j, k, scale / 8f), this, blockTypes[startingBlockID], transform));
+                }
+            }
+        }
+        InitChunks (startingChunks);
+    }
+
+    // call the Init() function on a bunch of chunks, in a coroutine
+    public void InitChunks (List<Chunk> chunks, Chunk parentChunk)
+    {
+        chunksToInit.Add (new List<Chunk> (chunks));
+        chunksToHide.Add (parentChunk);
+        if (!runningCoroutine)
+        {
+            StartCoroutine ("InitCoroutine");
+        }
+    }
+
+    public void InitChunks (List<Chunk> chunks)
+    {
+        InitChunks (chunks, null);
+    }
+
+    // a coroutine that calls Init() on each chunk gradually to avoid lag
+    IEnumerator InitCoroutine ()
+    {
+        runningCoroutine = true;
+        while (chunksToInit.Count > 0)
+        {
+            while (chunksToInit[0].Count > 0)
+            {
+                chunksToInit[0][0].Init ();
+                chunksToInit[0].RemoveAt (0);
+                yield return null;
+            }
+            chunksToInit.RemoveAt (0);
+            if (chunksToHide[0] != null) // may be null, ie. no parent
+                chunksToHide[0].Hide ();
+            chunksToHide.RemoveAt (0);
+        }
+        runningCoroutine = false;
     }
 }
 

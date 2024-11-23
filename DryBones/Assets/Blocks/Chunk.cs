@@ -16,6 +16,7 @@ public class Chunk
     MeshRenderer rend;
     MeshFilter filter;
 
+    float scale;
     int vertexIndex = 0;
     List<Vector3> vertices = new List<Vector3> ();
     List<int> triangles = new List<int> ();
@@ -25,7 +26,9 @@ public class Chunk
 
     World world;
 
-    public Chunk (ChunkCoord coord, World world, BlockType type)
+    List<Chunk> subChunks;
+
+    public Chunk (ChunkCoord coord, World world, BlockType type, Transform parent)
     {
         // get a reference to each of these components
         this.coord = coord;
@@ -35,15 +38,20 @@ public class Chunk
         filter = obj.AddComponent<MeshFilter> ();
         rend = obj.AddComponent<MeshRenderer> ();
 
-        // set material, parent, location, name
+        // set material, parent, location, scale, name
         rend.material = world.material;
-        obj.transform.SetParent (world.transform);
-        obj.transform.position = coord.ToVector3 ();
+        obj.transform.SetParent (parent);
+        obj.transform.position = coord.ToAbsolutePos ();
+        obj.transform.localScale = new Vector3 (0.125f, 0.125f, 0.125f);
         obj.name = coord.ToString ();
 
         // get the placements of sub-blocks based on what type of block this is
         blockMap = type.blockMap;
+    }
 
+    // run all of the computation intensive set-up
+    public void Init ()
+    {
         // create the data necessary to create a mesh
         CreateBlockData ();
 
@@ -66,7 +74,7 @@ public class Chunk
         }
     }
 
-    // add one block to this chunk at a position
+    // add one block to this chunk at a position (relative to the chunk)
     void AddBlockData (Vector3 pos)
     {
         byte blockID = blockMap[(int) pos.x, (int) pos.y, (int) pos.z];
@@ -100,7 +108,7 @@ public class Chunk
         }
     }
 
-    // check if there is a block at a position, using blockMap
+    // check if there is a block at a position (relative to the chunk), using blockMap
     // can accept positions that are out of bounds
     bool HasBlock (Vector3 pos)
     {
@@ -114,7 +122,7 @@ public class Chunk
         return false;
     }
 
-    // check if a position is within the chunk
+    // check if a position (relative to the chunk) is within the chunk
     bool InChunk (int x, int y, int z)
     {
         if (x < 0 || x >= BlockData.chunkWidth || y < 0 || y >= BlockData.chunkHeight || z < 0 || z >= BlockData.chunkWidth)
@@ -153,6 +161,65 @@ public class Chunk
         filter.mesh = mesh;
     }
 
+    // divde this block into many smaller blocks
+    public void Subdivide ()
+    {
+        if (subChunks == null)
+        {
+            subChunks = new List<Chunk> ();
+            for (int x = 0; x < BlockData.chunkWidth; ++x)
+            {
+                for (int y = 0; y < BlockData.chunkHeight; ++y)
+                {
+                    for (int z = 0; z < BlockData.chunkWidth; ++z)
+                    {
+                        Chunk subChunk = new Chunk (new ChunkCoord (coord, x, y, z), world, world.blockTypes[blockMap[x, y, z]], obj.transform);
+                        subChunks.Add (subChunk);
+                    }
+                }
+            }
+            world.InitChunks (subChunks, this);
+        }
+        else
+        {
+            foreach (Chunk c in subChunks)
+            {
+                c.SetActive (true);
+            }
+            Hide ();
+        }
+    }
+
+    // disable the renderer
+    public void Hide ()
+    {
+        rend.enabled = false;
+    }
+
+    // enable the renderer
+    public void Show ()
+    {
+        rend.enabled = true;
+    }
+
+    // disable the smaller blocks inside this block, and show itself again
+    public void Reunite ()
+    {
+        if (subChunks != null)
+        {
+            foreach (Chunk c in subChunks)
+            {
+                c.SetActive (false);
+            }
+        }
+       Show ();
+    }
+
+    public void SetActive (bool b)
+    {
+        obj.SetActive (b);
+    }
+
 }
 
 public class ChunkCoord
@@ -160,21 +227,36 @@ public class ChunkCoord
     public int x;
     public int y;
     public int z;
+    public float scale;
 
-    public ChunkCoord (int x, int y, int z)
+    // creates a coordinate given the x, y, and z at a certain scale
+    // the x, y, and z represent this chunk's position relative to its scale
+    public ChunkCoord (int x, int y, int z, float scale)
     {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.scale = scale;
     }
 
-    public Vector3 ToVector3 ()
+    // creates a coordinate given a parent coord and the x, y, and z to offset it by
+    // the offset x, y, and z are relative to this chunk coord's new scale
+    public ChunkCoord (ChunkCoord parentCoord, int offsetX, int offsetY, int offsetZ)
     {
-        return new Vector3 (x * BlockData.chunkWidth, y * BlockData.chunkHeight, z * BlockData.chunkWidth);
+        x = parentCoord.x * BlockData.chunkWidth + offsetX;
+        y = parentCoord.y * BlockData.chunkHeight + offsetY;
+        z = parentCoord.z * BlockData.chunkWidth + offsetZ;
+        this.scale = parentCoord.scale / BlockData.chunkWidth; // the scale should be reduced from the parent's scale
+    }
+
+    // returns the absolute position of coord in world space
+    public Vector3 ToAbsolutePos ()
+    {
+        return new Vector3 (x * BlockData.chunkWidth * scale, y * BlockData.chunkHeight * scale, z * BlockData.chunkWidth * scale);
     }
 
     public override string ToString ()
     {
-        return "Chunk " + ToVector3 ();
+        return "Chunk " + ToAbsolutePos ();
     }
 }
