@@ -27,6 +27,14 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private TMP_Text _renderObjectSliderText;
     [SerializeField] private TMP_Text _masterVolumeSliderText;
     [SerializeField] private TMP_Text _sfxVolumeSliderText;
+
+    [Header("Inactive Panels")]
+    [SerializeField] private GameObject _masterVolumeInactive;
+    [SerializeField] private GameObject _sfxVolumeInactive;
+
+    private bool _isMasterVolumeInactive = false;
+    private bool _isSfxVolumeInactive = false;
+
     Scene _currentScene;
 
     private void Start()
@@ -97,8 +105,6 @@ public class ButtonManager : MonoBehaviour
         } 
     }
 
-    
-
     public void RenderObjectInfoButton()
     {
         _renderObjectSliderPanel.SetActive(true);
@@ -134,11 +140,15 @@ public class ButtonManager : MonoBehaviour
     public void ToggleThemeMusic()
     {
         AudioManager.Instance._themeAudioSource.mute = !AudioManager.Instance._themeAudioSource.mute;
+        _isMasterVolumeInactive = !_isMasterVolumeInactive;
+        _masterVolumeInactive.SetActive(_isMasterVolumeInactive);
     }
 
     public void ToggleSFX()
     {
         AudioManager.Instance._sfxAudioSource.mute = !AudioManager.Instance._sfxAudioSource.mute;
+        _isSfxVolumeInactive = !_isSfxVolumeInactive;
+        _sfxVolumeInactive.SetActive(_isSfxVolumeInactive);
     }
 
     public void ClosePanelButton()
