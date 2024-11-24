@@ -35,6 +35,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_StepCycle;
         private float m_NextStep;
         private bool m_Jumping;
+        private float m_TimeOfJumpPress = 0f;
         private AudioSource m_AudioSource;
 
         // Use this for initialization
@@ -56,9 +57,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
             // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump && m_CharacterController.isGrounded)
+            if (!m_Jump)
             {
                 m_Jump = Input.GetButtonDown("Jump");
+                m_TimeOfJumpPress = Time.time;
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
@@ -107,10 +109,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 if (m_Jump)
                 {
-                    m_MoveDir.y = m_JumpSpeed;
-                    PlayJumpSound();
                     m_Jump = false;
-                    m_Jumping = true;
+                    if (m_TimeOfJumpPress + 0.1f > Time.time)
+                    {
+                        m_MoveDir.y = m_JumpSpeed;
+                        PlayJumpSound();
+                        m_Jumping = true;
+                    }
                 }
             }
             else
