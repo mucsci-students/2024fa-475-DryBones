@@ -3837,7 +3837,7 @@ MonoBehaviour:
   _sfxVolumeSliderText: {fileID: 722032928387280629}
   _masterVolumeInactive: {fileID: 7241336864191154753}
   _sfxVolumeInactive: {fileID: 1395533766499479877}
-  _crosshairTexture: {fileID: 0}
+  _crosshairTexture: {fileID: 2800000, guid: f6880df6b0862ce49836ddfcc50d196e, type: 3}
 --- !u!1 &3906535930586310681
 GameObject:
   m_ObjectHideFlags: 0
