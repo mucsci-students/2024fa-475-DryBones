@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject _informationMenuCanvas;
     [SerializeField] private GameObject _mainGameCanvas;
     [SerializeField] private GameObject _pauseCanvas;
+
+    [Header("Button To Show From Pause Menu")]
+    [SerializeField] private GameObject _resumeButtonInMainMenu;
+    [SerializeField] private GameObject _resumeButtonInSettingMenu;
 
     [Header("Information Panel")]
     [SerializeField] private GameObject _renderObjectSliderPanel;
@@ -48,6 +53,7 @@ public class ButtonManager : MonoBehaviour
     // Method to start playing game
     public void PlayButton()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("PlayerTest");
         _mainGameCanvas.SetActive(true);
         TurnOffAllCanvasInMainMenu();
@@ -71,6 +77,12 @@ public class ButtonManager : MonoBehaviour
 
     public void MainMenu()
     {
+        if (_currentScene.name == SceneNames.PlayerTest.ToString())
+        {
+            Debug.Log("Current scene is " + _currentScene.name);
+            
+        }
+
         _mainMenuCanvas.SetActive(true);
         _settingMenuCanvas.SetActive(false);
         _tutorialMenuCanvas.SetActive(false);
@@ -83,6 +95,12 @@ public class ButtonManager : MonoBehaviour
     // Setting menu
     public void SettingMenu()
     {
+        if (_currentScene.name == SceneNames.PlayerTest.ToString())
+        {
+            Debug.Log("Current scene is " + _currentScene.name);
+            
+        }
+           
         TurnOffPanel();
         _informationMenuCanvas.SetActive(false);
         _mainMenuCanvas.SetActive(false);
@@ -115,12 +133,16 @@ public class ButtonManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         _pauseCanvas.SetActive(true);
+        _resumeButtonInMainMenu.SetActive(true);
+        _resumeButtonInSettingMenu.SetActive(true);
     }
 
     public void ResumeButton()
     {
         Time.timeScale = 1f;
         _pauseCanvas.SetActive(false);
+        _mainGameCanvas.SetActive(true);
+        TurnOffAllCanvasInMainMenu();
     }
 
     public void RenderObjectInfoButton()
