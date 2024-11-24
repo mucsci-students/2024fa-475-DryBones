@@ -17,6 +17,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject _settingMenuCanvas;
     [SerializeField] private GameObject _tutorialMenuCanvas;
     [SerializeField] private GameObject _informationMenuCanvas;
+    [SerializeField] private GameObject _pauseCanvas;
 
     [Header("Information Panel")]
     [SerializeField] private GameObject _renderObjectSliderPanel;
@@ -102,7 +103,23 @@ public class ButtonManager : MonoBehaviour
             _settingMenuCanvas.SetActive(false);
             _tutorialMenuCanvas.SetActive(false);
             _informationMenuCanvas.SetActive(true);
-        } 
+        }
+        else
+        {
+
+        }
+    }
+
+    public void PauseButton()
+    {
+        Time.timeScale = 0f;
+        _pauseCanvas.SetActive(true);
+    }
+
+    public void ResumeButton()
+    {
+        Time.timeScale = 1f;
+        _pauseCanvas.SetActive(false);
     }
 
     public void RenderObjectInfoButton()
