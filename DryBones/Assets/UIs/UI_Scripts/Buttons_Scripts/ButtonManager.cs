@@ -90,16 +90,11 @@ public class ButtonManager : MonoBehaviour
         _settingMenuCanvas.SetActive(false);
         _tutorialMenuCanvas.SetActive(false);
         _informationMenuCanvas.SetActive(false);
+        _pauseCanvas.SetActive(false);
     }
 
     public void MainMenu()
     {
-        if (_currentScene.name == SceneNames.PlayerTest.ToString())
-        {
-            Debug.Log("Current scene is " + _currentScene.name);
-            
-        }
-
         _mainMenuCanvas.SetActive(true);
         _settingMenuCanvas.SetActive(false);
         _tutorialMenuCanvas.SetActive(false);
@@ -112,12 +107,6 @@ public class ButtonManager : MonoBehaviour
     // Setting menu
     public void SettingMenu()
     {
-        if (_currentScene.name == SceneNames.PlayerTest.ToString())
-        {
-            Debug.Log("Current scene is " + _currentScene.name);
-            
-        }
-           
         TurnOffPanel();
         _informationMenuCanvas.SetActive(false);
         _mainMenuCanvas.SetActive(false);
@@ -153,6 +142,7 @@ public class ButtonManager : MonoBehaviour
         _pauseCanvas.SetActive(true);
         _resumeButtonInMainMenu.SetActive(true);
         _resumeButtonInSettingMenu.SetActive(true);
+        _mainGameCanvas.SetActive(false);
     }
 
     public void ResumeButton()
