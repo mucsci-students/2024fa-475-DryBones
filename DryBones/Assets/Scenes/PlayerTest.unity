@@ -800,17 +800,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1478179099325784844, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3971039006065580066, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
       propertyPath: m_Name
       value: Game_Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 5497174933024864518, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
+    - target: {fileID: 4418845051223414151, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
