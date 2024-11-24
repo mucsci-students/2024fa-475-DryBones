@@ -39,6 +39,9 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject _masterVolumeInactive;
     [SerializeField] private GameObject _sfxVolumeInactive;
 
+    [Header("Cursor")]
+    [SerializeField] private Texture2D _crosshairTexture;
+
     private bool _isMasterVolumeInactive = false;
     private bool _isSfxVolumeInactive = false;
 
@@ -49,6 +52,7 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         MainMenu();
+        Cursor.SetCursor(_crosshairTexture, Vector2.zero, CursorMode.Auto);
         _currentScene = SceneManager.GetActiveScene();
     }
 
@@ -158,6 +162,20 @@ public class ButtonManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
+    }
+
+    public void ShowCursor()
+    {
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+        Cursor.visible = true;                 // Make the cursor visible
+        Debug.Log("Cursor is now visible and unlocked.");
+    }
+
+    public void HideCursor()
+    {
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+        Cursor.visible = true;                 // Make the cursor visible
+        Debug.Log("Cursor is now visible and unlocked.");
     }
 
     public void RenderObjectInfoButton()
