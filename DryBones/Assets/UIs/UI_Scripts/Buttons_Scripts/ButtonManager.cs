@@ -42,12 +42,29 @@ public class ButtonManager : MonoBehaviour
     private bool _isMasterVolumeInactive = false;
     private bool _isSfxVolumeInactive = false;
 
+    private bool _isPause = false;
+
     Scene _currentScene;
 
     private void Start()
     {
         MainMenu();
         _currentScene = SceneManager.GetActiveScene();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (_isPause)
+            {
+                ResumeButton();
+            }
+            else
+            {
+                PauseButton();
+            }
+        }
     }
 
     // Method to start playing game
@@ -131,6 +148,7 @@ public class ButtonManager : MonoBehaviour
 
     public void PauseButton()
     {
+        _isPause = true;
         Time.timeScale = 0f;
         _pauseCanvas.SetActive(true);
         _resumeButtonInMainMenu.SetActive(true);
@@ -139,6 +157,7 @@ public class ButtonManager : MonoBehaviour
 
     public void ResumeButton()
     {
+        _isPause = false;
         Time.timeScale = 1f;
         _pauseCanvas.SetActive(false);
         _mainGameCanvas.SetActive(true);
