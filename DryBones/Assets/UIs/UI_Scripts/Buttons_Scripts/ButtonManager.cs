@@ -143,6 +143,9 @@ public class ButtonManager : MonoBehaviour
         _resumeButtonInMainMenu.SetActive(true);
         _resumeButtonInSettingMenu.SetActive(true);
         _mainGameCanvas.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+        Cursor.visible = true; // Make the cursor visible
     }
 
     public void ResumeButton()
@@ -152,6 +155,9 @@ public class ButtonManager : MonoBehaviour
         _pauseCanvas.SetActive(false);
         _mainGameCanvas.SetActive(true);
         TurnOffAllCanvasInMainMenu();
+
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        Cursor.visible = false; // Hide the cursor
     }
 
     public void RenderObjectInfoButton()
