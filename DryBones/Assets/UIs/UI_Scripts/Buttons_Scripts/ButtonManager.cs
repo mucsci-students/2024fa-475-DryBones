@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
+    public enum SceneNames
+    {
+        MainMenu,
+        PlayerTest
+    }
+
     [Header("Canvases")]
     [SerializeField] private GameObject _mainMenuCanvas;  
     [SerializeField] private GameObject _settingMenuCanvas;
@@ -21,10 +27,12 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private TMP_Text _renderObjectSliderText;
     [SerializeField] private TMP_Text _masterVolumeSliderText;
     [SerializeField] private TMP_Text _sfxVolumeSliderText;
+    Scene _currentScene;
 
     private void Start()
     {
         MainMenu();
+        _currentScene = SceneManager.GetActiveScene();
     }
 
     // Method to start playing game
@@ -43,38 +51,50 @@ public class ButtonManager : MonoBehaviour
 
     public void MainMenu()
     {
-        _mainMenuCanvas.SetActive(true);
-        _settingMenuCanvas.SetActive(false);
-        _tutorialMenuCanvas.SetActive(false);
-        _informationMenuCanvas.SetActive(false);
+        if (_currentScene.name == SceneNames.MainMenu.ToString())
+        {
+            _mainMenuCanvas.SetActive(true);
+            _settingMenuCanvas.SetActive(false);
+            _tutorialMenuCanvas.SetActive(false);
+            _informationMenuCanvas.SetActive(false);
+        }
     }
 
     // Setting menu
     public void SettingMenu()
     {
-        TurnOffPanel();
-        _informationMenuCanvas.SetActive(false);
-        _mainMenuCanvas.SetActive(false);
-        _tutorialMenuCanvas.SetActive(false);
-        _settingMenuCanvas.SetActive(true);
+        if (_currentScene.name == SceneNames.MainMenu.ToString())
+        {
+            TurnOffPanel();
+            _informationMenuCanvas.SetActive(false);
+            _mainMenuCanvas.SetActive(false);
+            _tutorialMenuCanvas.SetActive(false);
+            _settingMenuCanvas.SetActive(true);
+        }
     }
 
     // Tutorial menu
     public void TutorialMenu()
     {
-        _informationMenuCanvas.SetActive(false);
-        _mainMenuCanvas.SetActive(false);
-        _settingMenuCanvas.SetActive(false);
-        _tutorialMenuCanvas.SetActive(true);
+        if (_currentScene.name == SceneNames.MainMenu.ToString())
+        {
+            _informationMenuCanvas.SetActive(false);
+            _mainMenuCanvas.SetActive(false);
+            _settingMenuCanvas.SetActive(false);
+            _tutorialMenuCanvas.SetActive(true);
+        }
     }
 
     // Information menu
     public void InformationMenu()
     {
-        _mainMenuCanvas.SetActive(false);
-        _settingMenuCanvas.SetActive(false);
-        _tutorialMenuCanvas.SetActive(false);
-        _informationMenuCanvas.SetActive(true);
+        if (_currentScene.name == SceneNames.MainMenu.ToString())
+        {
+            _mainMenuCanvas.SetActive(false);
+            _settingMenuCanvas.SetActive(false);
+            _tutorialMenuCanvas.SetActive(false);
+            _informationMenuCanvas.SetActive(true);
+        } 
     }
 
     
