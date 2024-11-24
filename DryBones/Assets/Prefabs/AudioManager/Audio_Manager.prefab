@@ -306,12 +306,10 @@ MonoBehaviour:
   _themeAudio:
   - _audioName: AllMenuAudio
     _audioClip: {fileID: 8300000, guid: 68749ab715658874a9e891281dc225f1, type: 3}
-  _ingameAudio:
   - _audioName: IngameAudio
     _audioClip: {fileID: 8300000, guid: 37d8ecfdda3c9434cab0615a0aa5570b, type: 3}
   _sfxAudio: []
   _themeAudioSource: {fileID: 94813038044020234}
-  _ingameAudioSource: {fileID: 2504074280182894827}
   _sfxAudioSource: {fileID: 1030358396897654938}
 --- !u!1 &7029319807548891179
 GameObject:

@@ -111,6 +111,16 @@ public class ButtonManager : MonoBehaviour
         _sfxVolumeSliderPanel.SetActive(false);
     }
 
+    public void ToggleThemeMusic()
+    {
+        AudioManager.Instance._themeAudioSource.mute = !AudioManager.Instance._themeAudioSource.mute;
+    }
+
+    public void ToggleSFX()
+    {
+        AudioManager.Instance._sfxAudioSource.mute = !AudioManager.Instance._sfxAudioSource.mute;
+    }
+
     public void ClosePanelButton()
     {
         TurnOffPanel();

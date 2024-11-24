@@ -10,8 +10,8 @@ public class AudioManager : MonoBehaviour
     //[SerializeField] private AudioMixer _masterVolumMixer; 
     //[SerializeField] private Slider _masterVolumSlider;
 
-    public Sound[] _themeAudio, _ingameAudio, _sfxAudio;
-    public AudioSource _themeAudioSource, _ingameAudioSource, _sfxAudioSource;
+    public Sound[] _themeAudio, _sfxAudio;
+    public AudioSource _themeAudioSource, _sfxAudioSource;
 
     private void Awake()
     {
@@ -37,20 +37,6 @@ public class AudioManager : MonoBehaviour
         {
             _themeAudioSource.clip = sounds._audioClip;
             _themeAudioSource.Play();
-        }
-    }
-
-    public void PlayIngameMusic(string audioName)
-    {
-        Sound sounds = Array.Find(_ingameAudio, x => x._audioName == audioName);
-        if (sounds == null)
-        {
-            Debug.Log("Ingame Audio Not Found!");
-        }
-        else
-        {
-            _ingameAudioSource.clip = sounds._audioClip;
-            _ingameAudioSource.Play();
         }
     }
 }

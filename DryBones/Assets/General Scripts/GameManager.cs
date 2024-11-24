@@ -52,6 +52,6 @@ public class GameManager : MonoBehaviour
     private System.Collections.IEnumerator PlayIngameMusicAfterDelay()
     {
         yield return new WaitForSeconds(0.5f);
-        AudioManager.Instance.PlayIngameMusic("IngameAudio");
+        AudioManager.Instance.PlayThemeMusic("IngameAudio");
     }
 }
