@@ -7,6 +7,10 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    [Header("Slider")]
+    [SerializeField] private Slider _masterVolumeSlider;
+    [SerializeField] private Slider _sfxVolumeSlider;
+
     //[SerializeField] private AudioMixer _masterVolumMixer; 
     //[SerializeField] private Slider _masterVolumSlider;
 
@@ -26,6 +30,12 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _masterVolumeSlider.value = _themeAudioSource.volume = 0.5f;
+        _sfxVolumeSlider.value = _sfxAudioSource.volume = 0.5f;
+    }
+
     public void PlayThemeMusic(string audioName)
     {
         Sound sounds = Array.Find(_themeAudio, x => x._audioName == audioName);
@@ -38,5 +48,15 @@ public class AudioManager : MonoBehaviour
             _themeAudioSource.clip = sounds._audioClip;
             _themeAudioSource.Play();
         }
+    }
+
+    public void MasterVolume(float volume)
+    {
+        _themeAudioSource.volume = volume;
+    }
+
+    public void SFXVolume(float volume)
+    {
+        _sfxAudioSource.volume = volume;
     }
 }
