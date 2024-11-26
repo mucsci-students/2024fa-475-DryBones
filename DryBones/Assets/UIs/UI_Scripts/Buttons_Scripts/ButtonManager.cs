@@ -59,25 +59,21 @@ public class ButtonManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && _currentScene.name != SceneNames.MainMenu.ToString())
         {
-            if (_isPause)
-            {
-                ResumeGame();
-            }
-            else
+            if (!_isPause)
             {
                 PauseGame();
             }
-        }
-        if (Input.GetMouseButtonUp(0) && !_isPause)
-        {
-            Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-            Cursor.visible = false; // Hide the cursor
+            else
+            {
+                ResumeGame();
+            }
         }
     }
 
     // Method to start playing game
     public void PlayGame()
     {
+        HideCursor();
         Time.timeScale = 1f;
         SceneManager.LoadScene("PlayerTest");
         TurnOffAllCanvasInMainMenu();
@@ -143,18 +139,17 @@ public class ButtonManager : MonoBehaviour
     public void PauseGame()
     {
         _isPause = true;
+        ShowCursor();
         Time.timeScale = 0f;
         _pauseCanvas.SetActive(true);
         _resumeButtonInMainMenu.SetActive(true);
-        _resumeButtonInSettingMenu.SetActive(true);
-
-        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-        Cursor.visible = true; // Make the cursor visible
+        _resumeButtonInSettingMenu.SetActive(true);   
     }
 
     public void ResumeGame()
     {
         _isPause = false;
+        HideCursor();
         Time.timeScale = 1f;
         _pauseCanvas.SetActive(false);
         TurnOffAllCanvasInMainMenu();
@@ -169,8 +164,8 @@ public class ButtonManager : MonoBehaviour
 
     public void HideCursor()
     {
-        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-        Cursor.visible = true;                 // Make the cursor visible
+        Cursor.lockState = CursorLockMode.Locked; // Unlock the cursor
+        Cursor.visible = false;                 // Make the cursor visible
         Debug.Log("Cursor is now visible and unlocked.");
     }
 
