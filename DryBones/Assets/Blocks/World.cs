@@ -13,13 +13,12 @@ public class World : MonoBehaviour
     public Material material;
     public BlockType[] blockTypes;
     public int startingBlockID = 1;
-    public List<Chunk> startingChunks = new List<Chunk> ();
+    public Chunk startingChunk;
     public List<List<Chunk>> chunksToInit = new List<List<Chunk>> ();
     public List<Chunk> chunksToHide = new List<Chunk> ();
     bool runningCoroutine = false;
-    public Vector3 position = new Vector3 (0f, 0f, 0f);
 
-    private float scale;
+    [SerializeField] private PlayerShrink playerShrink;
 
     void Start ()
     {
@@ -53,18 +52,10 @@ public class World : MonoBehaviour
             }
         }
 
-        scale = transform.localScale.x;
-        for (int i = -1; i <= 1; ++i)
-        {
-            for (int j = -1; j <= 1; ++j)
-            {
-                for (int k = -1; k <= 1; ++k)
-                {
-                    startingChunks.Add (new Chunk (new ChunkCoord (i, j, k, scale / 8f), this, blockTypes[startingBlockID], transform));
-                }
-            }
-        }
-        InitChunks (startingChunks);
+        startingChunk = new Chunk (new ChunkCoord (0, 0, 0, 0), this, blockTypes[startingBlockID], transform);
+        List<Chunk> temp = new List<Chunk> ();
+        temp.Add (startingChunk);
+        InitChunks (temp);
     }
 
     // call the Init() function on a bunch of chunks, in a coroutine
@@ -87,22 +78,45 @@ public class World : MonoBehaviour
     IEnumerator InitCoroutine ()
     {
         runningCoroutine = true;
+        int t = 0;
         while (chunksToInit.Count > 0)
         {
             while (chunksToInit[0].Count > 0)
             {
-                chunksToInit[0][0].Init ();
+                if (chunksToInit[0][0].coord != null)
+                {
+                    chunksToInit[0][0].Init ();
+                    if (t == 10)
+                    {
+                        t = 0;
+                        yield return null;
+                    }
+                    ++t;
+                }
                 chunksToInit[0].RemoveAt (0);
-                yield return null;
+                
             }
             chunksToInit.RemoveAt (0);
-            if (chunksToHide[0] != null) // may be null, ie. no parent
-                chunksToHide[0].Hide ();
-            chunksToHide.RemoveAt (0);
+            if (chunksToHide.Count > 0)
+            {
+                if (chunksToHide[0] != null && chunksToHide[0].subdivided) // may be null, ie. no parent
+                    chunksToHide[0].Hide ();
+                chunksToHide.RemoveAt (0);
+            }
         }
         runningCoroutine = false;
     }
-}
+
+    public void UpdateActiveChunk (ChunkCoord activeCoord)
+    {
+        startingChunk.UpdateActiveChunk (activeCoord);
+    }
+
+    public int GetCurrentSize ()
+    {
+        return playerShrink.size;
+    }
+} 
 
 [System.Serializable]
 public class BlockType 
@@ -134,7 +148,7 @@ public class BlockType
     public List<Vector3> subBlockLocs;
 
     // the placement of sub-blocks in this block
-    public byte[,,] blockMap = new byte[BlockData.chunkWidth, BlockData.chunkHeight, BlockData.chunkWidth];
+    public byte[,,] blockMap = new byte[BlockData.chunkWidth, BlockData.chunkWidth, BlockData.chunkWidth];
 
     public int GetTextureID (int faceIndex)
     {

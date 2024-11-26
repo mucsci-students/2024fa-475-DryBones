@@ -5,37 +5,35 @@ using UnityEngine;
 public class SubdivideDebug : MonoBehaviour
 {
 
-    public List<Chunk> chunks;
+    public Chunk chunk;
     public bool reunite = false;
 
     void Update ()
     {
         if (Input.GetKeyDown (KeyCode.Space))
         {
-            if (chunks == null)
+            if (chunk == null)
             {
-                chunks = GameObject.Find ("World").GetComponent<World> ().startingChunks;
-                if (chunks == null)
+                chunk = GameObject.Find ("World").GetComponent<World> ().startingChunk;
+                if (chunk == null)
                 {
                     print ("Could not find starting chunk.");
                 }
                 else
                 {
-                    print ("Found these chunks: " + chunks);
+                    print ("Found this chunk: " + chunk);
                 }
             }
             else
             {
                 if (reunite)
                 {
-                    foreach (Chunk c in chunks)
-                        c.Reunite ();
+                    chunk.Reunite ();
                     print ("reunited chunks");
                 }
                 else
                 {
-                    foreach (Chunk c in chunks)
-                        c.Subdivide ();
+                    chunk.Subdivide ();
                     print ("subdivided chunks");
                 }
                 reunite = !reunite;

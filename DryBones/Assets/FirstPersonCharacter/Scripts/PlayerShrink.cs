@@ -6,10 +6,12 @@ public class PlayerShrink : MonoBehaviour
 {
     // positive size increases the player's scale, negative size decreases it
     public int startingSize = 0;
-    int size;
+    public int size { get; private set; }
     float startingScale;
     public GameObject world;
     public GameObject worldParent;
+    ChunkCoord currChunkCoord;
+    ChunkCoord oldChunkCoord;
 
     bool scrolling = false;
     float timeOfLastScroll = 0f;
@@ -21,12 +23,16 @@ public class PlayerShrink : MonoBehaviour
     {
         startingScale = worldParent.transform.localScale.x;
         size = startingSize;
-        worldParent.transform.localScale = CurrentScale (0f);
+        currChunkCoord = new ChunkCoord ((int) transform.position.x, (int) transform.position.y, (int) transform.position.z, size);
+        oldChunkCoord = new ChunkCoord ((int) transform.position.x, (int) transform.position.y, (int) transform.position.z, size);
+        world.transform.parent = worldParent.transform;
+        worldParent.transform.localScale = CurrentScale ();
+        world.transform.parent = null;
     }
 
     void Update()
     {
-        float scrollAmt = Input.GetAxis ("Mouse ScrollWheel") / 10f;
+        float scrollAmt = Input.GetAxis ("Mouse ScrollWheel") / 25f;
         if (scrollAmt != 0)
         {
             // shrinking begins, time freezes
@@ -39,43 +45,56 @@ public class PlayerShrink : MonoBehaviour
             timeOfLastScroll = Time.unscaledTime;
             Time.timeScale = 0f;
             sizeChange += scrollAmt;
-            worldParent.transform.localScale *=  Mathf.Pow (8f, scrollAmt);
+            worldParent.transform.localScale *=  Mathf.Pow (8f, -scrollAmt);
 
             // adjust the size as the player scrolls
             if (sizeChange > 0.5f) 
             {
-                ++size;
+                size = size + 1;
                 --sizeChange;
-                print (size);
+                //print (size);
             }
             else if (sizeChange < -0.5f)
             {
-                --size;
+                size = size - 1;
                 ++sizeChange;
-                print (size);
+                //print (size);
             }
         }
         else if (scrolling && timeOfLastScroll + scrollingCooldown < Time.unscaledTime)
         {
             scrolling = false;
             StartCoroutine ("InterpolateToCurrentScale");
-            print (size);
+            //print (size);
+        }
+        UpdateChunkCoord ();
+    }
+
+    // TODO: fix this hideousness
+    void UpdateChunkCoord ()
+    {
+        Vector3 posRelativeToWorld = transform.position - world.transform.position;
+        currChunkCoord = new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth), (int) (posRelativeToWorld.z / BlockData.chunkWidth), size);
+        if (Time.timeScale == 1f && (currChunkCoord.size != oldChunkCoord.size || currChunkCoord.x != oldChunkCoord.x || currChunkCoord.y != oldChunkCoord.y || currChunkCoord.z != oldChunkCoord.z))
+        {
+            world.GetComponent<World> ().UpdateActiveChunk (new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth) - 1, (int) (posRelativeToWorld.z / BlockData.chunkWidth), size));
+            oldChunkCoord = currChunkCoord;
         }
     }
 
     // get the player's current scale based on their size
     // increases or decreases the return value based on the offset
-    Vector3 CurrentScale (float offset)
+    Vector3 CurrentScale ()
     {
-        return new Vector3 (1f, 1f, 1f) * startingScale * Mathf.Pow (8f, size + offset);
+        return new Vector3 (1f, 1f, 1f) * startingScale * Mathf.Pow (8f, -size);
     }
 
     IEnumerator InterpolateToCurrentScale ()
     {
         float currScale = worldParent.transform.localScale.x;
-        float newScale = CurrentScale (0f).x;
+        float newScale = CurrentScale ().x;
         float oldSizeChange = sizeChange;
-        float duration = 0.5f;
+        float duration = 0.35f;
         float elapsed = 0f;
         while (elapsed < duration)
         {
@@ -85,7 +104,7 @@ public class PlayerShrink : MonoBehaviour
             sizeChange = Mathf.Lerp (oldSizeChange, 0f, step);
             yield return null;
         }
-        worldParent.transform.localScale = CurrentScale (0f);
+        worldParent.transform.localScale = CurrentScale ();
         Time.timeScale = 1f;
         world.transform.parent = null;
         // shrinking ends, time resumes

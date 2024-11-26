@@ -135,12 +135,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsWalking: 0
-  m_WalkSpeed: 15
-  m_RunSpeed: 30
+  m_WalkSpeed: 10
+  m_RunSpeed: 20
   m_RunstepLenghten: 0.7
-  m_JumpSpeed: 30
+  m_JumpSpeed: 15
   m_StickToGroundForce: 10
-  m_GravityMultiplier: 5
+  m_GravityMultiplier: 2
   m_MouseLook:
     XSensitivity: 2
     YSensitivity: 2
@@ -199,8 +199,8 @@ Transform:
   m_GameObject: {fileID: 512647881}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -49.2, y: 3, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0.5, y: 8, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 512360171}
@@ -554,7 +554,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 512360169}
@@ -1513,7 +1513,7 @@ MonoBehaviour:
     - {x: 7, y: 7, z: 6}
     - {x: 7, y: 7, z: 7}
   startingBlockID: 4
-  position: {x: 0, y: 0, z: 0}
+  playerShrink: {fileID: 1911790642}
 --- !u!4 &1259499765
 Transform:
   m_ObjectHideFlags: 0
@@ -1524,7 +1524,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 16, y: 16, z: 16}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1547,7 +1547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1531683364
 BoxCollider:
   m_ObjectHideFlags: 0

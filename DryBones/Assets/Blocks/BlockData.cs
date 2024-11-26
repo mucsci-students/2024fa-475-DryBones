@@ -10,8 +10,7 @@ public class BlockData
 {
 
     public static readonly int chunkWidth = 8;
-    public static readonly int chunkHeight = 8;
-
+    
     // anything involving faces of the cube is done in this order:
     // Back, Front, Top, Bottom, Left, Right
     /*

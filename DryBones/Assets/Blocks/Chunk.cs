@@ -1,6 +1,8 @@
 /*
-    Represents one chunk (a subdivided block)
-    Instantiates a GameObject into the scene when the constructor is called
+    The Chunk class epresents one chunk (a subdivided block)
+    It instantiates a GameObject into the scene when the constructor is called
+    The ChunkCoord class is a way of storing location in a fractal world
+    The coordinates should never be negative
 */
 
 using System.Collections;
@@ -10,6 +12,8 @@ using UnityEngine;
 public class Chunk
 {
     public ChunkCoord coord;
+    // TODO: only call UpdateActiveChunk() on children that could contain the new active chunk coord, not all of them
+    //public Dictionary<ChunkCoord, Chunk> children;
 
     BlockType type;
     GameObject obj;
@@ -17,17 +21,17 @@ public class Chunk
     MeshFilter filter;
     MeshCollider coll;
 
-    float scale;
     int vertexIndex = 0;
     List<Vector3> vertices = new List<Vector3> ();
     List<int> triangles = new List<int> ();
     List<Vector2> uvs = new List<Vector2> ();
 
-    byte[,,] blockMap = new byte[BlockData.chunkWidth, BlockData.chunkHeight, BlockData.chunkWidth];
+    byte[,,] blockMap = new byte[BlockData.chunkWidth, BlockData.chunkWidth, BlockData.chunkWidth];
 
     World world;
 
     List<Chunk> subChunks;
+    public bool subdivided = false; // whether the chunk has a mesh or not
 
     public Chunk (ChunkCoord coord, World world, BlockType type, Transform parent)
     {
@@ -43,8 +47,8 @@ public class Chunk
         // set material, parent, location, scale, name
         rend.material = world.material;
         obj.transform.SetParent (parent);
-        obj.transform.position = coord.ToAbsolutePos ();
-        obj.transform.localScale = new Vector3 (0.125f, 0.125f, 0.125f);
+        obj.transform.position = world.transform.position + coord.ToVector3 () * Mathf.Pow (BlockData.chunkWidth, -(world.GetCurrentSize () - coord.size - 1f));
+        obj.transform.localScale = new Vector3 (1f / BlockData.chunkWidth, 1f / BlockData.chunkWidth, 1f / BlockData.chunkWidth);
         obj.name = coord.ToString ();
 
         // get the placements of sub-blocks based on what type of block this is
@@ -64,7 +68,7 @@ public class Chunk
     // generate mesh data for all blocks in this chunk
     void CreateBlockData ()
     {
-        for (int y = 0; y < BlockData.chunkHeight; ++y)
+        for (int y = 0; y < BlockData.chunkWidth; ++y)
         {
             for (int x = 0; x < BlockData.chunkWidth; ++x)
             {
@@ -127,7 +131,7 @@ public class Chunk
     // check if a position (relative to the chunk) is within the chunk
     bool InChunk (int x, int y, int z)
     {
-        if (x < 0 || x >= BlockData.chunkWidth || y < 0 || y >= BlockData.chunkHeight || z < 0 || z >= BlockData.chunkWidth)
+        if (x < 0 || x >= BlockData.chunkWidth || y < 0 || y >= BlockData.chunkWidth || z < 0 || z >= BlockData.chunkWidth)
             return false;
         return true;
     }
@@ -164,15 +168,62 @@ public class Chunk
         coll.sharedMesh = filter.mesh;
     }
 
+    // TODO: divide this chunk if it is the active chunk, or call this method on the child that is
+    public void UpdateActiveChunk (ChunkCoord activeCoord)
+    {
+        if (activeCoord.size > coord.size)
+        {
+            Reunite ();
+            if (subChunks != null)
+            {
+                foreach (Chunk c in subChunks)
+                {
+                    c.UpdateActiveChunk (activeCoord);
+                }
+            }
+        }
+        else if (activeCoord.size < coord.size && coord.Contains (activeCoord))
+        {
+            Subdivide ();
+            foreach (Chunk c in subChunks)
+            {
+                c.UpdateActiveChunk (activeCoord);
+            }
+        }
+        else if (activeCoord.size == coord.size)
+        {
+            if (activeCoord.x == coord.x && activeCoord.y == coord.y && activeCoord.z == coord.z)
+            {
+                Subdivide ();
+                foreach (Chunk c in subChunks)
+                {
+                    c.UpdateActiveChunk (activeCoord);
+                }
+            }
+            else
+            {
+                Reunite ();
+                if (subChunks != null)
+                {
+                    foreach (Chunk c in subChunks)
+                    {
+                        c.UpdateActiveChunk (activeCoord);
+                    }
+                }
+            }
+        }
+    }
+
     // divde this block into many smaller blocks
     public void Subdivide ()
     {
+        subdivided = true;
         if (subChunks == null)
         {
             subChunks = new List<Chunk> ();
             for (int x = 0; x < BlockData.chunkWidth; ++x)
             {
-                for (int y = 0; y < BlockData.chunkHeight; ++y)
+                for (int y = 0; y < BlockData.chunkWidth; ++y)
                 {
                     for (int z = 0; z < BlockData.chunkWidth; ++z)
                     {
@@ -193,21 +244,24 @@ public class Chunk
         }
     }
 
-    // disable the renderer
+    // disable the mesh
     public void Hide ()
     {
         rend.enabled = false;
+        coll.enabled = false;
     }
 
-    // enable the renderer
+    // enable the mesh
     public void Show ()
     {
         rend.enabled = true;
+        coll.enabled = true;
     }
 
     // disable the smaller blocks inside this block, and show itself again
     public void Reunite ()
     {
+        subdivided = false;
         if (subChunks != null)
         {
             foreach (Chunk c in subChunks)
@@ -230,36 +284,57 @@ public class ChunkCoord
     public int x;
     public int y;
     public int z;
-    public float scale;
+    public int size;
 
-    // creates a coordinate given the x, y, and z at a certain scale
-    // the x, y, and z represent this chunk's position relative to its scale
-    public ChunkCoord (int x, int y, int z, float scale)
+    // creates a coordinate given the x, y, and z at a certain size
+    // the x, y, and z represent this chunk's position relative to its size
+    public ChunkCoord (int x, int y, int z, int size)
     {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.scale = scale;
+        this.size = size;
     }
 
     // creates a coordinate given a parent coord and the x, y, and z to offset it by
-    // the offset x, y, and z are relative to this chunk coord's new scale
+    // the offset x, y, and z are relative to this chunk coord's new size
     public ChunkCoord (ChunkCoord parentCoord, int offsetX, int offsetY, int offsetZ)
     {
         x = parentCoord.x * BlockData.chunkWidth + offsetX;
-        y = parentCoord.y * BlockData.chunkHeight + offsetY;
+        y = parentCoord.y * BlockData.chunkWidth + offsetY;
         z = parentCoord.z * BlockData.chunkWidth + offsetZ;
-        this.scale = parentCoord.scale / BlockData.chunkWidth; // the scale should be reduced from the parent's scale
+        this.size = parentCoord.size - 1; // the size should be one less that the parent's size
     }
 
-    // returns the absolute position of coord in world space
-    public Vector3 ToAbsolutePos ()
+    // checks if this ChunkCoord contains the other ChunkCoord
+    public bool Contains (ChunkCoord other)
     {
-        return new Vector3 (x * BlockData.chunkWidth * scale, y * BlockData.chunkHeight * scale, z * BlockData.chunkWidth * scale);
+        if (other.size < size)
+        {
+            int relativeScale = (int) Mathf.Pow (BlockData.chunkWidth, size - other.size);
+            if (x == other.x / relativeScale && y == other.y / relativeScale && z == other.z / relativeScale)
+                return true;
+        }
+        return false;
+    }
+
+    public bool Equals (ChunkCoord other)
+    {
+        if (other.x == x && other.y == y && other.z == z && other.size == size)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    // returns the absolute position of coord
+    public Vector3 ToVector3 ()
+    {
+        return new Vector3 (x, y, z);
     }
 
     public override string ToString ()
     {
-        return "Chunk " + ToAbsolutePos ();
+        return "Chunk " + "(" + x + ", " + y + ", " + z + ") " + size;
     }
 }
