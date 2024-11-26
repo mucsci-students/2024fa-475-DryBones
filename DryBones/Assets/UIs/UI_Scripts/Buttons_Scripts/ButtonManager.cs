@@ -18,7 +18,6 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject _settingMenuCanvas;
     [SerializeField] private GameObject _tutorialMenuCanvas;
     [SerializeField] private GameObject _informationMenuCanvas;
-    [SerializeField] private GameObject _mainGameCanvas;
     [SerializeField] private GameObject _pauseCanvas;
 
     [Header("Button To Show From Pause Menu")]
@@ -62,26 +61,25 @@ public class ButtonManager : MonoBehaviour
         {
             if (_isPause)
             {
-                ResumeButton();
+                ResumeGame();
             }
             else
             {
-                PauseButton();
+                PauseGame();
             }
         }
     }
 
     // Method to start playing game
-    public void PlayButton()
+    public void PlayGame()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("PlayerTest");
-        _mainGameCanvas.SetActive(true);
         TurnOffAllCanvasInMainMenu();
     }
 
     // Method to quit the game
-    public void QuitButton()
+    public void QuitGame()
     {
         // This will only work in a built version of the game, not in the editor
         Debug.Log("Quit Game");
@@ -104,7 +102,6 @@ public class ButtonManager : MonoBehaviour
         _tutorialMenuCanvas.SetActive(false);
         _informationMenuCanvas.SetActive(false);
 
-        _mainGameCanvas.SetActive(false);
         _pauseCanvas.SetActive(false);
     }
 
@@ -117,7 +114,6 @@ public class ButtonManager : MonoBehaviour
         _tutorialMenuCanvas.SetActive(false);
         _settingMenuCanvas.SetActive(true);
 
-        _mainGameCanvas.SetActive(false);
         _pauseCanvas.SetActive(false);
     }
 
@@ -139,25 +135,23 @@ public class ButtonManager : MonoBehaviour
         _informationMenuCanvas.SetActive(true);
     }
 
-    public void PauseButton()
+    public void PauseGame()
     {
         _isPause = true;
         Time.timeScale = 0f;
         _pauseCanvas.SetActive(true);
         _resumeButtonInMainMenu.SetActive(true);
         _resumeButtonInSettingMenu.SetActive(true);
-        _mainGameCanvas.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Make the cursor visible
     }
 
-    public void ResumeButton()
+    public void ResumeGame()
     {
         _isPause = false;
         Time.timeScale = 1f;
         _pauseCanvas.SetActive(false);
-        _mainGameCanvas.SetActive(true);
         TurnOffAllCanvasInMainMenu();
 
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
