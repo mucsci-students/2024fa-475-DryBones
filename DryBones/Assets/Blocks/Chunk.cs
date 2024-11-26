@@ -12,7 +12,7 @@ using UnityEngine;
 public class Chunk
 {
     public ChunkCoord coord;
-    // TODO: only call UpdateActiveChunk() on children that could contain the new active chunk coord, not all of them
+    // TODO: maybe don't call UpdateActiveChunk() on every child...
     //public Dictionary<ChunkCoord, Chunk> children;
 
     BlockType type;
@@ -25,6 +25,7 @@ public class Chunk
     List<Vector3> vertices = new List<Vector3> ();
     List<int> triangles = new List<int> ();
     List<Vector2> uvs = new List<Vector2> ();
+    bool isSolid;
 
     byte[,,] blockMap = new byte[BlockData.chunkWidth, BlockData.chunkWidth, BlockData.chunkWidth];
 
@@ -50,6 +51,7 @@ public class Chunk
         obj.transform.position = world.transform.position + coord.ToVector3 () * Mathf.Pow (BlockData.chunkWidth, -(world.GetCurrentSize () - coord.size - 1f));
         obj.transform.localScale = new Vector3 (1f / BlockData.chunkWidth, 1f / BlockData.chunkWidth, 1f / BlockData.chunkWidth);
         obj.name = coord.ToString ();
+        isSolid = type.isSolid;
 
         // get the placements of sub-blocks based on what type of block this is
         blockMap = type.blockMap;
@@ -165,12 +167,46 @@ public class Chunk
         mesh.RecalculateNormals ();
 
         filter.mesh = mesh;
-        coll.sharedMesh = filter.mesh;
+        if (isSolid)
+            coll.sharedMesh = filter.mesh;
     }
 
     // TODO: divide this chunk if it is the active chunk, or call this method on the child that is
-    public void UpdateActiveChunk (ChunkCoord activeCoord)
+    public void UpdateActiveChunks (List<ChunkCoord> activeCoords)
     {
+        bool subdivide = false;
+        bool reunite = false;
+        foreach (ChunkCoord c in activeCoords)
+        {
+            if (c.size >= coord.size)
+            {
+                reunite = true;
+            }
+            if (coord.Contains (c))
+            {
+                subdivide = true;
+            }
+        }
+        if (subdivide)
+        {
+            Subdivide ();
+            foreach (Chunk c in subChunks)
+            {
+                c.UpdateActiveChunks (activeCoords);
+            }
+        }
+        else if (reunite)
+        {
+            Reunite ();
+            if (subChunks != null)
+            {
+                foreach (Chunk c in subChunks)
+                {
+                    c.UpdateActiveChunks (activeCoords);
+                }
+            }
+        }
+        /*
         if (activeCoord.size > coord.size)
         {
             Reunite ();
@@ -211,7 +247,9 @@ public class Chunk
                     }
                 }
             }
+            
         }
+        */
     }
 
     // divde this block into many smaller blocks
@@ -315,7 +353,7 @@ public class ChunkCoord
             if (x == other.x / relativeScale && y == other.y / relativeScale && z == other.z / relativeScale)
                 return true;
         }
-        return false;
+        return Equals (other);
     }
 
     public bool Equals (ChunkCoord other)

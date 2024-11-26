@@ -2042,7 +2042,7 @@ MonoBehaviour:
     bottomFaceTexture: 0
     leftFaceTexture: 0
     rightFaceTexture: 0
-    subBlockIDs: 0505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504
+    subBlockIDs: 05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505040808080808
     subBlockLocs:
     - {x: 0, y: 0, z: 0}
     - {x: 0, y: 0, z: 1}
@@ -2109,6 +2109,26 @@ MonoBehaviour:
     - {x: 7, y: 0, z: 6}
     - {x: 7, y: 0, z: 7}
     - {x: 3, y: 1, z: 3}
+    - {x: 1, y: 1, z: 6}
+    - {x: 2, y: 1, z: 1}
+    - {x: 3, y: 1, z: 4}
+    - {x: 5, y: 1, z: 3}
+    - {x: 6, y: 1, z: 5}
+  - blockName: Grass
+    isSolid: 0
+    backFaceTexture: 9
+    frontFaceTexture: 9
+    topFaceTexture: 10
+    bottomFaceTexture: 10
+    leftFaceTexture: 9
+    rightFaceTexture: 9
+    subBlockIDs: 08
+    subBlockLocs:
+    - {x: 1, y: 0, z: 6}
+    - {x: 2, y: 0, z: 1}
+    - {x: 3, y: 0, z: 3}
+    - {x: 5, y: 0, z: 2}
+    - {x: 6, y: 0, z: 5}
   startingBlockID: 7
   playerShrink: {fileID: 1911790642}
 --- !u!4 &1259499765

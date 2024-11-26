@@ -107,9 +107,9 @@ public class World : MonoBehaviour
         runningCoroutine = false;
     }
 
-    public void UpdateActiveChunk (ChunkCoord activeCoord)
+    public void UpdateActiveChunks (List<ChunkCoord> activeCoords)
     {
-        startingChunk.UpdateActiveChunk (activeCoord);
+        startingChunk.UpdateActiveChunks (activeCoords);
     }
 
     public int GetCurrentSize ()
