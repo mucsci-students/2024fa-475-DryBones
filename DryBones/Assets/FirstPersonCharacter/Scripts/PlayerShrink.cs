@@ -17,6 +17,7 @@ public class PlayerShrink : MonoBehaviour
     float timeOfLastScroll = 0f;
     float scrollingCooldown = 0.1f;
     float sizeChange = 0f;
+    public float scrollSensitivity = 0.04f;
 
 
     void Start()
@@ -32,7 +33,7 @@ public class PlayerShrink : MonoBehaviour
 
     void Update()
     {
-        float scrollAmt = Input.GetAxis ("Mouse ScrollWheel") / 25f;
+        float scrollAmt = Input.GetAxis ("Mouse ScrollWheel") * scrollSensitivity;
         if (scrollAmt != 0)
         {
             // shrinking begins, time freezes
