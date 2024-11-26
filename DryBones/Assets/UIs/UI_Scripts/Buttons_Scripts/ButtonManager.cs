@@ -68,6 +68,11 @@ public class ButtonManager : MonoBehaviour
                 PauseGame();
             }
         }
+        if (Input.GetMouseButtonUp(0) && !_isPause)
+        {
+            Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+            Cursor.visible = false; // Hide the cursor
+        }
     }
 
     // Method to start playing game
@@ -153,9 +158,6 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 1f;
         _pauseCanvas.SetActive(false);
         TurnOffAllCanvasInMainMenu();
-
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        Cursor.visible = false; // Hide the cursor
     }
 
     public void ShowCursor()
