@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     private bool _hasStartedIngameMusic = false; // Flag to track if the coroutine has started
 
+    public static int _coinAmount = 0;
+
     private void Awake()
     {
         // Check if an instance of GameManager already exists

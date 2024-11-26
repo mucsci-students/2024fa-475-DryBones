@@ -157,16 +157,16 @@ public class ButtonManager : MonoBehaviour
 
     public void ShowCursor()
     {
-        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-        Cursor.visible = true;                 // Make the cursor visible
-        Debug.Log("Cursor is now visible and unlocked.");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;                 
+        //Debug.Log("Cursor is now visible and unlocked.");
     }
 
     public void HideCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked; // Unlock the cursor
-        Cursor.visible = false;                 // Make the cursor visible
-        Debug.Log("Cursor is now visible and unlocked.");
+        Cursor.lockState = CursorLockMode.Locked; 
+        Cursor.visible = false;                 
+        //Debug.Log("Cursor is now visible and unlocked.");
     }
 
     public void RenderObjectInfoButton()
