@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerShrink : MonoBehaviour
 {
+    // Define constants for level limits
+    public float minScale = 1;
+    public float maxScale = 1;
+
     // positive size increases the player's scale, negative size decreases it
     public int startingSize = 0;
     public int size { get; private set; }
@@ -17,7 +21,7 @@ public class PlayerShrink : MonoBehaviour
     float timeOfLastScroll = 0f;
     float scrollingCooldown = 0.1f;
     float sizeChange = 0f;
-    public float scrollSensitivity = 0.04f;
+    public float scrollSensitivity = 0.009f;
 
 
     void Start()
@@ -33,43 +37,102 @@ public class PlayerShrink : MonoBehaviour
 
     void Update()
     {
-        float scrollAmt = Input.GetAxis ("Mouse ScrollWheel") * scrollSensitivity;
-        if (scrollAmt != 0)
+        //float scrollAmt = Input.GetAxis ("Mouse ScrollWheel") * scrollSensitivity;
+        //if (scrollAmt != 0)
+        //{
+        //    // shrinking begins, time freezes
+        //    if (!scrolling)
+        //    {
+        //        StopCoroutine ("InterpolateToCurrentScale");
+        //        world.transform.parent = worldParent.transform;
+        //        scrolling = true;
+        //    }
+        //    timeOfLastScroll = Time.unscaledTime;
+        //    Time.timeScale = 0f;
+        //    sizeChange += scrollAmt;
+        //    worldParent.transform.localScale *=  Mathf.Pow (8f, -scrollAmt);
+
+        //    // adjust the size as the player scrolls
+        //    if (sizeChange > 0.5f) 
+        //    {
+        //        size = size + 1;
+        //        --sizeChange;
+        //        //print (size);
+        //    }
+        //    else if (sizeChange < -0.5f)
+        //    {
+        //        size = size - 1;
+        //        ++sizeChange;
+        //        //print (size);
+        //    }
+        //}
+        //else if (scrolling && timeOfLastScroll + scrollingCooldown < Time.unscaledTime)
+        //{
+        //    scrolling = false;
+        //    StartCoroutine ("InterpolateToCurrentScale");
+        //    //print (size);
+        //}
+        ShrinkTest();
+        UpdateChunkCoord ();
+    }
+    void ShrinkTest()
+    {
+        float zoomAmount = 0f;
+
+        // Check for shrink (G key) or grow (H key)
+        if (Input.GetKey(KeyCode.G))
         {
-            // shrinking begins, time freezes
+            zoomAmount = -scrollSensitivity; // Shrink
+        }
+        else if (Input.GetKey(KeyCode.H))
+        {
+            zoomAmount = scrollSensitivity; // Grow
+        }
+
+        if (zoomAmount != 0)
+        {
+            // Shrinking begins, time freezes
             if (!scrolling)
             {
-                StopCoroutine ("InterpolateToCurrentScale");
+                StopCoroutine("InterpolateToCurrentScale");
                 world.transform.parent = worldParent.transform;
                 scrolling = true;
             }
             timeOfLastScroll = Time.unscaledTime;
             Time.timeScale = 0f;
-            sizeChange += scrollAmt;
-            worldParent.transform.localScale *=  Mathf.Pow (8f, -scrollAmt);
 
-            // adjust the size as the player scrolls
-            if (sizeChange > 0.5f) 
+            // Calculate the new scale and clamp it
+            float currentScale = worldParent.transform.localScale.x;
+            float targetScale = Mathf.Clamp(
+                currentScale * Mathf.Pow(8f, -zoomAmount),
+                startingScale * Mathf.Pow(8f, -minScale),
+                startingScale * Mathf.Pow(8f, maxScale)
+            );
+
+            // Apply the clamped scale
+            worldParent.transform.localScale = new Vector3(targetScale, targetScale, targetScale);
+
+            // Adjust sizeChange and update size
+            sizeChange += zoomAmount;
+            if (sizeChange > 0.5f && size < maxScale)
             {
-                size = size + 1;
-                --sizeChange;
-                //print (size);
+                size++;
+                sizeChange -= 1f;
             }
-            else if (sizeChange < -0.5f)
+            else if (sizeChange < -0.5f && size > -minScale)
             {
-                size = size - 1;
-                ++sizeChange;
-                //print (size);
+                size--;
+                sizeChange += 1f;
             }
         }
         else if (scrolling && timeOfLastScroll + scrollingCooldown < Time.unscaledTime)
         {
+            // End zooming process
             scrolling = false;
-            StartCoroutine ("InterpolateToCurrentScale");
-            //print (size);
+            StartCoroutine("InterpolateToCurrentScale");
         }
-        UpdateChunkCoord ();
     }
+
 
     // TODO: fix this hideousness
     void UpdateChunkCoord ()
