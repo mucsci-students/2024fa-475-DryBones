@@ -24,6 +24,7 @@ public class ButtonManager : MonoBehaviour
     [Header("Button To Show From Pause Menu")]
     [SerializeField] private GameObject _resumeButtonInMainMenu;
     [SerializeField] private GameObject _resumeButtonInSettingMenu;
+    [SerializeField] private GameObject _resumeButtonInUpgradeMenu;
 
     [Header("Information Panel")]
     [SerializeField] private GameObject _renderObjectSliderPanel;
@@ -114,12 +115,8 @@ public class ButtonManager : MonoBehaviour
     public void SettingMenu()
     {
         TurnOffPanel();
-        _informationMenuCanvas.SetActive(false);
-        _mainMenuCanvas.SetActive(false);
-        _tutorialMenuCanvas.SetActive(false);
+        TurnOffAllCanvasInMainMenu();
         _settingMenuCanvas.SetActive(true);
-
-        _pauseCanvas.SetActive(false);
     }
 
     // Tutorial menu
@@ -147,7 +144,8 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 0f;
         _pauseCanvas.SetActive(true);
         _resumeButtonInMainMenu.SetActive(true);
-        _resumeButtonInSettingMenu.SetActive(true);   
+        _resumeButtonInSettingMenu.SetActive(true);
+        _resumeButtonInUpgradeMenu.SetActive(true);
     }
 
     public void ResumeGame()
