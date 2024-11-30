@@ -19,6 +19,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject _tutorialMenuCanvas;
     [SerializeField] private GameObject _informationMenuCanvas;
     [SerializeField] private GameObject _pauseCanvas;
+    [SerializeField] private GameObject _upgradeCanvas;
 
     [Header("Button To Show From Pause Menu")]
     [SerializeField] private GameObject _resumeButtonInMainMenu;
@@ -94,16 +95,19 @@ public class ButtonManager : MonoBehaviour
         _tutorialMenuCanvas.SetActive(false);
         _informationMenuCanvas.SetActive(false);
         _pauseCanvas.SetActive(false);
+        _upgradeCanvas.SetActive(false);
     }
 
     public void MainMenu()
     {
+        TurnOffAllCanvasInMainMenu();
         _mainMenuCanvas.SetActive(true);
-        _settingMenuCanvas.SetActive(false);
-        _tutorialMenuCanvas.SetActive(false);
-        _informationMenuCanvas.SetActive(false);
+    }
 
-        _pauseCanvas.SetActive(false);
+    public void UpgradeMenu()
+    {
+        TurnOffAllCanvasInMainMenu();
+        _upgradeCanvas.SetActive(true);
     }
 
     // Setting menu
@@ -151,7 +155,6 @@ public class ButtonManager : MonoBehaviour
         _isPause = false;
         HideCursor();
         Time.timeScale = 1f;
-        _pauseCanvas.SetActive(false);
         TurnOffAllCanvasInMainMenu();
     }
 
