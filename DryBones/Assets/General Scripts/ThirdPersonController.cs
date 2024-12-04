@@ -8,15 +8,17 @@ public class ThirdPersonController : MonoBehaviour
 
     [Header("Movement Speeds")]
     [SerializeField] private float _walkSpeed = 10f;
-    [SerializeField] private float _runSpeedMultiplier = 2f;
+    [SerializeField] private float _runSpeedMultiplier = 1.5f;
     
     [Header("Jump Parameters")]
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _gravity = 9.81f;
+    [SerializeField] private float _doubleJumpMultiplier = 1.5f;
+    [SerializeField] private int _maxJump = 3;
 
     [Header("Look Sensitivity")]
     [SerializeField] private float _mouseSensitivity = 2f;
-    [SerializeField] private float _updownRange = 80f;
+    [SerializeField] private float _updownRange = 90f;
 
     [Header("Player Input Handler And Camera")]
     [SerializeField] private PlayerInputHandler _playerInputHandler;
@@ -25,6 +27,9 @@ public class ThirdPersonController : MonoBehaviour
     private CharacterController _characterController;
     private Vector3 _currentMovement;
     private float _verticalRotation;
+    private int _jumpCount = 0;
+
+    public static bool _isDoubleJump = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -58,15 +63,30 @@ public class ThirdPersonController : MonoBehaviour
     {
         if (_characterController.isGrounded)
         {
-            _currentMovement.y = -0.5f;
+            _currentMovement.y = -1f;
+
+            if (_playerInputHandler.JumpTriggered && _jumpCount > 0)
+            {
+                _playerInputHandler.ConsumeJump();
+            }
+
+            _jumpCount = 0;
 
             if (_playerInputHandler.JumpTriggered)
             {
+                _jumpCount++;
                 _currentMovement.y = _jumpForce;
+                _playerInputHandler.ConsumeJump(); // Reset JumpTriggered
             }
         }
         else
         {
+            if (_playerInputHandler.JumpTriggered && _isDoubleJump && _jumpCount < _maxJump)
+            {
+                ++_jumpCount;
+                _currentMovement.y = _jumpForce * _doubleJumpMultiplier;
+                _playerInputHandler.ConsumeJump(); // Reset JumpTriggered
+            }
             _currentMovement.y -= _gravity * Time.deltaTime;
         }
     }
@@ -80,4 +100,5 @@ public class ThirdPersonController : MonoBehaviour
         _verticalRotation = Mathf.Clamp(_verticalRotation, -_updownRange, _updownRange);
         _mainCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
     }
+
 }
