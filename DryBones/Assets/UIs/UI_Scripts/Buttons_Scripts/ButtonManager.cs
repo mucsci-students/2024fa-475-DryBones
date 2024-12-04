@@ -44,31 +44,26 @@ public class ButtonManager : MonoBehaviour
     [Header("Cursor")]
     [SerializeField] private Texture2D _crosshairTexture;
 
-    [Header("Respawn Position")]
-    [SerializeField] private GameObject _player;
+    [Header("Respawn Position")] 
     [SerializeField] private Transform _respawnPosition;
 
-    private GameObject _playerHandler;
+    private PlayerInputHandler _playerInputHandler;
 
     private bool _isMasterVolumeInactive = false;
     private bool _isSfxVolumeInactive = false;
 
     public static bool _isPause = false;
-    public static bool _isRestart = false;
-
-    Scene _currentScene;
 
     private void Start()
     {
-        _player.SetActive(false);
         MainMenu();
+        _playerInputHandler = GameObject.FindWithTag("Player").GetComponent<PlayerInputHandler>();
         Cursor.SetCursor(_crosshairTexture, Vector2.zero, CursorMode.Auto);
-        _currentScene = SceneManager.GetActiveScene();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && _currentScene.name != SceneNames.MainMenu.ToString())
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != SceneNames.MainMenu.ToString())
         {
             if (!_isPause)
             {
@@ -84,12 +79,13 @@ public class ButtonManager : MonoBehaviour
     // Method to start playing game
     public void PlayGame()
     {
-        _player.SetActive(true);
-        _isRestart = true;
+        if (_playerInputHandler != null)
+        {
+            _playerInputHandler.OnEnable();
+        }
         HideCursor();
         Time.timeScale = 1f;
-        SceneManager.LoadScene("PlayerTest");
-        _player.transform.position = _respawnPosition.position;
+        SceneManager.LoadScene(SceneNames.PlayerTest.ToString());
         TurnOffAllCanvasInMainMenu();
     }
 
@@ -151,6 +147,10 @@ public class ButtonManager : MonoBehaviour
 
     public void PauseGame()
     {
+        if (_playerInputHandler != null)
+        {
+            _playerInputHandler.OnDisable();
+        }
         _isPause = true;
         Time.timeScale = 0f;
         _pauseCanvas.SetActive(true);

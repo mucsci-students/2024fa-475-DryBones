@@ -12,9 +12,6 @@ public class GameManager : MonoBehaviour
     // Singleton instance
     public static GameManager Instance { get; private set; }
 
-    [Header("Player Input Handler")]
-    [SerializeField] private PlayerInputHandler _playerInputHandler;
-
     private bool _hasStartedIngameMusic = false; // Flag to track if the coroutine has started
 
     public static int _coinAmount = 0;
@@ -31,8 +28,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject); // Destroy duplicate GameManager
         }
-
-        _playerInputHandler.OnEnable();
     }
 
     private void Start()
