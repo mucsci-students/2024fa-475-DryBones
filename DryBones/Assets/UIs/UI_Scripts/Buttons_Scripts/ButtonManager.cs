@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -43,23 +44,26 @@ public class ButtonManager : MonoBehaviour
     [Header("Cursor")]
     [SerializeField] private Texture2D _crosshairTexture;
 
+    [Header("Respawn Position")] 
+    [SerializeField] private Transform _respawnPosition;
+
+    private PlayerInputHandler _playerInputHandler;
+
     private bool _isMasterVolumeInactive = false;
     private bool _isSfxVolumeInactive = false;
 
-    private bool _isPause = false;
-
-    Scene _currentScene;
+    public static bool _isPause = false;
 
     private void Start()
     {
         MainMenu();
+        _playerInputHandler = GameObject.FindWithTag("Player").GetComponent<PlayerInputHandler>();
         Cursor.SetCursor(_crosshairTexture, Vector2.zero, CursorMode.Auto);
-        _currentScene = SceneManager.GetActiveScene();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && _currentScene.name != SceneNames.MainMenu.ToString())
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != SceneNames.MainMenu.ToString())
         {
             if (!_isPause)
             {
@@ -75,9 +79,13 @@ public class ButtonManager : MonoBehaviour
     // Method to start playing game
     public void PlayGame()
     {
+        if (_playerInputHandler != null)
+        {
+            _playerInputHandler.OnEnable();
+        }
         HideCursor();
         Time.timeScale = 1f;
-        SceneManager.LoadScene("PlayerTest");
+        SceneManager.LoadScene(SceneNames.PlayerTest.ToString());
         TurnOffAllCanvasInMainMenu();
     }
 
@@ -139,13 +147,17 @@ public class ButtonManager : MonoBehaviour
 
     public void PauseGame()
     {
+        if (_playerInputHandler != null)
+        {
+            _playerInputHandler.OnDisable();
+        }
         _isPause = true;
-        ShowCursor();
         Time.timeScale = 0f;
         _pauseCanvas.SetActive(true);
         _resumeButtonInMainMenu.SetActive(true);
         _resumeButtonInSettingMenu.SetActive(true);
         _resumeButtonInUpgradeMenu.SetActive(true);
+        ShowCursor();
     }
 
     public void ResumeGame()

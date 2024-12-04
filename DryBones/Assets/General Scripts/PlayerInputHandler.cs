@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    public static PlayerInputHandler Instance { get; private set; }
-
-
     [Header("Input Action Asset")]
     [SerializeField] private InputActionAsset _playerController;
 
@@ -34,17 +31,6 @@ public class PlayerInputHandler : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        // Check if an instance of GameManager already exists
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Prevent this object from being destroyed
-        }
-        else
-        {
-            Destroy(gameObject); // Destroy duplicate GameManager
-        }
-
         _walkAction = _playerController.FindActionMap(_actionMapName).FindAction(_walk);
         _runAction = _playerController.FindActionMap(_actionMapName).FindAction(_run);
         _jumpAction = _playerController.FindActionMap(_actionMapName).FindAction(_jump);
@@ -67,7 +53,7 @@ public class PlayerInputHandler : MonoBehaviour
         _jumpAction.canceled += context => JumpTriggered = false;
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         _walkAction.Enable();
         _runAction.Enable();
@@ -75,7 +61,7 @@ public class PlayerInputHandler : MonoBehaviour
         _lookAction.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         _walkAction.Disable();
         _runAction.Disable();
