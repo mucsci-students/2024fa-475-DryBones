@@ -50,7 +50,12 @@ public class PlayerInputHandler : MonoBehaviour
         _lookAction.canceled += context => LookInput = Vector2.zero;
 
         _jumpAction.performed += context => JumpTriggered = true;
-        _jumpAction.canceled += context => JumpTriggered = false;
+        //_jumpAction.canceled += context => JumpTriggered = false;
+    }
+
+    public void ConsumeJump()
+    {
+        JumpTriggered = false;
     }
 
     public void OnEnable()
