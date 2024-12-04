@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -43,15 +44,23 @@ public class ButtonManager : MonoBehaviour
     [Header("Cursor")]
     [SerializeField] private Texture2D _crosshairTexture;
 
+    [Header("Respawn Position")]
+    [SerializeField] private GameObject _player;
+    [SerializeField] private Transform _respawnPosition;
+
+    private GameObject _playerHandler;
+
     private bool _isMasterVolumeInactive = false;
     private bool _isSfxVolumeInactive = false;
 
     private bool _isPause = false;
+    public static bool _isRestart = false;
 
     Scene _currentScene;
 
     private void Start()
     {
+        _player.SetActive(false);
         MainMenu();
         Cursor.SetCursor(_crosshairTexture, Vector2.zero, CursorMode.Auto);
         _currentScene = SceneManager.GetActiveScene();
@@ -75,9 +84,12 @@ public class ButtonManager : MonoBehaviour
     // Method to start playing game
     public void PlayGame()
     {
+        _player.SetActive(true);
+        _isRestart = true;
         HideCursor();
         Time.timeScale = 1f;
         SceneManager.LoadScene("PlayerTest");
+        //_player.transform.position = _respawnPosition.position;
         TurnOffAllCanvasInMainMenu();
     }
 

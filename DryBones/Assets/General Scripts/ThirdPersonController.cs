@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ThirdPersonController : MonoBehaviour
@@ -17,9 +18,11 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private float _mouseSensitivity = 2f;
     [SerializeField] private float _updownRange = 80f;
 
+    [Header("Player Input Handler And Camera")]
+    [SerializeField] private PlayerInputHandler _playerInputHandler;
+    [SerializeField] private Camera _mainCamera;
+
     private CharacterController _characterController;
-    private Camera _mainCamera;
-    private PlayerInputHandler _playerInputHandler;
     private Vector3 _currentMovement;
     private float _verticalRotation;
 
@@ -28,7 +31,6 @@ public class ThirdPersonController : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _mainCamera = Camera.main;
-        _playerInputHandler = PlayerInputHandler.Instance;
     }
 
     // Update is called once per frame
