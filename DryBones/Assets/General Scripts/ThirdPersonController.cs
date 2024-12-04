@@ -16,7 +16,9 @@ public class ThirdPersonController : MonoBehaviour
 
     [Header("Look Sensitivity")]
     [SerializeField] private float _mouseSensitivity = 2f;
-    [SerializeField] private float _updownRange = 80f;
+    [SerializeField] private float _updownRange = 90f;
+    [SerializeField] private bool smooth;
+    [SerializeField] private float smoothTime = 5f;
 
     [Header("Player Input Handler And Camera")]
     [SerializeField] private PlayerInputHandler _playerInputHandler;
@@ -80,4 +82,5 @@ public class ThirdPersonController : MonoBehaviour
         _verticalRotation = Mathf.Clamp(_verticalRotation, -_updownRange, _updownRange);
         _mainCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
     }
+
 }
