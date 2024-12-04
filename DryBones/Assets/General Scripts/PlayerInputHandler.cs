@@ -82,9 +82,4 @@ public class PlayerInputHandler : MonoBehaviour
         _jumpAction.Disable();
         _lookAction.Disable();
     }
-
-    private void Update()
-    {
-        gameObject.transform.Rotate(0f, 0f, 2f);
-    }
 }
