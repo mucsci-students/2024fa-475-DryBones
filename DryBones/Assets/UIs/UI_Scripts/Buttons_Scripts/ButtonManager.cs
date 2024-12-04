@@ -53,7 +53,7 @@ public class ButtonManager : MonoBehaviour
     private bool _isMasterVolumeInactive = false;
     private bool _isSfxVolumeInactive = false;
 
-    private bool _isPause = false;
+    public static bool _isPause = false;
     public static bool _isRestart = false;
 
     Scene _currentScene;
@@ -89,7 +89,7 @@ public class ButtonManager : MonoBehaviour
         HideCursor();
         Time.timeScale = 1f;
         SceneManager.LoadScene("PlayerTest");
-        //_player.transform.position = _respawnPosition.position;
+        _player.transform.position = _respawnPosition.position;
         TurnOffAllCanvasInMainMenu();
     }
 
@@ -152,12 +152,12 @@ public class ButtonManager : MonoBehaviour
     public void PauseGame()
     {
         _isPause = true;
-        ShowCursor();
         Time.timeScale = 0f;
         _pauseCanvas.SetActive(true);
         _resumeButtonInMainMenu.SetActive(true);
         _resumeButtonInSettingMenu.SetActive(true);
         _resumeButtonInUpgradeMenu.SetActive(true);
+        ShowCursor();
     }
 
     public void ResumeGame()
