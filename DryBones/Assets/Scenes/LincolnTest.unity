@@ -2225,8 +2225,10 @@ MonoBehaviour:
   maxScale: 5
   startingSize: 0
   world: {fileID: 1259499763}
+  worldComponent: {fileID: 1259499764}
   worldParent: {fileID: 927784612}
   scrollSensitivity: 0.05
+  chunkDepth: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

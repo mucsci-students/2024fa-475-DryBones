@@ -13,6 +13,7 @@ public class PlayerShrink : MonoBehaviour
     public int size { get; private set; }
     float startingScale;
     public GameObject world;
+    public World worldComponent;
     public GameObject worldParent;
     ChunkCoord currChunkCoord;
     ChunkCoord oldChunkCoord;
@@ -22,6 +23,7 @@ public class PlayerShrink : MonoBehaviour
     float scrollingCooldown = 0.1f;
     float sizeChange = 0f;
     public float scrollSensitivity = 0.009f;
+    public int chunkDepth = 2; //how far the chunks get subdivided around the player, between 2 and 5
 
 
     void Start()
@@ -133,22 +135,33 @@ public class PlayerShrink : MonoBehaviour
         }
     }
 
-
-    // TODO: fix this hideousness
     void UpdateChunkCoord ()
     {
         Vector3 posRelativeToWorld = transform.position - world.transform.position;
         currChunkCoord = new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth), (int) (posRelativeToWorld.z / BlockData.chunkWidth), size);
-        if (Time.timeScale == 1f && (currChunkCoord.size != oldChunkCoord.size || currChunkCoord.x != oldChunkCoord.x || currChunkCoord.y != oldChunkCoord.y || currChunkCoord.z != oldChunkCoord.z))
+        if (Time.timeScale == 1f && (!currChunkCoord.Equals (oldChunkCoord)))
         {
             List<ChunkCoord> coords = new List<ChunkCoord> ();
-            //coords.Add (new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth) - 1, (int) (posRelativeToWorld.z / BlockData.chunkWidth), size));
-            //coords.Add (new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth), (int) (posRelativeToWorld.z / BlockData.chunkWidth), size));
-            for (int x = -1; x <= 1; ++x)
-                for (int y = -1; y <= 1; ++y)
-                    for (int z = -1; z <= 1; ++z)
-                        coords.Add (new ChunkCoord ((int) (currChunkCoord.x / BlockData.chunkWidth) + x, (int) (currChunkCoord.y / BlockData.chunkWidth) + y, (int) (currChunkCoord.z / BlockData.chunkWidth) + z, size + 1));
-            world.GetComponent<World> ().UpdateActiveChunks (coords);
+            if (chunkDepth % 2 == 0)
+            {
+                int r = chunkDepth / 2;
+                int xOffset = currChunkCoord.x % BlockData.chunkWidth < 4 ? 0 : 1;
+                int yOffset = currChunkCoord.y % BlockData.chunkWidth < 4 ? 0 : 1;
+                int zOffset = currChunkCoord.z % BlockData.chunkWidth < 4 ? 0 : 1;
+                for (int x = xOffset - r; x <= xOffset + r - 1; ++x)
+                    for (int y = yOffset - r; y <= yOffset + r - 1; ++y)
+                        for (int z = zOffset - r; z <= zOffset + r - 1; ++z)
+                            coords.Add (new ChunkCoord ((int) (currChunkCoord.x / BlockData.chunkWidth) + x, (int) (currChunkCoord.y / BlockData.chunkWidth) + y, (int) (currChunkCoord.z / BlockData.chunkWidth) + z, size + 1));
+            }
+            else
+            {
+                int r = chunkDepth / 2;
+                for (int x = -r; x <= r; ++x)
+                    for (int y = -r; y <= r; ++y)
+                        for (int z = -r; z <= r; ++z)
+                            coords.Add (new ChunkCoord ((int) (currChunkCoord.x / BlockData.chunkWidth) + x, (int) (currChunkCoord.y / BlockData.chunkWidth) + y, (int) (currChunkCoord.z / BlockData.chunkWidth) + z, size + 1));
+            }
+            worldComponent.UpdateActiveChunks (coords);
             oldChunkCoord = currChunkCoord;
         }
     }
