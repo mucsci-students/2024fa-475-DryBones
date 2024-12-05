@@ -2089,6 +2089,7 @@ MonoBehaviour:
     - {x: 7, y: 7, z: 3}
   startingBlockID: 7
   playerShrink: {fileID: 1911790642}
+  subdivisionSpeed: 50
 --- !u!4 &1259499765
 Transform:
   m_ObjectHideFlags: 0

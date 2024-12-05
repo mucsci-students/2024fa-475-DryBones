@@ -82,11 +82,10 @@ public class PlayerShrink : MonoBehaviour
             {
                 StopCoroutine("InterpolateToCurrentScale");
                 world.transform.parent = worldParent.transform;
-                scrolling = true;
-                timeOfLastScroll = Time.unscaledTime;
                 Time.timeScale = 0f;
                 --size;
-                StartCoroutine("InterpolateToCurrentScale");
+                scrolling = false;
+                StartCoroutine ("InterpolateToCurrentScale");
             }
         }
         else if (Input.GetKeyDown (KeyCode.H))
@@ -95,11 +94,10 @@ public class PlayerShrink : MonoBehaviour
             {
                 StopCoroutine("InterpolateToCurrentScale");
                 world.transform.parent = worldParent.transform;
-                scrolling = true;
-                timeOfLastScroll = Time.unscaledTime;
                 Time.timeScale = 0f;
                 ++size;
-                StartCoroutine("InterpolateToCurrentScale");
+                scrolling = false;
+                StartCoroutine ("InterpolateToCurrentScale");
             }
         }
         UpdateChunkCoord ();
