@@ -12,8 +12,6 @@ using UnityEngine;
 public class Chunk
 {
     public ChunkCoord coord;
-    // TODO: maybe don't call UpdateActiveChunk() on every child...
-    //public Dictionary<ChunkCoord, Chunk> children;
 
     BlockType type;
     GameObject obj;
@@ -33,6 +31,7 @@ public class Chunk
 
     List<Chunk> subChunks;
     public bool subdivided = false; // whether the chunk has a mesh or not
+    public int initialized = 0; // how many of this chunk's subchunks have been initialized
 
     public Chunk (ChunkCoord coord, World world, BlockType type, Transform parent)
     {
@@ -171,7 +170,6 @@ public class Chunk
             coll.sharedMesh = filter.mesh;
     }
 
-    // TODO: divide this chunk if it is the active chunk, or call this method on the child that is
     public void UpdateActiveChunks (List<ChunkCoord> activeCoords)
     {
         bool subdivide = false;
@@ -189,7 +187,8 @@ public class Chunk
         }
         if (subdivide)
         {
-            Subdivide ();
+            if (!subdivided)
+                Subdivide ();
             foreach (Chunk c in subChunks)
             {
                 c.UpdateActiveChunks (activeCoords);
@@ -197,7 +196,8 @@ public class Chunk
         }
         else if (reunite)
         {
-            Reunite ();
+            if (subdivided)
+                Reunite ();
             if (subChunks != null)
             {
                 foreach (Chunk c in subChunks)
@@ -206,50 +206,7 @@ public class Chunk
                 }
             }
         }
-        /*
-        if (activeCoord.size > coord.size)
-        {
-            Reunite ();
-            if (subChunks != null)
-            {
-                foreach (Chunk c in subChunks)
-                {
-                    c.UpdateActiveChunk (activeCoord);
-                }
-            }
-        }
-        else if (activeCoord.size < coord.size && coord.Contains (activeCoord))
-        {
-            Subdivide ();
-            foreach (Chunk c in subChunks)
-            {
-                c.UpdateActiveChunk (activeCoord);
-            }
-        }
-        else if (activeCoord.size == coord.size)
-        {
-            if (activeCoord.x == coord.x && activeCoord.y == coord.y && activeCoord.z == coord.z)
-            {
-                Subdivide ();
-                foreach (Chunk c in subChunks)
-                {
-                    c.UpdateActiveChunk (activeCoord);
-                }
-            }
-            else
-            {
-                Reunite ();
-                if (subChunks != null)
-                {
-                    foreach (Chunk c in subChunks)
-                    {
-                        c.UpdateActiveChunk (activeCoord);
-                    }
-                }
-            }
-            
-        }
-        */
+        
     }
 
     // divde this block into many smaller blocks
@@ -272,13 +229,27 @@ public class Chunk
             }
             world.InitChunks (subChunks, this);
         }
+        else if (initialized != Mathf.Pow (BlockData.chunkWidth, 3f))
+        {
+            List<Chunk> chunksToInit = new List<Chunk> ();
+            int t = 0;
+            foreach (Chunk c in subChunks)
+                if (t++ >= initialized)
+                    chunksToInit.Add (c);
+            world.InitChunks (chunksToInit, this);
+            foreach (Chunk c in subChunks)
+            {
+                c.SetActive (true);
+            }
+        }
         else
         {
             foreach (Chunk c in subChunks)
             {
                 c.SetActive (true);
             }
-            Hide ();
+            if (subChunks.Count == Mathf.Pow (BlockData.chunkWidth, 3f))
+                Hide ();
         }
     }
 

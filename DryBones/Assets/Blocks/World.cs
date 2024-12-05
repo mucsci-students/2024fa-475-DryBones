@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class World : MonoBehaviour
 {
@@ -81,7 +82,10 @@ public class World : MonoBehaviour
         int t = 0;
         while (chunksToInit.Count > 0)
         {
-            while (chunksToInit[0].Count > 0)
+            Chunk parent = null;
+            if (chunksToHide.Count > 0)
+                parent = chunksToHide[0];
+            while ((parent == null || parent.subdivided) && chunksToInit[0].Count > 0)
             {
                 if (chunksToInit[0][0].coord != null)
                 {
@@ -94,15 +98,17 @@ public class World : MonoBehaviour
                     ++t;
                 }
                 chunksToInit[0].RemoveAt (0);
-                
+                if (parent != null)
+                    ++parent.initialized;
             }
             chunksToInit.RemoveAt (0);
+            if (parent != null && parent.subdivided) // may be null, ie. no parent
+                parent.Hide ();
             if (chunksToHide.Count > 0)
-            {
-                if (chunksToHide[0] != null && chunksToHide[0].subdivided) // may be null, ie. no parent
-                    chunksToHide[0].Hide ();
                 chunksToHide.RemoveAt (0);
-            }
+                //print ("What??" + toStringList<List<Chunk>>(chunksToInit) + "\n" + toStringList<Chunk>(chunksToHide));
+            else
+                chunksToHide.Clear ();
         }
         runningCoroutine = false;
     }
@@ -115,6 +121,27 @@ public class World : MonoBehaviour
     public int GetCurrentSize ()
     {
         return playerShrink.size;
+    }
+
+    public string toStringList<T> (List<T> things)
+    {
+        string str = "[";
+        foreach (T t in things)
+        {
+            if (t == null)
+            {
+                str += "null";
+            }
+            if (t is IEnumerable<object> nestedList)
+            {
+                str += toStringList<object> (nestedList.ToList ());
+            }
+            else
+            {
+                str += t + ", ";
+            }
+        }
+        return str + "](" + things.Count + ")";
     }
 } 
 

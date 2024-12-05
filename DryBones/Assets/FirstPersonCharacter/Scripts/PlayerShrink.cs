@@ -37,42 +37,42 @@ public class PlayerShrink : MonoBehaviour
 
     void Update()
     {
-        //float scrollAmt = Input.GetAxis ("Mouse ScrollWheel") * scrollSensitivity;
-        //if (scrollAmt != 0)
-        //{
-        //    // shrinking begins, time freezes
-        //    if (!scrolling)
-        //    {
-        //        StopCoroutine ("InterpolateToCurrentScale");
-        //        world.transform.parent = worldParent.transform;
-        //        scrolling = true;
-        //    }
-        //    timeOfLastScroll = Time.unscaledTime;
-        //    Time.timeScale = 0f;
-        //    sizeChange += scrollAmt;
-        //    worldParent.transform.localScale *=  Mathf.Pow (8f, -scrollAmt);
+        float scrollAmt = Input.GetAxis ("Mouse ScrollWheel") * scrollSensitivity;
+        if (scrollAmt != 0)
+        {
+           // shrinking begins, time freezes
+           if (!scrolling)
+           {
+               StopCoroutine ("InterpolateToCurrentScale");
+               world.transform.parent = worldParent.transform;
+               scrolling = true;
+           }
+           timeOfLastScroll = Time.unscaledTime;
+           Time.timeScale = 0f;
+           sizeChange += scrollAmt;
+           worldParent.transform.localScale *=  Mathf.Pow (8f, -scrollAmt);
 
-        //    // adjust the size as the player scrolls
-        //    if (sizeChange > 0.5f) 
-        //    {
-        //        size = size + 1;
-        //        --sizeChange;
-        //        //print (size);
-        //    }
-        //    else if (sizeChange < -0.5f)
-        //    {
-        //        size = size - 1;
-        //        ++sizeChange;
-        //        //print (size);
-        //    }
-        //}
-        //else if (scrolling && timeOfLastScroll + scrollingCooldown < Time.unscaledTime)
-        //{
-        //    scrolling = false;
-        //    StartCoroutine ("InterpolateToCurrentScale");
-        //    //print (size);
-        //}
-        ShrinkTest();
+           // adjust the size as the player scrolls
+           if (sizeChange > 0.5f) 
+           {
+               size = size + 1;
+               --sizeChange;
+               //print (size);
+           }
+           else if (sizeChange < -0.5f)
+           {
+               size = size - 1;
+               ++sizeChange;
+               //print (size);
+           }
+        }
+        else if (scrolling && timeOfLastScroll + scrollingCooldown < Time.unscaledTime)
+        {
+           scrolling = false;
+           StartCoroutine ("InterpolateToCurrentScale");
+           //print (size);
+        }
+        //ShrinkTest();
         UpdateChunkCoord ();
     }
     void ShrinkTest()
@@ -142,8 +142,12 @@ public class PlayerShrink : MonoBehaviour
         if (Time.timeScale == 1f && (currChunkCoord.size != oldChunkCoord.size || currChunkCoord.x != oldChunkCoord.x || currChunkCoord.y != oldChunkCoord.y || currChunkCoord.z != oldChunkCoord.z))
         {
             List<ChunkCoord> coords = new List<ChunkCoord> ();
-            coords.Add (new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth) - 1, (int) (posRelativeToWorld.z / BlockData.chunkWidth), size));
-            coords.Add (new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth), (int) (posRelativeToWorld.z / BlockData.chunkWidth), size));
+            //coords.Add (new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth) - 1, (int) (posRelativeToWorld.z / BlockData.chunkWidth), size));
+            //coords.Add (new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth), (int) (posRelativeToWorld.z / BlockData.chunkWidth), size));
+            for (int x = -1; x <= 1; ++x)
+                for (int y = -1; y <= 1; ++y)
+                    for (int z = -1; z <= 1; ++z)
+                        coords.Add (new ChunkCoord ((int) (currChunkCoord.x / BlockData.chunkWidth) + x, (int) (currChunkCoord.y / BlockData.chunkWidth) + y, (int) (currChunkCoord.z / BlockData.chunkWidth) + z, size + 1));
             world.GetComponent<World> ().UpdateActiveChunks (coords);
             oldChunkCoord = currChunkCoord;
         }
