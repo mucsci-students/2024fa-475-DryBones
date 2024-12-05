@@ -35,9 +35,9 @@ public class ThirdPersonController : MonoBehaviour
     private Vector3 _currentMovement;
     private float _verticalRotation;
     private int _jumpCount = 0;
+    private bool _canDash = true;
 
     public static bool _isDoubleJump = true;
-    public static bool _canDash = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -133,5 +133,4 @@ public class ThirdPersonController : MonoBehaviour
         _verticalRotation = Mathf.Clamp(_verticalRotation, -_updownRange, _updownRange);
         _mainCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
     }
-
 }

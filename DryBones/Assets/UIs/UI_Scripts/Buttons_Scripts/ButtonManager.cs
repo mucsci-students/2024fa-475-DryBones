@@ -57,7 +57,6 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         MainMenu();
-        _playerInputHandler = GameObject.FindWithTag("Player").GetComponent<PlayerInputHandler>();
         Cursor.SetCursor(_crosshairTexture, Vector2.zero, CursorMode.Auto);
     }
 
@@ -79,13 +78,18 @@ public class ButtonManager : MonoBehaviour
     // Method to start playing game
     public void PlayGame()
     {
-        if (_playerInputHandler != null)
-        {
-            _playerInputHandler.OnEnable();
-        }
+        SceneManager.LoadScene(SceneNames.PlayerTest.ToString());
+        //if(SceneManager.GetActiveScene().name == SceneNames.PlayerTest.ToString())
+        //{
+        //    _playerInputHandler = GameObject.FindWithTag("InputHandler").GetComponent<PlayerInputHandler>();
+        //    if (_playerInputHandler != null)
+        //    {
+        //        Debug.Log("START GAME!!!!!!!!!");
+        //        _playerInputHandler.OnEnable();
+        //    }
+        //}
         HideCursor();
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneNames.PlayerTest.ToString());
         TurnOffAllCanvasInMainMenu();
     }
 
