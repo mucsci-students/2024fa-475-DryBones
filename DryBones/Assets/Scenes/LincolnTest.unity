@@ -2222,13 +2222,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minScale: 5
-  maxScale: 5
+  maxScale: 0
   startingSize: 0
   world: {fileID: 1259499763}
   worldComponent: {fileID: 1259499764}
   worldParent: {fileID: 927784612}
   scrollSensitivity: 0.05
-  chunkDepth: 4
+  chunkDepth: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

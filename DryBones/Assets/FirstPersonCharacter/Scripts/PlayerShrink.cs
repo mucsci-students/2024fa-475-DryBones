@@ -51,6 +51,7 @@ public class PlayerShrink : MonoBehaviour
            }
            timeOfLastScroll = Time.unscaledTime;
            Time.timeScale = 0f;
+           scrollAmt = Mathf.Clamp (scrollAmt, size == -minScale ? -0.1f - sizeChange : float.NegativeInfinity, size == maxScale ? 0.1f - sizeChange : float.PositiveInfinity);
            sizeChange += scrollAmt;
            worldParent.transform.localScale *=  Mathf.Pow (8f, -scrollAmt);
 
@@ -75,8 +76,36 @@ public class PlayerShrink : MonoBehaviour
            //print (size);
         }
         //ShrinkTest();
+        if (Input.GetKeyDown (KeyCode.G))
+        {
+            if (size != -minScale)
+            {
+                StopCoroutine("InterpolateToCurrentScale");
+                world.transform.parent = worldParent.transform;
+                scrolling = true;
+                timeOfLastScroll = Time.unscaledTime;
+                Time.timeScale = 0f;
+                --size;
+                StartCoroutine("InterpolateToCurrentScale");
+            }
+        }
+        else if (Input.GetKeyDown (KeyCode.H))
+        {
+            if (size != maxScale)
+            {
+                StopCoroutine("InterpolateToCurrentScale");
+                world.transform.parent = worldParent.transform;
+                scrolling = true;
+                timeOfLastScroll = Time.unscaledTime;
+                Time.timeScale = 0f;
+                ++size;
+                StartCoroutine("InterpolateToCurrentScale");
+            }
+        }
         UpdateChunkCoord ();
     }
+
+/*
     void ShrinkTest()
     {
         float zoomAmount = 0f;
@@ -134,6 +163,7 @@ public class PlayerShrink : MonoBehaviour
             StartCoroutine("InterpolateToCurrentScale");
         }
     }
+*/
 
     void UpdateChunkCoord ()
     {
