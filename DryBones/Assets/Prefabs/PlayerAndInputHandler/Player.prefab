@@ -341,7 +341,12 @@ MonoBehaviour:
   _runSpeedMultiplier: 1.5
   _jumpForce: 8
   _gravity: 16
+  _doubleJumpMultiplier: 1.1
   _maxJump: 2
+  _dashSpeed: 50
+  _dashDuration: 1.5
+  _dashCooldown: 1
+  _trailRenderer: {fileID: 0}
   _mouseSensitivity: 0.4
   _updownRange: 90
   _playerInputHandler: {fileID: 0}

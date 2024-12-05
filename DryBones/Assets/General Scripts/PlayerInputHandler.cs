@@ -14,11 +14,13 @@ public class PlayerInputHandler : MonoBehaviour
     [Header("Action Name References")]
     [SerializeField] private string _walk = "Walk";
     [SerializeField] private string _run = "Run";
+    [SerializeField] private string _dash = "Dash";
     [SerializeField] private string _jump = "Jump";
     [SerializeField] private string _look = "Look";
 
     private InputAction _walkAction;
     private InputAction _runAction;
+    private InputAction _dashAction;
     private InputAction _lookAction;
     private InputAction _jumpAction;
 
@@ -26,6 +28,7 @@ public class PlayerInputHandler : MonoBehaviour
     public float RunValue { get; private set; }
     public Vector2 LookInput { get; private set; }
     public bool JumpTriggered { get; private set; }
+    public bool DashTriggered { get; private set; }
 
 
     // Start is called before the first frame update
@@ -33,6 +36,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _walkAction = _playerController.FindActionMap(_actionMapName).FindAction(_walk);
         _runAction = _playerController.FindActionMap(_actionMapName).FindAction(_run);
+        _dashAction = _playerController.FindActionMap(_actionMapName).FindAction(_dash);
         _jumpAction = _playerController.FindActionMap(_actionMapName).FindAction(_jump);
         _lookAction = _playerController.FindActionMap(_actionMapName).FindAction(_look);
         RegisterInputActions();
@@ -50,12 +54,18 @@ public class PlayerInputHandler : MonoBehaviour
         _lookAction.canceled += context => LookInput = Vector2.zero;
 
         _jumpAction.performed += context => JumpTriggered = true;
-        //_jumpAction.canceled += context => JumpTriggered = false;
+
+        _dashAction.performed += context => DashTriggered = true;
     }
 
     public void ConsumeJump()
     {
         JumpTriggered = false;
+    }
+
+    public void ConsumeDash()
+    {
+        DashTriggered = false;
     }
 
     public void OnEnable()
