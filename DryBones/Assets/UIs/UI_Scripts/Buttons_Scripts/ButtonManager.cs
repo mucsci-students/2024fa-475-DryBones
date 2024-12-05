@@ -79,15 +79,6 @@ public class ButtonManager : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneNames.PlayerTest.ToString());
-        //if(SceneManager.GetActiveScene().name == SceneNames.PlayerTest.ToString())
-        //{
-        //    _playerInputHandler = GameObject.FindWithTag("InputHandler").GetComponent<PlayerInputHandler>();
-        //    if (_playerInputHandler != null)
-        //    {
-        //        Debug.Log("START GAME!!!!!!!!!");
-        //        _playerInputHandler.OnEnable();
-        //    }
-        //}
         HideCursor();
         Time.timeScale = 1f;
         TurnOffAllCanvasInMainMenu();
