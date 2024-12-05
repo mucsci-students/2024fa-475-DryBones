@@ -18,6 +18,7 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private int _maxJump = 3;
 
     [Header("Dash Parameters")]
+    [SerializeField] private TrailRenderer _trailRenderer;
     [SerializeField] private float _dashSpeed = 15f;
     [SerializeField] private float _dashDuration = 0.5f;
     [SerializeField] private float _dashCooldown = 1f;
@@ -34,8 +35,6 @@ public class ThirdPersonController : MonoBehaviour
     private Vector3 _currentMovement;
     private float _verticalRotation;
     private int _jumpCount = 0;
-
-    private bool _isDashing = false;
 
     public static bool _isDoubleJump = true;
     public static bool _canDash = true;
@@ -106,7 +105,6 @@ public class ThirdPersonController : MonoBehaviour
 
     private void ConsumeDashWrapper()
     {
-        _isDashing = false;
         _playerInputHandler.ConsumeDash();
     }
 
@@ -117,8 +115,10 @@ public class ThirdPersonController : MonoBehaviour
         worldDirection.Normalize();
         _currentMovement.x = worldDirection.x * _dashSpeed;
         _currentMovement.z = worldDirection.z * _dashSpeed;
+        _trailRenderer.emitting = true;
         yield return new WaitForSeconds(_dashDuration);
         _playerInputHandler.ConsumeDash();
+        _trailRenderer.emitting = false;
         _canDash = false;
         yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
