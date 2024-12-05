@@ -54,7 +54,7 @@ public class PlayerInputHandler : MonoBehaviour
         _lookAction.canceled += context => LookInput = Vector2.zero;
 
         _jumpAction.performed += context => JumpTriggered = true;
-
+        
         _dashAction.performed += context => DashTriggered = true;
     }
 
@@ -72,6 +72,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _walkAction.Enable();
         _runAction.Enable();
+        _dashAction.Enable();
         _jumpAction.Enable();
         _lookAction.Enable();
     }
@@ -80,6 +81,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _walkAction.Disable();
         _runAction.Disable();
+        _dashAction.Disable();
         _jumpAction.Disable();
         _lookAction.Disable();
     }

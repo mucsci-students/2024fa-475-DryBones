@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class ThirdPersonController : MonoBehaviour
 {
-
     [Header("Movement Speeds")]
     [SerializeField] private float _walkSpeed = 10f;
     [SerializeField] private float _runSpeedMultiplier = 1.5f;
@@ -18,6 +17,7 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private int _maxJump = 3;
 
     [Header("Dash Parameters")]
+    [SerializeField] private TrailRenderer _trailRenderer;
     [SerializeField] private float _dashSpeed = 15f;
     [SerializeField] private float _dashDuration = 0.5f;
     [SerializeField] private float _dashCooldown = 1f;
@@ -34,11 +34,9 @@ public class ThirdPersonController : MonoBehaviour
     private Vector3 _currentMovement;
     private float _verticalRotation;
     private int _jumpCount = 0;
-
-    private bool _isDashing = false;
+    private bool _canDash = true;
 
     public static bool _isDoubleJump = true;
-    public static bool _canDash = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -104,12 +102,6 @@ public class ThirdPersonController : MonoBehaviour
         }
     }
 
-    private void ConsumeDashWrapper()
-    {
-        _isDashing = false;
-        _playerInputHandler.ConsumeDash();
-    }
-
     private IEnumerator HandleDashing()
     {
         Vector3 inputDirection = new Vector3(_playerInputHandler.WalkInput.x, 0f, _playerInputHandler.WalkInput.y);
@@ -117,10 +109,29 @@ public class ThirdPersonController : MonoBehaviour
         worldDirection.Normalize();
         _currentMovement.x = worldDirection.x * _dashSpeed;
         _currentMovement.z = worldDirection.z * _dashSpeed;
+        _trailRenderer.emitting = true;
         yield return new WaitForSeconds(_dashDuration);
         _playerInputHandler.ConsumeDash();
+        _trailRenderer.emitting = false;
         _canDash = false;
-        yield return new WaitForSeconds(_dashCooldown);
+        Debug.Log("DASHING");
+        // Check for input during cooldown
+        // Cooldown check
+        float cooldownTimer = 0f;
+        while (cooldownTimer < _dashCooldown)
+        {
+            cooldownTimer += Time.deltaTime;
+
+            // Check if dash is pressed during cooldown
+            if (_playerInputHandler.DashTriggered)
+            {
+                Debug.Log("Dash pressed during cooldown!");
+                _playerInputHandler.ConsumeDash(); // Reset the dash trigger
+            }
+
+            yield return null; // Wait for the next frame
+        }
+        //yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
     }
 
@@ -133,5 +144,4 @@ public class ThirdPersonController : MonoBehaviour
         _verticalRotation = Mathf.Clamp(_verticalRotation, -_updownRange, _updownRange);
         _mainCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
     }
-
 }
