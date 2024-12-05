@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class ThirdPersonController : MonoBehaviour
 {
-
     [Header("Movement Speeds")]
     [SerializeField] private float _walkSpeed = 10f;
     [SerializeField] private float _runSpeedMultiplier = 1.5f;
@@ -103,11 +102,6 @@ public class ThirdPersonController : MonoBehaviour
         }
     }
 
-    private void ConsumeDashWrapper()
-    {
-        _playerInputHandler.ConsumeDash();
-    }
-
     private IEnumerator HandleDashing()
     {
         Vector3 inputDirection = new Vector3(_playerInputHandler.WalkInput.x, 0f, _playerInputHandler.WalkInput.y);
@@ -120,7 +114,24 @@ public class ThirdPersonController : MonoBehaviour
         _playerInputHandler.ConsumeDash();
         _trailRenderer.emitting = false;
         _canDash = false;
-        yield return new WaitForSeconds(_dashCooldown);
+        Debug.Log("DASHING");
+        // Check for input during cooldown
+        // Cooldown check
+        float cooldownTimer = 0f;
+        while (cooldownTimer < _dashCooldown)
+        {
+            cooldownTimer += Time.deltaTime;
+
+            // Check if dash is pressed during cooldown
+            if (_playerInputHandler.DashTriggered)
+            {
+                Debug.Log("Dash pressed during cooldown!");
+                _playerInputHandler.ConsumeDash(); // Reset the dash trigger
+            }
+
+            yield return null; // Wait for the next frame
+        }
+        //yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
     }
 
