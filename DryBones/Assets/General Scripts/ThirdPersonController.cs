@@ -1,3 +1,4 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,12 +10,15 @@ public class ThirdPersonController : MonoBehaviour
     [Header("Movement Speeds")]
     [SerializeField] private float _walkSpeed = 10f;
     [SerializeField] private float _runSpeedMultiplier = 1.5f;
-    
+
     [Header("Jump Parameters")]
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _gravity = 9.81f;
     [SerializeField] private float _doubleJumpMultiplier = 1.5f;
     [SerializeField] private int _maxJump = 3;
+
+    [Header("Dash Parameters")]
+    [SerializeField] private float _dashSpeed = 15f;
 
     [Header("Look Sensitivity")]
     [SerializeField] private float _mouseSensitivity = 2f;
@@ -56,6 +60,7 @@ public class ThirdPersonController : MonoBehaviour
         _currentMovement.x = worldDirection.x * speed;
         _currentMovement.z = worldDirection.z * speed;
         HandleJumping();
+        HandleDashing();
         _characterController.Move(_currentMovement * Time.deltaTime);
     }
 
@@ -88,6 +93,24 @@ public class ThirdPersonController : MonoBehaviour
                 _playerInputHandler.ConsumeJump(); // Reset JumpTriggered
             }
             _currentMovement.y -= _gravity * Time.deltaTime;
+        }
+    }
+
+    private void ConsumeDashWrapper()
+    {
+        _playerInputHandler.ConsumeDash();
+    }
+
+    private void HandleDashing()
+    {
+        if (_playerInputHandler.DashTriggered)
+        {
+            Vector3 inputDirection = new Vector3(_playerInputHandler.WalkInput.x, 0f, _playerInputHandler.WalkInput.y);
+            Vector3 worldDirection = transform.TransformDirection(inputDirection);
+            worldDirection.Normalize();
+            _currentMovement.x = worldDirection.x * _dashSpeed;
+            _currentMovement.z = worldDirection.z * _dashSpeed;
+            Invoke("ConsumeDashWrapper", 0.1f);
         }
     }
 
