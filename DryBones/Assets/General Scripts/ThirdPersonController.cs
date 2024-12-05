@@ -13,11 +13,19 @@ public class ThirdPersonController : MonoBehaviour
     private Vector3 _currentMovement;
 
     [Header("Wall Running")]
-    [SerializeField] Transform _playerCamera;
     [SerializeField] Transform _orientation;
     [SerializeField] private LayerMask _wallLayer;
-    [SerializeField] float _wallRunForce = 10f;
-    [SerializeField] float _maxWallRuntime = 5f;
+    [SerializeField] private float _wallRunForce = 10f;
+    [SerializeField] private float _maxStamina = 100f;
+    [SerializeField] private float _staminaCost = 2f;
+    [SerializeField] private float _staminaRecoveryAmount = 1f;
+    [SerializeField] private float _staminaLossRate = 0.3f;
+    [SerializeField] private float _staminaRecoveryRate = 0.4f;
+
+    private Coroutine _staminaDecreaseCoroutine;
+    private Coroutine _staminaIncreaseCoroutine;
+
+    private float _currentStamina;
 
     private bool _isRunningOnWall = false;
     private bool _isWallLeft = false;
@@ -57,6 +65,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _mainCamera = Camera.main;
+        _currentStamina = _maxStamina;
     }
 
     // Update is called once per frame
@@ -185,7 +194,18 @@ public class ThirdPersonController : MonoBehaviour
 
     private void StartWallRun()
     {
-        Debug.Log("RUNNING ON THE WALL!");
+        if(_currentStamina <= 0)
+        {
+            StopWallRun();
+            return;
+        }
+
+        if (_staminaDecreaseCoroutine == null)
+        {
+            _staminaDecreaseCoroutine = StartCoroutine(StaminaDecreaseRoutine());
+        }
+
+        //Debug.Log("RUNNING ON THE WALL!");
         _isRunningOnWall = true;
 
         // Cancel vertical gravity
@@ -196,9 +216,55 @@ public class ThirdPersonController : MonoBehaviour
         _currentMovement += _orientation.forward * _wallRunForce * Time.deltaTime;
     }
 
+    private void StaminaDecrease()
+    {
+        if (_currentStamina <= 0) return;
+        _currentStamina -= _staminaCost;
+    }
+
+    private void StaminaIncrease()
+    {
+        if (_currentStamina >= _maxStamina) return;
+        _currentStamina += _staminaRecoveryAmount;
+    }
+
+    private IEnumerator StaminaDecreaseRoutine()
+    {
+        while (_isRunningOnWall && _currentStamina > 0)
+        {
+            StaminaDecrease();
+            Debug.Log("Stamina decreasing: " + _currentStamina);
+            yield return new WaitForSeconds(_staminaLossRate);
+        }
+    }
+
+    private IEnumerator StaminaIncreaseRoutine()
+    {
+        while (!_isRunningOnWall && _currentStamina < _maxStamina)
+        {
+            StaminaIncrease();
+            Debug.Log("Stamina increasing: " + _currentStamina);
+            yield return new WaitForSeconds(_staminaRecoveryRate);
+        }
+
+        // Stop the recovery coroutine if stamina is fully replenished
+        _staminaIncreaseCoroutine = null;
+    }
+
     private void StopWallRun()
     {
-        Debug.Log("STOP RUNNING ON THE WALL!");
+        if (_staminaDecreaseCoroutine != null)
+        {
+            StopCoroutine(_staminaDecreaseCoroutine);
+            _staminaDecreaseCoroutine = null;
+        }
+
+        if (_staminaIncreaseCoroutine == null)
+        {
+            _staminaIncreaseCoroutine = StartCoroutine(StaminaIncreaseRoutine());
+        }
+
+        //Debug.Log("STOP RUNNING ON THE WALL!");
         _isRunningOnWall = false;
         _gravity = 9.81f;
         // Allow gravity to act again
