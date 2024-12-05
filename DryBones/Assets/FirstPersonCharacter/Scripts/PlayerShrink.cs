@@ -51,20 +51,20 @@ public class PlayerShrink : MonoBehaviour
            }
            timeOfLastScroll = Time.unscaledTime;
            Time.timeScale = 0f;
-           scrollAmt = Mathf.Clamp (scrollAmt, size == -minScale ? -0.1f - sizeChange : float.NegativeInfinity, size == maxScale ? 0.1f - sizeChange : float.PositiveInfinity);
+           scrollAmt = Mathf.Clamp (scrollAmt, -0.05f - sizeChange - (size + minScale), 0.05f - sizeChange - size + maxScale);
            sizeChange += scrollAmt;
            worldParent.transform.localScale *=  Mathf.Pow (8f, -scrollAmt);
 
            // adjust the size as the player scrolls
            if (sizeChange > 0.5f) 
            {
-               size = size + 1;
+               ++size;
                --sizeChange;
                //print (size);
            }
            else if (sizeChange < -0.5f)
            {
-               size = size - 1;
+               --size;
                ++sizeChange;
                //print (size);
            }
@@ -84,6 +84,7 @@ public class PlayerShrink : MonoBehaviour
                 world.transform.parent = worldParent.transform;
                 Time.timeScale = 0f;
                 --size;
+                ++sizeChange;
                 scrolling = false;
                 StartCoroutine ("InterpolateToCurrentScale");
             }
@@ -96,6 +97,7 @@ public class PlayerShrink : MonoBehaviour
                 world.transform.parent = worldParent.transform;
                 Time.timeScale = 0f;
                 ++size;
+                --sizeChange;
                 scrolling = false;
                 StartCoroutine ("InterpolateToCurrentScale");
             }

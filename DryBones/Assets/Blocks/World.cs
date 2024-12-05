@@ -107,7 +107,6 @@ public class World : MonoBehaviour
                 parent.Hide ();
             if (chunksToHide.Count > 0)
                 chunksToHide.RemoveAt (0);
-                //print ("What??" + toStringList<List<Chunk>>(chunksToInit) + "\n" + toStringList<Chunk>(chunksToHide));
             else
                 chunksToHide.Clear ();
         }

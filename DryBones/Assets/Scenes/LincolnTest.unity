@@ -2222,7 +2222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fc6ab117efa4d88831d5e041d99600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScale: 5
+  minScale: 3
   maxScale: 0
   startingSize: 0
   world: {fileID: 1259499763}
