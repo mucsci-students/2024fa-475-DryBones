@@ -10,7 +10,7 @@ public class PlayerCollision : MonoBehaviour
         {
             // Access the static field directly using the class name
             GameManager._coinAmount += 1;
-            Debug.Log($"Coin amount: {GameManager._coinAmount}");
+            //Debug.Log($"Coin amount: {GameManager._coinAmount}");
             Destroy(other.gameObject);
         }
     }

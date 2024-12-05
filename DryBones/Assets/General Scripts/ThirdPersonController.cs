@@ -19,6 +19,8 @@ public class ThirdPersonController : MonoBehaviour
 
     [Header("Dash Parameters")]
     [SerializeField] private float _dashSpeed = 15f;
+    [SerializeField] private float _dashDuration = 0.5f;
+    [SerializeField] private float _dashCooldown = 1f;
 
     [Header("Look Sensitivity")]
     [SerializeField] private float _mouseSensitivity = 2f;
@@ -33,7 +35,10 @@ public class ThirdPersonController : MonoBehaviour
     private float _verticalRotation;
     private int _jumpCount = 0;
 
+    private bool _isDashing = false;
+
     public static bool _isDoubleJump = true;
+    public static bool _canDash = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -60,7 +65,10 @@ public class ThirdPersonController : MonoBehaviour
         _currentMovement.x = worldDirection.x * speed;
         _currentMovement.z = worldDirection.z * speed;
         HandleJumping();
-        HandleDashing();
+        if (_playerInputHandler.DashTriggered && _canDash)
+        {
+            StartCoroutine(HandleDashing());
+        }
         _characterController.Move(_currentMovement * Time.deltaTime);
     }
 
@@ -98,20 +106,22 @@ public class ThirdPersonController : MonoBehaviour
 
     private void ConsumeDashWrapper()
     {
+        _isDashing = false;
         _playerInputHandler.ConsumeDash();
     }
 
-    private void HandleDashing()
+    private IEnumerator HandleDashing()
     {
-        if (_playerInputHandler.DashTriggered)
-        {
-            Vector3 inputDirection = new Vector3(_playerInputHandler.WalkInput.x, 0f, _playerInputHandler.WalkInput.y);
-            Vector3 worldDirection = transform.TransformDirection(inputDirection);
-            worldDirection.Normalize();
-            _currentMovement.x = worldDirection.x * _dashSpeed;
-            _currentMovement.z = worldDirection.z * _dashSpeed;
-            Invoke("ConsumeDashWrapper", 0.1f);
-        }
+        Vector3 inputDirection = new Vector3(_playerInputHandler.WalkInput.x, 0f, _playerInputHandler.WalkInput.y);
+        Vector3 worldDirection = transform.TransformDirection(inputDirection);
+        worldDirection.Normalize();
+        _currentMovement.x = worldDirection.x * _dashSpeed;
+        _currentMovement.z = worldDirection.z * _dashSpeed;
+        yield return new WaitForSeconds(_dashDuration);
+        _playerInputHandler.ConsumeDash();
+        _canDash = false;
+        yield return new WaitForSeconds(_dashCooldown);
+        _canDash = true;
     }
 
     private void HandleRotation()
