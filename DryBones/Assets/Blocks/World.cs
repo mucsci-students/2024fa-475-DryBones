@@ -20,6 +20,7 @@ public class World : MonoBehaviour
     bool runningCoroutine = false;
 
     [SerializeField] private PlayerShrink playerShrink;
+    [SerializeField] private int subdivisionSpeed; // how many chunks are subdivided per frame (probably 10-100)
 
     void Start ()
     {
@@ -90,7 +91,7 @@ public class World : MonoBehaviour
                 if (chunksToInit[0][0].coord != null)
                 {
                     chunksToInit[0][0].Init ();
-                    if (t == 10)
+                    if (t == subdivisionSpeed)
                     {
                         t = 0;
                         yield return null;
@@ -106,7 +107,6 @@ public class World : MonoBehaviour
                 parent.Hide ();
             if (chunksToHide.Count > 0)
                 chunksToHide.RemoveAt (0);
-                //print ("What??" + toStringList<List<Chunk>>(chunksToInit) + "\n" + toStringList<Chunk>(chunksToHide));
             else
                 chunksToHide.Clear ();
         }
