@@ -346,7 +346,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _wallRunForce: 500
-  _maxStamina: 50
+  _maxStamina: 25
   _staminaCost: 2
   _staminaRecoveryAmount: 1
   _staminaLossRate: 0.3

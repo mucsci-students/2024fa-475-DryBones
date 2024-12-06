@@ -1447,9 +1447,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 392823182298575655, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 392823182298575655, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3971039006065580066, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
       propertyPath: m_Name
       value: Game_Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052866855080532609, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.800003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2825,14 +2837,6 @@ PrefabInstance:
     - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
-      propertyPath: _maxStamina
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
-      propertyPath: _wallRunForce
-      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: _playerInputHandler
