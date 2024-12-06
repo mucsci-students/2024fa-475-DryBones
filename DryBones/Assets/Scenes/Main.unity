@@ -37,8 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_Sun: {fileID: 0}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -104,7 +103,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,19 +116,22 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &705507993
+--- !u!1 &983161324
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 705507995}
-  - component: {fileID: 705507994}
+  - component: {fileID: 983161326}
+  - component: {fileID: 983161325}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -137,19 +139,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!108 &705507994
+--- !u!108 &983161325
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 705507993}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983161324}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -159,6 +164,24 @@ Light:
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
@@ -166,102 +189,2018 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 1
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!4 &705507995
+--- !u!4 &983161326
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 705507993}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983161324}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &963194225
+--- !u!1001 &1077767159
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6242250982411599607, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_Name
+      value: InputHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242250982411599607, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -188.73352
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -59.23044
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 116.35646
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+--- !u!1001 &1092844200
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 855058675373446476, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: world
+      value: 
+      objectReference: {fileID: 1384101380}
+    - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: worldComponent
+      value: 
+      objectReference: {fileID: 1384101381}
+    - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: _playerInputHandler
+      value: 
+      objectReference: {fileID: 1860023507}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+--- !u!1 &1384101380
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 963194228}
-  - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
+  - component: {fileID: 1384101382}
+  - component: {fileID: 1384101381}
   m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
+  m_Name: World
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &963194226
-AudioListener:
+--- !u!114 &1384101381
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384101380}
   m_Enabled: 1
---- !u!20 &963194227
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_GateFitMode: 2
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &963194228
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9fac10db3ff443f97a6dd47dcdd9ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 3e0feac6047154c2dbbd1ad15b0c6de3, type: 2}
+  blockTypes:
+  - blockName: Air
+    isSolid: 0
+    backFaceTexture: 0
+    frontFaceTexture: 0
+    topFaceTexture: 0
+    bottomFaceTexture: 0
+    leftFaceTexture: 0
+    rightFaceTexture: 0
+    subBlockIDs: 
+    subBlockLocs: []
+  - blockName: Default
+    isSolid: 1
+    backFaceTexture: 0
+    frontFaceTexture: 0
+    topFaceTexture: 0
+    bottomFaceTexture: 0
+    leftFaceTexture: 0
+    rightFaceTexture: 0
+    subBlockIDs: 01
+    subBlockLocs: []
+  - blockName: Placeholder 1
+    isSolid: 1
+    backFaceTexture: 1
+    frontFaceTexture: 1
+    topFaceTexture: 1
+    bottomFaceTexture: 1
+    leftFaceTexture: 1
+    rightFaceTexture: 1
+    subBlockIDs: 02
+    subBlockLocs: []
+  - blockName: Placeholder 2
+    isSolid: 1
+    backFaceTexture: 2
+    frontFaceTexture: 2
+    topFaceTexture: 2
+    bottomFaceTexture: 2
+    leftFaceTexture: 2
+    rightFaceTexture: 2
+    subBlockIDs: 03
+    subBlockLocs: []
+  - blockName: Menger Sponge
+    isSolid: 1
+    backFaceTexture: 3
+    frontFaceTexture: 3
+    topFaceTexture: 3
+    bottomFaceTexture: 3
+    leftFaceTexture: 3
+    rightFaceTexture: 3
+    subBlockIDs: 04
+    subBlockLocs:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 1}
+    - {x: 0, y: 0, z: 2}
+    - {x: 0, y: 0, z: 3}
+    - {x: 0, y: 0, z: 4}
+    - {x: 0, y: 0, z: 5}
+    - {x: 0, y: 0, z: 6}
+    - {x: 0, y: 0, z: 7}
+    - {x: 0, y: 1, z: 0}
+    - {x: 0, y: 1, z: 2}
+    - {x: 0, y: 1, z: 5}
+    - {x: 0, y: 1, z: 7}
+    - {x: 0, y: 2, z: 0}
+    - {x: 0, y: 2, z: 1}
+    - {x: 0, y: 2, z: 2}
+    - {x: 0, y: 2, z: 3}
+    - {x: 0, y: 2, z: 4}
+    - {x: 0, y: 2, z: 5}
+    - {x: 0, y: 2, z: 6}
+    - {x: 0, y: 2, z: 7}
+    - {x: 0, y: 3, z: 0}
+    - {x: 0, y: 3, z: 2}
+    - {x: 0, y: 3, z: 5}
+    - {x: 0, y: 3, z: 7}
+    - {x: 0, y: 4, z: 0}
+    - {x: 0, y: 4, z: 2}
+    - {x: 0, y: 4, z: 5}
+    - {x: 0, y: 4, z: 7}
+    - {x: 0, y: 5, z: 0}
+    - {x: 0, y: 5, z: 1}
+    - {x: 0, y: 5, z: 2}
+    - {x: 0, y: 5, z: 3}
+    - {x: 0, y: 5, z: 4}
+    - {x: 0, y: 5, z: 5}
+    - {x: 0, y: 5, z: 6}
+    - {x: 0, y: 5, z: 7}
+    - {x: 0, y: 6, z: 0}
+    - {x: 0, y: 6, z: 2}
+    - {x: 0, y: 6, z: 5}
+    - {x: 0, y: 6, z: 7}
+    - {x: 0, y: 7, z: 0}
+    - {x: 0, y: 7, z: 1}
+    - {x: 0, y: 7, z: 2}
+    - {x: 0, y: 7, z: 3}
+    - {x: 0, y: 7, z: 4}
+    - {x: 0, y: 7, z: 5}
+    - {x: 0, y: 7, z: 6}
+    - {x: 0, y: 7, z: 7}
+    - {x: 1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 2}
+    - {x: 1, y: 0, z: 5}
+    - {x: 1, y: 0, z: 7}
+    - {x: 1, y: 2, z: 0}
+    - {x: 1, y: 2, z: 2}
+    - {x: 1, y: 2, z: 5}
+    - {x: 1, y: 2, z: 7}
+    - {x: 1, y: 5, z: 0}
+    - {x: 1, y: 5, z: 2}
+    - {x: 1, y: 5, z: 5}
+    - {x: 1, y: 5, z: 7}
+    - {x: 1, y: 7, z: 0}
+    - {x: 1, y: 7, z: 2}
+    - {x: 1, y: 7, z: 5}
+    - {x: 1, y: 7, z: 7}
+    - {x: 2, y: 0, z: 0}
+    - {x: 2, y: 0, z: 1}
+    - {x: 2, y: 0, z: 2}
+    - {x: 2, y: 0, z: 3}
+    - {x: 2, y: 0, z: 4}
+    - {x: 2, y: 0, z: 5}
+    - {x: 2, y: 0, z: 6}
+    - {x: 2, y: 0, z: 7}
+    - {x: 2, y: 1, z: 0}
+    - {x: 2, y: 1, z: 2}
+    - {x: 2, y: 1, z: 5}
+    - {x: 2, y: 1, z: 7}
+    - {x: 2, y: 2, z: 0}
+    - {x: 2, y: 2, z: 1}
+    - {x: 2, y: 2, z: 2}
+    - {x: 2, y: 2, z: 3}
+    - {x: 2, y: 2, z: 4}
+    - {x: 2, y: 2, z: 5}
+    - {x: 2, y: 2, z: 6}
+    - {x: 2, y: 2, z: 7}
+    - {x: 2, y: 3, z: 0}
+    - {x: 2, y: 3, z: 2}
+    - {x: 2, y: 3, z: 5}
+    - {x: 2, y: 3, z: 7}
+    - {x: 2, y: 4, z: 0}
+    - {x: 2, y: 4, z: 2}
+    - {x: 2, y: 4, z: 5}
+    - {x: 2, y: 4, z: 7}
+    - {x: 2, y: 5, z: 0}
+    - {x: 2, y: 5, z: 1}
+    - {x: 2, y: 5, z: 2}
+    - {x: 2, y: 5, z: 3}
+    - {x: 2, y: 5, z: 4}
+    - {x: 2, y: 5, z: 5}
+    - {x: 2, y: 5, z: 6}
+    - {x: 2, y: 5, z: 7}
+    - {x: 2, y: 6, z: 0}
+    - {x: 2, y: 6, z: 2}
+    - {x: 2, y: 6, z: 5}
+    - {x: 2, y: 6, z: 7}
+    - {x: 2, y: 7, z: 0}
+    - {x: 2, y: 7, z: 1}
+    - {x: 2, y: 7, z: 2}
+    - {x: 2, y: 7, z: 3}
+    - {x: 2, y: 7, z: 4}
+    - {x: 2, y: 7, z: 5}
+    - {x: 2, y: 7, z: 6}
+    - {x: 2, y: 7, z: 7}
+    - {x: 3, y: 0, z: 0}
+    - {x: 3, y: 0, z: 2}
+    - {x: 3, y: 0, z: 5}
+    - {x: 3, y: 0, z: 7}
+    - {x: 3, y: 2, z: 0}
+    - {x: 3, y: 2, z: 2}
+    - {x: 3, y: 2, z: 5}
+    - {x: 3, y: 2, z: 7}
+    - {x: 3, y: 5, z: 0}
+    - {x: 3, y: 5, z: 2}
+    - {x: 3, y: 5, z: 5}
+    - {x: 3, y: 5, z: 7}
+    - {x: 3, y: 7, z: 0}
+    - {x: 3, y: 7, z: 2}
+    - {x: 3, y: 7, z: 5}
+    - {x: 3, y: 7, z: 7}
+    - {x: 4, y: 0, z: 0}
+    - {x: 4, y: 0, z: 2}
+    - {x: 4, y: 0, z: 5}
+    - {x: 4, y: 0, z: 7}
+    - {x: 4, y: 2, z: 0}
+    - {x: 4, y: 2, z: 2}
+    - {x: 4, y: 2, z: 5}
+    - {x: 4, y: 2, z: 7}
+    - {x: 4, y: 5, z: 0}
+    - {x: 4, y: 5, z: 2}
+    - {x: 4, y: 5, z: 5}
+    - {x: 4, y: 5, z: 7}
+    - {x: 4, y: 7, z: 0}
+    - {x: 4, y: 7, z: 2}
+    - {x: 4, y: 7, z: 5}
+    - {x: 4, y: 7, z: 7}
+    - {x: 5, y: 0, z: 0}
+    - {x: 5, y: 0, z: 1}
+    - {x: 5, y: 0, z: 2}
+    - {x: 5, y: 0, z: 3}
+    - {x: 5, y: 0, z: 4}
+    - {x: 5, y: 0, z: 5}
+    - {x: 5, y: 0, z: 6}
+    - {x: 5, y: 0, z: 7}
+    - {x: 5, y: 1, z: 0}
+    - {x: 5, y: 1, z: 2}
+    - {x: 5, y: 1, z: 5}
+    - {x: 5, y: 1, z: 7}
+    - {x: 5, y: 2, z: 0}
+    - {x: 5, y: 2, z: 1}
+    - {x: 5, y: 2, z: 2}
+    - {x: 5, y: 2, z: 3}
+    - {x: 5, y: 2, z: 4}
+    - {x: 5, y: 2, z: 5}
+    - {x: 5, y: 2, z: 6}
+    - {x: 5, y: 2, z: 7}
+    - {x: 5, y: 3, z: 0}
+    - {x: 5, y: 3, z: 2}
+    - {x: 5, y: 3, z: 5}
+    - {x: 5, y: 3, z: 7}
+    - {x: 5, y: 4, z: 0}
+    - {x: 5, y: 4, z: 2}
+    - {x: 5, y: 4, z: 5}
+    - {x: 5, y: 4, z: 7}
+    - {x: 5, y: 5, z: 0}
+    - {x: 5, y: 5, z: 1}
+    - {x: 5, y: 5, z: 2}
+    - {x: 5, y: 5, z: 3}
+    - {x: 5, y: 5, z: 4}
+    - {x: 5, y: 5, z: 5}
+    - {x: 5, y: 5, z: 6}
+    - {x: 5, y: 5, z: 7}
+    - {x: 5, y: 6, z: 0}
+    - {x: 5, y: 6, z: 2}
+    - {x: 5, y: 6, z: 5}
+    - {x: 5, y: 6, z: 7}
+    - {x: 5, y: 7, z: 0}
+    - {x: 5, y: 7, z: 1}
+    - {x: 5, y: 7, z: 2}
+    - {x: 5, y: 7, z: 3}
+    - {x: 5, y: 7, z: 4}
+    - {x: 5, y: 7, z: 5}
+    - {x: 5, y: 7, z: 6}
+    - {x: 5, y: 7, z: 7}
+    - {x: 6, y: 0, z: 0}
+    - {x: 6, y: 0, z: 2}
+    - {x: 6, y: 0, z: 5}
+    - {x: 6, y: 0, z: 7}
+    - {x: 6, y: 2, z: 0}
+    - {x: 6, y: 2, z: 2}
+    - {x: 6, y: 2, z: 5}
+    - {x: 6, y: 2, z: 7}
+    - {x: 6, y: 5, z: 0}
+    - {x: 6, y: 5, z: 2}
+    - {x: 6, y: 5, z: 5}
+    - {x: 6, y: 5, z: 7}
+    - {x: 6, y: 7, z: 0}
+    - {x: 6, y: 7, z: 2}
+    - {x: 6, y: 7, z: 5}
+    - {x: 6, y: 7, z: 7}
+    - {x: 7, y: 0, z: 0}
+    - {x: 7, y: 0, z: 1}
+    - {x: 7, y: 0, z: 2}
+    - {x: 7, y: 0, z: 3}
+    - {x: 7, y: 0, z: 4}
+    - {x: 7, y: 0, z: 5}
+    - {x: 7, y: 0, z: 6}
+    - {x: 7, y: 0, z: 7}
+    - {x: 7, y: 1, z: 0}
+    - {x: 7, y: 1, z: 2}
+    - {x: 7, y: 1, z: 5}
+    - {x: 7, y: 1, z: 7}
+    - {x: 7, y: 2, z: 0}
+    - {x: 7, y: 2, z: 1}
+    - {x: 7, y: 2, z: 2}
+    - {x: 7, y: 2, z: 3}
+    - {x: 7, y: 2, z: 4}
+    - {x: 7, y: 2, z: 5}
+    - {x: 7, y: 2, z: 6}
+    - {x: 7, y: 2, z: 7}
+    - {x: 7, y: 3, z: 0}
+    - {x: 7, y: 3, z: 2}
+    - {x: 7, y: 3, z: 5}
+    - {x: 7, y: 3, z: 7}
+    - {x: 7, y: 4, z: 0}
+    - {x: 7, y: 4, z: 2}
+    - {x: 7, y: 4, z: 5}
+    - {x: 7, y: 4, z: 7}
+    - {x: 7, y: 5, z: 0}
+    - {x: 7, y: 5, z: 1}
+    - {x: 7, y: 5, z: 2}
+    - {x: 7, y: 5, z: 3}
+    - {x: 7, y: 5, z: 4}
+    - {x: 7, y: 5, z: 5}
+    - {x: 7, y: 5, z: 6}
+    - {x: 7, y: 5, z: 7}
+    - {x: 7, y: 6, z: 0}
+    - {x: 7, y: 6, z: 2}
+    - {x: 7, y: 6, z: 5}
+    - {x: 7, y: 6, z: 7}
+    - {x: 7, y: 7, z: 0}
+    - {x: 7, y: 7, z: 1}
+    - {x: 7, y: 7, z: 2}
+    - {x: 7, y: 7, z: 3}
+    - {x: 7, y: 7, z: 4}
+    - {x: 7, y: 7, z: 5}
+    - {x: 7, y: 7, z: 6}
+    - {x: 7, y: 7, z: 7}
+  - blockName: Grass
+    isSolid: 1
+    backFaceTexture: 5
+    frontFaceTexture: 5
+    topFaceTexture: 4
+    bottomFaceTexture: 6
+    leftFaceTexture: 5
+    rightFaceTexture: 5
+    subBlockIDs: 0606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606050505050505050506060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060505050505050505060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060605050505050505050606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606050505050505050506060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060505050505050505060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060605050505050505050606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606050505050505050506060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060505050505050505
+    subBlockLocs:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 1}
+    - {x: 0, y: 0, z: 2}
+    - {x: 0, y: 0, z: 3}
+    - {x: 0, y: 0, z: 4}
+    - {x: 0, y: 0, z: 5}
+    - {x: 0, y: 0, z: 6}
+    - {x: 0, y: 0, z: 7}
+    - {x: 0, y: 1, z: 0}
+    - {x: 0, y: 1, z: 1}
+    - {x: 0, y: 1, z: 2}
+    - {x: 0, y: 1, z: 3}
+    - {x: 0, y: 1, z: 4}
+    - {x: 0, y: 1, z: 5}
+    - {x: 0, y: 1, z: 6}
+    - {x: 0, y: 1, z: 7}
+    - {x: 0, y: 2, z: 0}
+    - {x: 0, y: 2, z: 1}
+    - {x: 0, y: 2, z: 2}
+    - {x: 0, y: 2, z: 3}
+    - {x: 0, y: 2, z: 4}
+    - {x: 0, y: 2, z: 5}
+    - {x: 0, y: 2, z: 6}
+    - {x: 0, y: 2, z: 7}
+    - {x: 0, y: 3, z: 0}
+    - {x: 0, y: 3, z: 1}
+    - {x: 0, y: 3, z: 2}
+    - {x: 0, y: 3, z: 3}
+    - {x: 0, y: 3, z: 4}
+    - {x: 0, y: 3, z: 5}
+    - {x: 0, y: 3, z: 6}
+    - {x: 0, y: 3, z: 7}
+    - {x: 0, y: 4, z: 0}
+    - {x: 0, y: 4, z: 1}
+    - {x: 0, y: 4, z: 2}
+    - {x: 0, y: 4, z: 3}
+    - {x: 0, y: 4, z: 4}
+    - {x: 0, y: 4, z: 5}
+    - {x: 0, y: 4, z: 6}
+    - {x: 0, y: 4, z: 7}
+    - {x: 0, y: 5, z: 0}
+    - {x: 0, y: 5, z: 1}
+    - {x: 0, y: 5, z: 2}
+    - {x: 0, y: 5, z: 3}
+    - {x: 0, y: 5, z: 4}
+    - {x: 0, y: 5, z: 5}
+    - {x: 0, y: 5, z: 6}
+    - {x: 0, y: 5, z: 7}
+    - {x: 0, y: 6, z: 0}
+    - {x: 0, y: 6, z: 1}
+    - {x: 0, y: 6, z: 2}
+    - {x: 0, y: 6, z: 3}
+    - {x: 0, y: 6, z: 4}
+    - {x: 0, y: 6, z: 5}
+    - {x: 0, y: 6, z: 6}
+    - {x: 0, y: 6, z: 7}
+    - {x: 0, y: 7, z: 0}
+    - {x: 0, y: 7, z: 1}
+    - {x: 0, y: 7, z: 2}
+    - {x: 0, y: 7, z: 3}
+    - {x: 0, y: 7, z: 4}
+    - {x: 0, y: 7, z: 5}
+    - {x: 0, y: 7, z: 6}
+    - {x: 0, y: 7, z: 7}
+    - {x: 1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 1}
+    - {x: 1, y: 0, z: 2}
+    - {x: 1, y: 0, z: 3}
+    - {x: 1, y: 0, z: 4}
+    - {x: 1, y: 0, z: 5}
+    - {x: 1, y: 0, z: 6}
+    - {x: 1, y: 0, z: 7}
+    - {x: 1, y: 1, z: 0}
+    - {x: 1, y: 1, z: 1}
+    - {x: 1, y: 1, z: 2}
+    - {x: 1, y: 1, z: 3}
+    - {x: 1, y: 1, z: 4}
+    - {x: 1, y: 1, z: 5}
+    - {x: 1, y: 1, z: 6}
+    - {x: 1, y: 1, z: 7}
+    - {x: 1, y: 2, z: 0}
+    - {x: 1, y: 2, z: 1}
+    - {x: 1, y: 2, z: 2}
+    - {x: 1, y: 2, z: 3}
+    - {x: 1, y: 2, z: 4}
+    - {x: 1, y: 2, z: 5}
+    - {x: 1, y: 2, z: 6}
+    - {x: 1, y: 2, z: 7}
+    - {x: 1, y: 3, z: 0}
+    - {x: 1, y: 3, z: 1}
+    - {x: 1, y: 3, z: 2}
+    - {x: 1, y: 3, z: 3}
+    - {x: 1, y: 3, z: 4}
+    - {x: 1, y: 3, z: 5}
+    - {x: 1, y: 3, z: 6}
+    - {x: 1, y: 3, z: 7}
+    - {x: 1, y: 4, z: 0}
+    - {x: 1, y: 4, z: 1}
+    - {x: 1, y: 4, z: 2}
+    - {x: 1, y: 4, z: 3}
+    - {x: 1, y: 4, z: 4}
+    - {x: 1, y: 4, z: 5}
+    - {x: 1, y: 4, z: 6}
+    - {x: 1, y: 4, z: 7}
+    - {x: 1, y: 5, z: 0}
+    - {x: 1, y: 5, z: 1}
+    - {x: 1, y: 5, z: 2}
+    - {x: 1, y: 5, z: 3}
+    - {x: 1, y: 5, z: 4}
+    - {x: 1, y: 5, z: 5}
+    - {x: 1, y: 5, z: 6}
+    - {x: 1, y: 5, z: 7}
+    - {x: 1, y: 6, z: 0}
+    - {x: 1, y: 6, z: 1}
+    - {x: 1, y: 6, z: 2}
+    - {x: 1, y: 6, z: 3}
+    - {x: 1, y: 6, z: 4}
+    - {x: 1, y: 6, z: 5}
+    - {x: 1, y: 6, z: 6}
+    - {x: 1, y: 6, z: 7}
+    - {x: 1, y: 7, z: 0}
+    - {x: 1, y: 7, z: 1}
+    - {x: 1, y: 7, z: 2}
+    - {x: 1, y: 7, z: 3}
+    - {x: 1, y: 7, z: 4}
+    - {x: 1, y: 7, z: 5}
+    - {x: 1, y: 7, z: 6}
+    - {x: 1, y: 7, z: 7}
+    - {x: 2, y: 0, z: 0}
+    - {x: 2, y: 0, z: 1}
+    - {x: 2, y: 0, z: 2}
+    - {x: 2, y: 0, z: 3}
+    - {x: 2, y: 0, z: 4}
+    - {x: 2, y: 0, z: 5}
+    - {x: 2, y: 0, z: 6}
+    - {x: 2, y: 0, z: 7}
+    - {x: 2, y: 1, z: 0}
+    - {x: 2, y: 1, z: 1}
+    - {x: 2, y: 1, z: 2}
+    - {x: 2, y: 1, z: 3}
+    - {x: 2, y: 1, z: 4}
+    - {x: 2, y: 1, z: 5}
+    - {x: 2, y: 1, z: 6}
+    - {x: 2, y: 1, z: 7}
+    - {x: 2, y: 2, z: 0}
+    - {x: 2, y: 2, z: 1}
+    - {x: 2, y: 2, z: 2}
+    - {x: 2, y: 2, z: 3}
+    - {x: 2, y: 2, z: 4}
+    - {x: 2, y: 2, z: 5}
+    - {x: 2, y: 2, z: 6}
+    - {x: 2, y: 2, z: 7}
+    - {x: 2, y: 3, z: 0}
+    - {x: 2, y: 3, z: 1}
+    - {x: 2, y: 3, z: 2}
+    - {x: 2, y: 3, z: 3}
+    - {x: 2, y: 3, z: 4}
+    - {x: 2, y: 3, z: 5}
+    - {x: 2, y: 3, z: 6}
+    - {x: 2, y: 3, z: 7}
+    - {x: 2, y: 4, z: 0}
+    - {x: 2, y: 4, z: 1}
+    - {x: 2, y: 4, z: 2}
+    - {x: 2, y: 4, z: 3}
+    - {x: 2, y: 4, z: 4}
+    - {x: 2, y: 4, z: 5}
+    - {x: 2, y: 4, z: 6}
+    - {x: 2, y: 4, z: 7}
+    - {x: 2, y: 5, z: 0}
+    - {x: 2, y: 5, z: 1}
+    - {x: 2, y: 5, z: 2}
+    - {x: 2, y: 5, z: 3}
+    - {x: 2, y: 5, z: 4}
+    - {x: 2, y: 5, z: 5}
+    - {x: 2, y: 5, z: 6}
+    - {x: 2, y: 5, z: 7}
+    - {x: 2, y: 6, z: 0}
+    - {x: 2, y: 6, z: 1}
+    - {x: 2, y: 6, z: 2}
+    - {x: 2, y: 6, z: 3}
+    - {x: 2, y: 6, z: 4}
+    - {x: 2, y: 6, z: 5}
+    - {x: 2, y: 6, z: 6}
+    - {x: 2, y: 6, z: 7}
+    - {x: 2, y: 7, z: 0}
+    - {x: 2, y: 7, z: 1}
+    - {x: 2, y: 7, z: 2}
+    - {x: 2, y: 7, z: 3}
+    - {x: 2, y: 7, z: 4}
+    - {x: 2, y: 7, z: 5}
+    - {x: 2, y: 7, z: 6}
+    - {x: 2, y: 7, z: 7}
+    - {x: 3, y: 0, z: 0}
+    - {x: 3, y: 0, z: 1}
+    - {x: 3, y: 0, z: 2}
+    - {x: 3, y: 0, z: 3}
+    - {x: 3, y: 0, z: 4}
+    - {x: 3, y: 0, z: 5}
+    - {x: 3, y: 0, z: 6}
+    - {x: 3, y: 0, z: 7}
+    - {x: 3, y: 1, z: 0}
+    - {x: 3, y: 1, z: 1}
+    - {x: 3, y: 1, z: 2}
+    - {x: 3, y: 1, z: 3}
+    - {x: 3, y: 1, z: 4}
+    - {x: 3, y: 1, z: 5}
+    - {x: 3, y: 1, z: 6}
+    - {x: 3, y: 1, z: 7}
+    - {x: 3, y: 2, z: 0}
+    - {x: 3, y: 2, z: 1}
+    - {x: 3, y: 2, z: 2}
+    - {x: 3, y: 2, z: 3}
+    - {x: 3, y: 2, z: 4}
+    - {x: 3, y: 2, z: 5}
+    - {x: 3, y: 2, z: 6}
+    - {x: 3, y: 2, z: 7}
+    - {x: 3, y: 3, z: 0}
+    - {x: 3, y: 3, z: 1}
+    - {x: 3, y: 3, z: 2}
+    - {x: 3, y: 3, z: 3}
+    - {x: 3, y: 3, z: 4}
+    - {x: 3, y: 3, z: 5}
+    - {x: 3, y: 3, z: 6}
+    - {x: 3, y: 3, z: 7}
+    - {x: 3, y: 4, z: 0}
+    - {x: 3, y: 4, z: 1}
+    - {x: 3, y: 4, z: 2}
+    - {x: 3, y: 4, z: 3}
+    - {x: 3, y: 4, z: 4}
+    - {x: 3, y: 4, z: 5}
+    - {x: 3, y: 4, z: 6}
+    - {x: 3, y: 4, z: 7}
+    - {x: 3, y: 5, z: 0}
+    - {x: 3, y: 5, z: 1}
+    - {x: 3, y: 5, z: 2}
+    - {x: 3, y: 5, z: 3}
+    - {x: 3, y: 5, z: 4}
+    - {x: 3, y: 5, z: 5}
+    - {x: 3, y: 5, z: 6}
+    - {x: 3, y: 5, z: 7}
+    - {x: 3, y: 6, z: 0}
+    - {x: 3, y: 6, z: 1}
+    - {x: 3, y: 6, z: 2}
+    - {x: 3, y: 6, z: 3}
+    - {x: 3, y: 6, z: 4}
+    - {x: 3, y: 6, z: 5}
+    - {x: 3, y: 6, z: 6}
+    - {x: 3, y: 6, z: 7}
+    - {x: 3, y: 7, z: 0}
+    - {x: 3, y: 7, z: 1}
+    - {x: 3, y: 7, z: 2}
+    - {x: 3, y: 7, z: 3}
+    - {x: 3, y: 7, z: 4}
+    - {x: 3, y: 7, z: 5}
+    - {x: 3, y: 7, z: 6}
+    - {x: 3, y: 7, z: 7}
+    - {x: 4, y: 0, z: 0}
+    - {x: 4, y: 0, z: 1}
+    - {x: 4, y: 0, z: 2}
+    - {x: 4, y: 0, z: 3}
+    - {x: 4, y: 0, z: 4}
+    - {x: 4, y: 0, z: 5}
+    - {x: 4, y: 0, z: 6}
+    - {x: 4, y: 0, z: 7}
+    - {x: 4, y: 1, z: 0}
+    - {x: 4, y: 1, z: 1}
+    - {x: 4, y: 1, z: 2}
+    - {x: 4, y: 1, z: 3}
+    - {x: 4, y: 1, z: 4}
+    - {x: 4, y: 1, z: 5}
+    - {x: 4, y: 1, z: 6}
+    - {x: 4, y: 1, z: 7}
+    - {x: 4, y: 2, z: 0}
+    - {x: 4, y: 2, z: 1}
+    - {x: 4, y: 2, z: 2}
+    - {x: 4, y: 2, z: 3}
+    - {x: 4, y: 2, z: 4}
+    - {x: 4, y: 2, z: 5}
+    - {x: 4, y: 2, z: 6}
+    - {x: 4, y: 2, z: 7}
+    - {x: 4, y: 3, z: 0}
+    - {x: 4, y: 3, z: 1}
+    - {x: 4, y: 3, z: 2}
+    - {x: 4, y: 3, z: 3}
+    - {x: 4, y: 3, z: 4}
+    - {x: 4, y: 3, z: 5}
+    - {x: 4, y: 3, z: 6}
+    - {x: 4, y: 3, z: 7}
+    - {x: 4, y: 4, z: 0}
+    - {x: 4, y: 4, z: 1}
+    - {x: 4, y: 4, z: 2}
+    - {x: 4, y: 4, z: 3}
+    - {x: 4, y: 4, z: 4}
+    - {x: 4, y: 4, z: 5}
+    - {x: 4, y: 4, z: 6}
+    - {x: 4, y: 4, z: 7}
+    - {x: 4, y: 5, z: 0}
+    - {x: 4, y: 5, z: 1}
+    - {x: 4, y: 5, z: 2}
+    - {x: 4, y: 5, z: 3}
+    - {x: 4, y: 5, z: 4}
+    - {x: 4, y: 5, z: 5}
+    - {x: 4, y: 5, z: 6}
+    - {x: 4, y: 5, z: 7}
+    - {x: 4, y: 6, z: 0}
+    - {x: 4, y: 6, z: 1}
+    - {x: 4, y: 6, z: 2}
+    - {x: 4, y: 6, z: 3}
+    - {x: 4, y: 6, z: 4}
+    - {x: 4, y: 6, z: 5}
+    - {x: 4, y: 6, z: 6}
+    - {x: 4, y: 6, z: 7}
+    - {x: 4, y: 7, z: 0}
+    - {x: 4, y: 7, z: 1}
+    - {x: 4, y: 7, z: 2}
+    - {x: 4, y: 7, z: 3}
+    - {x: 4, y: 7, z: 4}
+    - {x: 4, y: 7, z: 5}
+    - {x: 4, y: 7, z: 6}
+    - {x: 4, y: 7, z: 7}
+    - {x: 5, y: 0, z: 0}
+    - {x: 5, y: 0, z: 1}
+    - {x: 5, y: 0, z: 2}
+    - {x: 5, y: 0, z: 3}
+    - {x: 5, y: 0, z: 4}
+    - {x: 5, y: 0, z: 5}
+    - {x: 5, y: 0, z: 6}
+    - {x: 5, y: 0, z: 7}
+    - {x: 5, y: 1, z: 0}
+    - {x: 5, y: 1, z: 1}
+    - {x: 5, y: 1, z: 2}
+    - {x: 5, y: 1, z: 3}
+    - {x: 5, y: 1, z: 4}
+    - {x: 5, y: 1, z: 5}
+    - {x: 5, y: 1, z: 6}
+    - {x: 5, y: 1, z: 7}
+    - {x: 5, y: 2, z: 0}
+    - {x: 5, y: 2, z: 1}
+    - {x: 5, y: 2, z: 2}
+    - {x: 5, y: 2, z: 3}
+    - {x: 5, y: 2, z: 4}
+    - {x: 5, y: 2, z: 5}
+    - {x: 5, y: 2, z: 6}
+    - {x: 5, y: 2, z: 7}
+    - {x: 5, y: 3, z: 0}
+    - {x: 5, y: 3, z: 1}
+    - {x: 5, y: 3, z: 2}
+    - {x: 5, y: 3, z: 3}
+    - {x: 5, y: 3, z: 4}
+    - {x: 5, y: 3, z: 5}
+    - {x: 5, y: 3, z: 6}
+    - {x: 5, y: 3, z: 7}
+    - {x: 5, y: 4, z: 0}
+    - {x: 5, y: 4, z: 1}
+    - {x: 5, y: 4, z: 2}
+    - {x: 5, y: 4, z: 3}
+    - {x: 5, y: 4, z: 4}
+    - {x: 5, y: 4, z: 5}
+    - {x: 5, y: 4, z: 6}
+    - {x: 5, y: 4, z: 7}
+    - {x: 5, y: 5, z: 0}
+    - {x: 5, y: 5, z: 1}
+    - {x: 5, y: 5, z: 2}
+    - {x: 5, y: 5, z: 3}
+    - {x: 5, y: 5, z: 4}
+    - {x: 5, y: 5, z: 5}
+    - {x: 5, y: 5, z: 6}
+    - {x: 5, y: 5, z: 7}
+    - {x: 5, y: 6, z: 0}
+    - {x: 5, y: 6, z: 1}
+    - {x: 5, y: 6, z: 2}
+    - {x: 5, y: 6, z: 3}
+    - {x: 5, y: 6, z: 4}
+    - {x: 5, y: 6, z: 5}
+    - {x: 5, y: 6, z: 6}
+    - {x: 5, y: 6, z: 7}
+    - {x: 5, y: 7, z: 0}
+    - {x: 5, y: 7, z: 1}
+    - {x: 5, y: 7, z: 2}
+    - {x: 5, y: 7, z: 3}
+    - {x: 5, y: 7, z: 4}
+    - {x: 5, y: 7, z: 5}
+    - {x: 5, y: 7, z: 6}
+    - {x: 5, y: 7, z: 7}
+    - {x: 6, y: 0, z: 0}
+    - {x: 6, y: 0, z: 1}
+    - {x: 6, y: 0, z: 2}
+    - {x: 6, y: 0, z: 3}
+    - {x: 6, y: 0, z: 4}
+    - {x: 6, y: 0, z: 5}
+    - {x: 6, y: 0, z: 6}
+    - {x: 6, y: 0, z: 7}
+    - {x: 6, y: 1, z: 0}
+    - {x: 6, y: 1, z: 1}
+    - {x: 6, y: 1, z: 2}
+    - {x: 6, y: 1, z: 3}
+    - {x: 6, y: 1, z: 4}
+    - {x: 6, y: 1, z: 5}
+    - {x: 6, y: 1, z: 6}
+    - {x: 6, y: 1, z: 7}
+    - {x: 6, y: 2, z: 0}
+    - {x: 6, y: 2, z: 1}
+    - {x: 6, y: 2, z: 2}
+    - {x: 6, y: 2, z: 3}
+    - {x: 6, y: 2, z: 4}
+    - {x: 6, y: 2, z: 5}
+    - {x: 6, y: 2, z: 6}
+    - {x: 6, y: 2, z: 7}
+    - {x: 6, y: 3, z: 0}
+    - {x: 6, y: 3, z: 1}
+    - {x: 6, y: 3, z: 2}
+    - {x: 6, y: 3, z: 3}
+    - {x: 6, y: 3, z: 4}
+    - {x: 6, y: 3, z: 5}
+    - {x: 6, y: 3, z: 6}
+    - {x: 6, y: 3, z: 7}
+    - {x: 6, y: 4, z: 0}
+    - {x: 6, y: 4, z: 1}
+    - {x: 6, y: 4, z: 2}
+    - {x: 6, y: 4, z: 3}
+    - {x: 6, y: 4, z: 4}
+    - {x: 6, y: 4, z: 5}
+    - {x: 6, y: 4, z: 6}
+    - {x: 6, y: 4, z: 7}
+    - {x: 6, y: 5, z: 0}
+    - {x: 6, y: 5, z: 1}
+    - {x: 6, y: 5, z: 2}
+    - {x: 6, y: 5, z: 3}
+    - {x: 6, y: 5, z: 4}
+    - {x: 6, y: 5, z: 5}
+    - {x: 6, y: 5, z: 6}
+    - {x: 6, y: 5, z: 7}
+    - {x: 6, y: 6, z: 0}
+    - {x: 6, y: 6, z: 1}
+    - {x: 6, y: 6, z: 2}
+    - {x: 6, y: 6, z: 3}
+    - {x: 6, y: 6, z: 4}
+    - {x: 6, y: 6, z: 5}
+    - {x: 6, y: 6, z: 6}
+    - {x: 6, y: 6, z: 7}
+    - {x: 6, y: 7, z: 0}
+    - {x: 6, y: 7, z: 1}
+    - {x: 6, y: 7, z: 2}
+    - {x: 6, y: 7, z: 3}
+    - {x: 6, y: 7, z: 4}
+    - {x: 6, y: 7, z: 5}
+    - {x: 6, y: 7, z: 6}
+    - {x: 6, y: 7, z: 7}
+    - {x: 7, y: 0, z: 0}
+    - {x: 7, y: 0, z: 1}
+    - {x: 7, y: 0, z: 2}
+    - {x: 7, y: 0, z: 3}
+    - {x: 7, y: 0, z: 4}
+    - {x: 7, y: 0, z: 5}
+    - {x: 7, y: 0, z: 6}
+    - {x: 7, y: 0, z: 7}
+    - {x: 7, y: 1, z: 0}
+    - {x: 7, y: 1, z: 1}
+    - {x: 7, y: 1, z: 2}
+    - {x: 7, y: 1, z: 3}
+    - {x: 7, y: 1, z: 4}
+    - {x: 7, y: 1, z: 5}
+    - {x: 7, y: 1, z: 6}
+    - {x: 7, y: 1, z: 7}
+    - {x: 7, y: 2, z: 0}
+    - {x: 7, y: 2, z: 1}
+    - {x: 7, y: 2, z: 2}
+    - {x: 7, y: 2, z: 3}
+    - {x: 7, y: 2, z: 4}
+    - {x: 7, y: 2, z: 5}
+    - {x: 7, y: 2, z: 6}
+    - {x: 7, y: 2, z: 7}
+    - {x: 7, y: 3, z: 0}
+    - {x: 7, y: 3, z: 1}
+    - {x: 7, y: 3, z: 2}
+    - {x: 7, y: 3, z: 3}
+    - {x: 7, y: 3, z: 4}
+    - {x: 7, y: 3, z: 5}
+    - {x: 7, y: 3, z: 6}
+    - {x: 7, y: 3, z: 7}
+    - {x: 7, y: 4, z: 0}
+    - {x: 7, y: 4, z: 1}
+    - {x: 7, y: 4, z: 2}
+    - {x: 7, y: 4, z: 3}
+    - {x: 7, y: 4, z: 4}
+    - {x: 7, y: 4, z: 5}
+    - {x: 7, y: 4, z: 6}
+    - {x: 7, y: 4, z: 7}
+    - {x: 7, y: 5, z: 0}
+    - {x: 7, y: 5, z: 1}
+    - {x: 7, y: 5, z: 2}
+    - {x: 7, y: 5, z: 3}
+    - {x: 7, y: 5, z: 4}
+    - {x: 7, y: 5, z: 5}
+    - {x: 7, y: 5, z: 6}
+    - {x: 7, y: 5, z: 7}
+    - {x: 7, y: 6, z: 0}
+    - {x: 7, y: 6, z: 1}
+    - {x: 7, y: 6, z: 2}
+    - {x: 7, y: 6, z: 3}
+    - {x: 7, y: 6, z: 4}
+    - {x: 7, y: 6, z: 5}
+    - {x: 7, y: 6, z: 6}
+    - {x: 7, y: 6, z: 7}
+    - {x: 7, y: 7, z: 0}
+    - {x: 7, y: 7, z: 1}
+    - {x: 7, y: 7, z: 2}
+    - {x: 7, y: 7, z: 3}
+    - {x: 7, y: 7, z: 4}
+    - {x: 7, y: 7, z: 5}
+    - {x: 7, y: 7, z: 6}
+    - {x: 7, y: 7, z: 7}
+  - blockName: Dirt
+    isSolid: 1
+    backFaceTexture: 7
+    frontFaceTexture: 7
+    topFaceTexture: 8
+    bottomFaceTexture: 6
+    leftFaceTexture: 7
+    rightFaceTexture: 7
+    subBlockIDs: 06
+    subBlockLocs: []
+  - blockName: Field w. Menger Sponge
+    isSolid: 1
+    backFaceTexture: 0
+    frontFaceTexture: 0
+    topFaceTexture: 0
+    bottomFaceTexture: 0
+    leftFaceTexture: 0
+    rightFaceTexture: 0
+    subBlockIDs: 0505050505050505050505050505050505050808080505050505080508050505050508080805050505050505050505050505050505050505050505050505050509
+    subBlockLocs:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 1}
+    - {x: 0, y: 0, z: 2}
+    - {x: 0, y: 0, z: 3}
+    - {x: 0, y: 0, z: 4}
+    - {x: 0, y: 0, z: 5}
+    - {x: 0, y: 0, z: 6}
+    - {x: 0, y: 0, z: 7}
+    - {x: 1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 1}
+    - {x: 1, y: 0, z: 2}
+    - {x: 1, y: 0, z: 3}
+    - {x: 1, y: 0, z: 4}
+    - {x: 1, y: 0, z: 5}
+    - {x: 1, y: 0, z: 6}
+    - {x: 1, y: 0, z: 7}
+    - {x: 2, y: 0, z: 0}
+    - {x: 2, y: 0, z: 1}
+    - {x: 2, y: 0, z: 2}
+    - {x: 2, y: 0, z: 3}
+    - {x: 2, y: 0, z: 4}
+    - {x: 2, y: 0, z: 5}
+    - {x: 2, y: 0, z: 6}
+    - {x: 2, y: 0, z: 7}
+    - {x: 3, y: 0, z: 0}
+    - {x: 3, y: 0, z: 1}
+    - {x: 3, y: 0, z: 2}
+    - {x: 3, y: 0, z: 3}
+    - {x: 3, y: 0, z: 4}
+    - {x: 3, y: 0, z: 5}
+    - {x: 3, y: 0, z: 6}
+    - {x: 3, y: 0, z: 7}
+    - {x: 4, y: 0, z: 0}
+    - {x: 4, y: 0, z: 1}
+    - {x: 4, y: 0, z: 2}
+    - {x: 4, y: 0, z: 3}
+    - {x: 4, y: 0, z: 4}
+    - {x: 4, y: 0, z: 5}
+    - {x: 4, y: 0, z: 6}
+    - {x: 4, y: 0, z: 7}
+    - {x: 5, y: 0, z: 0}
+    - {x: 5, y: 0, z: 1}
+    - {x: 5, y: 0, z: 2}
+    - {x: 5, y: 0, z: 3}
+    - {x: 5, y: 0, z: 4}
+    - {x: 5, y: 0, z: 5}
+    - {x: 5, y: 0, z: 6}
+    - {x: 5, y: 0, z: 7}
+    - {x: 6, y: 0, z: 0}
+    - {x: 6, y: 0, z: 1}
+    - {x: 6, y: 0, z: 2}
+    - {x: 6, y: 0, z: 3}
+    - {x: 6, y: 0, z: 4}
+    - {x: 6, y: 0, z: 5}
+    - {x: 6, y: 0, z: 6}
+    - {x: 6, y: 0, z: 7}
+    - {x: 7, y: 0, z: 0}
+    - {x: 7, y: 0, z: 1}
+    - {x: 7, y: 0, z: 2}
+    - {x: 7, y: 0, z: 3}
+    - {x: 7, y: 0, z: 4}
+    - {x: 7, y: 0, z: 5}
+    - {x: 7, y: 0, z: 6}
+    - {x: 7, y: 0, z: 7}
+    - {x: 3, y: 1, z: 3}
+  - blockName: Valley
+    isSolid: 1
+    backFaceTexture: 5
+    frontFaceTexture: 5
+    topFaceTexture: 4
+    bottomFaceTexture: 6
+    leftFaceTexture: 5
+    rightFaceTexture: 5
+    subBlockIDs: 060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606050505050606060605050505060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606050808050606060605080805060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606050808050606060605080805060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606050505050606060605050505060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060505050505050505060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060508080505080805060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060508080505080805060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060505050505050505
+    subBlockLocs:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 1}
+    - {x: 0, y: 0, z: 2}
+    - {x: 0, y: 0, z: 3}
+    - {x: 0, y: 0, z: 4}
+    - {x: 0, y: 0, z: 5}
+    - {x: 0, y: 0, z: 6}
+    - {x: 0, y: 0, z: 7}
+    - {x: 0, y: 1, z: 0}
+    - {x: 0, y: 1, z: 1}
+    - {x: 0, y: 1, z: 2}
+    - {x: 0, y: 1, z: 3}
+    - {x: 0, y: 1, z: 4}
+    - {x: 0, y: 1, z: 5}
+    - {x: 0, y: 1, z: 6}
+    - {x: 0, y: 1, z: 7}
+    - {x: 0, y: 2, z: 0}
+    - {x: 0, y: 2, z: 1}
+    - {x: 0, y: 2, z: 2}
+    - {x: 0, y: 2, z: 3}
+    - {x: 0, y: 2, z: 4}
+    - {x: 0, y: 2, z: 5}
+    - {x: 0, y: 2, z: 6}
+    - {x: 0, y: 2, z: 7}
+    - {x: 0, y: 3, z: 0}
+    - {x: 0, y: 3, z: 1}
+    - {x: 0, y: 3, z: 2}
+    - {x: 0, y: 3, z: 3}
+    - {x: 0, y: 3, z: 4}
+    - {x: 0, y: 3, z: 5}
+    - {x: 0, y: 3, z: 6}
+    - {x: 0, y: 3, z: 7}
+    - {x: 0, y: 4, z: 0}
+    - {x: 0, y: 4, z: 1}
+    - {x: 0, y: 4, z: 2}
+    - {x: 0, y: 4, z: 3}
+    - {x: 0, y: 4, z: 4}
+    - {x: 0, y: 4, z: 5}
+    - {x: 0, y: 4, z: 6}
+    - {x: 0, y: 4, z: 7}
+    - {x: 0, y: 5, z: 0}
+    - {x: 0, y: 5, z: 1}
+    - {x: 0, y: 5, z: 2}
+    - {x: 0, y: 5, z: 3}
+    - {x: 0, y: 5, z: 4}
+    - {x: 0, y: 5, z: 5}
+    - {x: 0, y: 5, z: 6}
+    - {x: 0, y: 5, z: 7}
+    - {x: 0, y: 6, z: 0}
+    - {x: 0, y: 6, z: 1}
+    - {x: 0, y: 6, z: 2}
+    - {x: 0, y: 6, z: 3}
+    - {x: 0, y: 6, z: 4}
+    - {x: 0, y: 6, z: 5}
+    - {x: 0, y: 6, z: 6}
+    - {x: 0, y: 6, z: 7}
+    - {x: 0, y: 7, z: 4}
+    - {x: 0, y: 7, z: 5}
+    - {x: 0, y: 7, z: 6}
+    - {x: 0, y: 7, z: 7}
+    - {x: 1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 1}
+    - {x: 1, y: 0, z: 2}
+    - {x: 1, y: 0, z: 3}
+    - {x: 1, y: 0, z: 4}
+    - {x: 1, y: 0, z: 5}
+    - {x: 1, y: 0, z: 6}
+    - {x: 1, y: 0, z: 7}
+    - {x: 1, y: 1, z: 0}
+    - {x: 1, y: 1, z: 1}
+    - {x: 1, y: 1, z: 2}
+    - {x: 1, y: 1, z: 3}
+    - {x: 1, y: 1, z: 4}
+    - {x: 1, y: 1, z: 5}
+    - {x: 1, y: 1, z: 6}
+    - {x: 1, y: 1, z: 7}
+    - {x: 1, y: 2, z: 0}
+    - {x: 1, y: 2, z: 1}
+    - {x: 1, y: 2, z: 2}
+    - {x: 1, y: 2, z: 3}
+    - {x: 1, y: 2, z: 4}
+    - {x: 1, y: 2, z: 5}
+    - {x: 1, y: 2, z: 6}
+    - {x: 1, y: 2, z: 7}
+    - {x: 1, y: 3, z: 0}
+    - {x: 1, y: 3, z: 1}
+    - {x: 1, y: 3, z: 2}
+    - {x: 1, y: 3, z: 3}
+    - {x: 1, y: 3, z: 4}
+    - {x: 1, y: 3, z: 5}
+    - {x: 1, y: 3, z: 6}
+    - {x: 1, y: 3, z: 7}
+    - {x: 1, y: 4, z: 0}
+    - {x: 1, y: 4, z: 1}
+    - {x: 1, y: 4, z: 2}
+    - {x: 1, y: 4, z: 3}
+    - {x: 1, y: 4, z: 4}
+    - {x: 1, y: 4, z: 5}
+    - {x: 1, y: 4, z: 6}
+    - {x: 1, y: 4, z: 7}
+    - {x: 1, y: 5, z: 0}
+    - {x: 1, y: 5, z: 1}
+    - {x: 1, y: 5, z: 2}
+    - {x: 1, y: 5, z: 3}
+    - {x: 1, y: 5, z: 4}
+    - {x: 1, y: 5, z: 5}
+    - {x: 1, y: 5, z: 6}
+    - {x: 1, y: 5, z: 7}
+    - {x: 1, y: 6, z: 0}
+    - {x: 1, y: 6, z: 1}
+    - {x: 1, y: 6, z: 2}
+    - {x: 1, y: 6, z: 3}
+    - {x: 1, y: 6, z: 4}
+    - {x: 1, y: 6, z: 5}
+    - {x: 1, y: 6, z: 6}
+    - {x: 1, y: 6, z: 7}
+    - {x: 1, y: 7, z: 4}
+    - {x: 1, y: 7, z: 5}
+    - {x: 1, y: 7, z: 6}
+    - {x: 1, y: 7, z: 7}
+    - {x: 2, y: 0, z: 0}
+    - {x: 2, y: 0, z: 1}
+    - {x: 2, y: 0, z: 2}
+    - {x: 2, y: 0, z: 3}
+    - {x: 2, y: 0, z: 4}
+    - {x: 2, y: 0, z: 5}
+    - {x: 2, y: 0, z: 6}
+    - {x: 2, y: 0, z: 7}
+    - {x: 2, y: 1, z: 0}
+    - {x: 2, y: 1, z: 1}
+    - {x: 2, y: 1, z: 2}
+    - {x: 2, y: 1, z: 3}
+    - {x: 2, y: 1, z: 4}
+    - {x: 2, y: 1, z: 5}
+    - {x: 2, y: 1, z: 6}
+    - {x: 2, y: 1, z: 7}
+    - {x: 2, y: 2, z: 0}
+    - {x: 2, y: 2, z: 1}
+    - {x: 2, y: 2, z: 2}
+    - {x: 2, y: 2, z: 3}
+    - {x: 2, y: 2, z: 4}
+    - {x: 2, y: 2, z: 5}
+    - {x: 2, y: 2, z: 6}
+    - {x: 2, y: 2, z: 7}
+    - {x: 2, y: 3, z: 0}
+    - {x: 2, y: 3, z: 1}
+    - {x: 2, y: 3, z: 2}
+    - {x: 2, y: 3, z: 3}
+    - {x: 2, y: 3, z: 4}
+    - {x: 2, y: 3, z: 5}
+    - {x: 2, y: 3, z: 6}
+    - {x: 2, y: 3, z: 7}
+    - {x: 2, y: 4, z: 0}
+    - {x: 2, y: 4, z: 1}
+    - {x: 2, y: 4, z: 2}
+    - {x: 2, y: 4, z: 3}
+    - {x: 2, y: 4, z: 4}
+    - {x: 2, y: 4, z: 5}
+    - {x: 2, y: 4, z: 6}
+    - {x: 2, y: 4, z: 7}
+    - {x: 2, y: 5, z: 0}
+    - {x: 2, y: 5, z: 1}
+    - {x: 2, y: 5, z: 2}
+    - {x: 2, y: 5, z: 3}
+    - {x: 2, y: 5, z: 4}
+    - {x: 2, y: 5, z: 5}
+    - {x: 2, y: 5, z: 6}
+    - {x: 2, y: 5, z: 7}
+    - {x: 2, y: 6, z: 0}
+    - {x: 2, y: 6, z: 1}
+    - {x: 2, y: 6, z: 2}
+    - {x: 2, y: 6, z: 3}
+    - {x: 2, y: 6, z: 4}
+    - {x: 2, y: 6, z: 5}
+    - {x: 2, y: 6, z: 6}
+    - {x: 2, y: 6, z: 7}
+    - {x: 2, y: 7, z: 4}
+    - {x: 2, y: 7, z: 5}
+    - {x: 2, y: 7, z: 6}
+    - {x: 2, y: 7, z: 7}
+    - {x: 3, y: 0, z: 0}
+    - {x: 3, y: 0, z: 1}
+    - {x: 3, y: 0, z: 2}
+    - {x: 3, y: 0, z: 3}
+    - {x: 3, y: 0, z: 4}
+    - {x: 3, y: 0, z: 5}
+    - {x: 3, y: 0, z: 6}
+    - {x: 3, y: 0, z: 7}
+    - {x: 3, y: 1, z: 0}
+    - {x: 3, y: 1, z: 1}
+    - {x: 3, y: 1, z: 2}
+    - {x: 3, y: 1, z: 3}
+    - {x: 3, y: 1, z: 4}
+    - {x: 3, y: 1, z: 5}
+    - {x: 3, y: 1, z: 6}
+    - {x: 3, y: 1, z: 7}
+    - {x: 3, y: 2, z: 0}
+    - {x: 3, y: 2, z: 1}
+    - {x: 3, y: 2, z: 2}
+    - {x: 3, y: 2, z: 3}
+    - {x: 3, y: 2, z: 4}
+    - {x: 3, y: 2, z: 5}
+    - {x: 3, y: 2, z: 6}
+    - {x: 3, y: 2, z: 7}
+    - {x: 3, y: 3, z: 0}
+    - {x: 3, y: 3, z: 1}
+    - {x: 3, y: 3, z: 2}
+    - {x: 3, y: 3, z: 3}
+    - {x: 3, y: 3, z: 4}
+    - {x: 3, y: 3, z: 5}
+    - {x: 3, y: 3, z: 6}
+    - {x: 3, y: 3, z: 7}
+    - {x: 3, y: 4, z: 0}
+    - {x: 3, y: 4, z: 1}
+    - {x: 3, y: 4, z: 2}
+    - {x: 3, y: 4, z: 3}
+    - {x: 3, y: 4, z: 4}
+    - {x: 3, y: 4, z: 5}
+    - {x: 3, y: 4, z: 6}
+    - {x: 3, y: 4, z: 7}
+    - {x: 3, y: 5, z: 0}
+    - {x: 3, y: 5, z: 1}
+    - {x: 3, y: 5, z: 2}
+    - {x: 3, y: 5, z: 3}
+    - {x: 3, y: 5, z: 4}
+    - {x: 3, y: 5, z: 5}
+    - {x: 3, y: 5, z: 6}
+    - {x: 3, y: 5, z: 7}
+    - {x: 3, y: 6, z: 0}
+    - {x: 3, y: 6, z: 1}
+    - {x: 3, y: 6, z: 2}
+    - {x: 3, y: 6, z: 3}
+    - {x: 3, y: 6, z: 4}
+    - {x: 3, y: 6, z: 5}
+    - {x: 3, y: 6, z: 6}
+    - {x: 3, y: 6, z: 7}
+    - {x: 3, y: 7, z: 4}
+    - {x: 3, y: 7, z: 5}
+    - {x: 3, y: 7, z: 6}
+    - {x: 3, y: 7, z: 7}
+    - {x: 4, y: 0, z: 0}
+    - {x: 4, y: 0, z: 1}
+    - {x: 4, y: 0, z: 2}
+    - {x: 4, y: 0, z: 3}
+    - {x: 4, y: 0, z: 4}
+    - {x: 4, y: 0, z: 5}
+    - {x: 4, y: 0, z: 6}
+    - {x: 4, y: 0, z: 7}
+    - {x: 4, y: 1, z: 0}
+    - {x: 4, y: 1, z: 1}
+    - {x: 4, y: 1, z: 2}
+    - {x: 4, y: 1, z: 3}
+    - {x: 4, y: 1, z: 4}
+    - {x: 4, y: 1, z: 5}
+    - {x: 4, y: 1, z: 6}
+    - {x: 4, y: 1, z: 7}
+    - {x: 4, y: 2, z: 0}
+    - {x: 4, y: 2, z: 1}
+    - {x: 4, y: 2, z: 2}
+    - {x: 4, y: 2, z: 3}
+    - {x: 4, y: 2, z: 4}
+    - {x: 4, y: 2, z: 5}
+    - {x: 4, y: 2, z: 6}
+    - {x: 4, y: 2, z: 7}
+    - {x: 4, y: 3, z: 0}
+    - {x: 4, y: 3, z: 1}
+    - {x: 4, y: 3, z: 2}
+    - {x: 4, y: 3, z: 3}
+    - {x: 4, y: 3, z: 4}
+    - {x: 4, y: 3, z: 5}
+    - {x: 4, y: 3, z: 6}
+    - {x: 4, y: 3, z: 7}
+    - {x: 4, y: 4, z: 0}
+    - {x: 4, y: 4, z: 1}
+    - {x: 4, y: 4, z: 2}
+    - {x: 4, y: 4, z: 3}
+    - {x: 4, y: 4, z: 4}
+    - {x: 4, y: 4, z: 5}
+    - {x: 4, y: 4, z: 6}
+    - {x: 4, y: 4, z: 7}
+    - {x: 4, y: 5, z: 0}
+    - {x: 4, y: 5, z: 1}
+    - {x: 4, y: 5, z: 2}
+    - {x: 4, y: 5, z: 3}
+    - {x: 4, y: 5, z: 4}
+    - {x: 4, y: 5, z: 5}
+    - {x: 4, y: 5, z: 6}
+    - {x: 4, y: 5, z: 7}
+    - {x: 4, y: 6, z: 0}
+    - {x: 4, y: 6, z: 1}
+    - {x: 4, y: 6, z: 2}
+    - {x: 4, y: 6, z: 3}
+    - {x: 4, y: 6, z: 4}
+    - {x: 4, y: 6, z: 5}
+    - {x: 4, y: 6, z: 6}
+    - {x: 4, y: 6, z: 7}
+    - {x: 4, y: 7, z: 0}
+    - {x: 4, y: 7, z: 1}
+    - {x: 4, y: 7, z: 2}
+    - {x: 4, y: 7, z: 3}
+    - {x: 5, y: 0, z: 0}
+    - {x: 5, y: 0, z: 1}
+    - {x: 5, y: 0, z: 2}
+    - {x: 5, y: 0, z: 3}
+    - {x: 5, y: 0, z: 4}
+    - {x: 5, y: 0, z: 5}
+    - {x: 5, y: 0, z: 6}
+    - {x: 5, y: 0, z: 7}
+    - {x: 5, y: 1, z: 0}
+    - {x: 5, y: 1, z: 1}
+    - {x: 5, y: 1, z: 2}
+    - {x: 5, y: 1, z: 3}
+    - {x: 5, y: 1, z: 4}
+    - {x: 5, y: 1, z: 5}
+    - {x: 5, y: 1, z: 6}
+    - {x: 5, y: 1, z: 7}
+    - {x: 5, y: 2, z: 0}
+    - {x: 5, y: 2, z: 1}
+    - {x: 5, y: 2, z: 2}
+    - {x: 5, y: 2, z: 3}
+    - {x: 5, y: 2, z: 4}
+    - {x: 5, y: 2, z: 5}
+    - {x: 5, y: 2, z: 6}
+    - {x: 5, y: 2, z: 7}
+    - {x: 5, y: 3, z: 0}
+    - {x: 5, y: 3, z: 1}
+    - {x: 5, y: 3, z: 2}
+    - {x: 5, y: 3, z: 3}
+    - {x: 5, y: 3, z: 4}
+    - {x: 5, y: 3, z: 5}
+    - {x: 5, y: 3, z: 6}
+    - {x: 5, y: 3, z: 7}
+    - {x: 5, y: 4, z: 0}
+    - {x: 5, y: 4, z: 1}
+    - {x: 5, y: 4, z: 2}
+    - {x: 5, y: 4, z: 3}
+    - {x: 5, y: 4, z: 4}
+    - {x: 5, y: 4, z: 5}
+    - {x: 5, y: 4, z: 6}
+    - {x: 5, y: 4, z: 7}
+    - {x: 5, y: 5, z: 0}
+    - {x: 5, y: 5, z: 1}
+    - {x: 5, y: 5, z: 2}
+    - {x: 5, y: 5, z: 3}
+    - {x: 5, y: 5, z: 4}
+    - {x: 5, y: 5, z: 5}
+    - {x: 5, y: 5, z: 6}
+    - {x: 5, y: 5, z: 7}
+    - {x: 5, y: 6, z: 0}
+    - {x: 5, y: 6, z: 1}
+    - {x: 5, y: 6, z: 2}
+    - {x: 5, y: 6, z: 3}
+    - {x: 5, y: 6, z: 4}
+    - {x: 5, y: 6, z: 5}
+    - {x: 5, y: 6, z: 6}
+    - {x: 5, y: 6, z: 7}
+    - {x: 5, y: 7, z: 0}
+    - {x: 5, y: 7, z: 1}
+    - {x: 5, y: 7, z: 2}
+    - {x: 5, y: 7, z: 3}
+    - {x: 6, y: 0, z: 0}
+    - {x: 6, y: 0, z: 1}
+    - {x: 6, y: 0, z: 2}
+    - {x: 6, y: 0, z: 3}
+    - {x: 6, y: 0, z: 4}
+    - {x: 6, y: 0, z: 5}
+    - {x: 6, y: 0, z: 6}
+    - {x: 6, y: 0, z: 7}
+    - {x: 6, y: 1, z: 0}
+    - {x: 6, y: 1, z: 1}
+    - {x: 6, y: 1, z: 2}
+    - {x: 6, y: 1, z: 3}
+    - {x: 6, y: 1, z: 4}
+    - {x: 6, y: 1, z: 5}
+    - {x: 6, y: 1, z: 6}
+    - {x: 6, y: 1, z: 7}
+    - {x: 6, y: 2, z: 0}
+    - {x: 6, y: 2, z: 1}
+    - {x: 6, y: 2, z: 2}
+    - {x: 6, y: 2, z: 3}
+    - {x: 6, y: 2, z: 4}
+    - {x: 6, y: 2, z: 5}
+    - {x: 6, y: 2, z: 6}
+    - {x: 6, y: 2, z: 7}
+    - {x: 6, y: 3, z: 0}
+    - {x: 6, y: 3, z: 1}
+    - {x: 6, y: 3, z: 2}
+    - {x: 6, y: 3, z: 3}
+    - {x: 6, y: 3, z: 4}
+    - {x: 6, y: 3, z: 5}
+    - {x: 6, y: 3, z: 6}
+    - {x: 6, y: 3, z: 7}
+    - {x: 6, y: 4, z: 0}
+    - {x: 6, y: 4, z: 1}
+    - {x: 6, y: 4, z: 2}
+    - {x: 6, y: 4, z: 3}
+    - {x: 6, y: 4, z: 4}
+    - {x: 6, y: 4, z: 5}
+    - {x: 6, y: 4, z: 6}
+    - {x: 6, y: 4, z: 7}
+    - {x: 6, y: 5, z: 0}
+    - {x: 6, y: 5, z: 1}
+    - {x: 6, y: 5, z: 2}
+    - {x: 6, y: 5, z: 3}
+    - {x: 6, y: 5, z: 4}
+    - {x: 6, y: 5, z: 5}
+    - {x: 6, y: 5, z: 6}
+    - {x: 6, y: 5, z: 7}
+    - {x: 6, y: 6, z: 0}
+    - {x: 6, y: 6, z: 1}
+    - {x: 6, y: 6, z: 2}
+    - {x: 6, y: 6, z: 3}
+    - {x: 6, y: 6, z: 4}
+    - {x: 6, y: 6, z: 5}
+    - {x: 6, y: 6, z: 6}
+    - {x: 6, y: 6, z: 7}
+    - {x: 6, y: 7, z: 0}
+    - {x: 6, y: 7, z: 1}
+    - {x: 6, y: 7, z: 2}
+    - {x: 6, y: 7, z: 3}
+    - {x: 7, y: 0, z: 0}
+    - {x: 7, y: 0, z: 1}
+    - {x: 7, y: 0, z: 2}
+    - {x: 7, y: 0, z: 3}
+    - {x: 7, y: 0, z: 4}
+    - {x: 7, y: 0, z: 5}
+    - {x: 7, y: 0, z: 6}
+    - {x: 7, y: 0, z: 7}
+    - {x: 7, y: 1, z: 0}
+    - {x: 7, y: 1, z: 1}
+    - {x: 7, y: 1, z: 2}
+    - {x: 7, y: 1, z: 3}
+    - {x: 7, y: 1, z: 4}
+    - {x: 7, y: 1, z: 5}
+    - {x: 7, y: 1, z: 6}
+    - {x: 7, y: 1, z: 7}
+    - {x: 7, y: 2, z: 0}
+    - {x: 7, y: 2, z: 1}
+    - {x: 7, y: 2, z: 2}
+    - {x: 7, y: 2, z: 3}
+    - {x: 7, y: 2, z: 4}
+    - {x: 7, y: 2, z: 5}
+    - {x: 7, y: 2, z: 6}
+    - {x: 7, y: 2, z: 7}
+    - {x: 7, y: 3, z: 0}
+    - {x: 7, y: 3, z: 1}
+    - {x: 7, y: 3, z: 2}
+    - {x: 7, y: 3, z: 3}
+    - {x: 7, y: 3, z: 4}
+    - {x: 7, y: 3, z: 5}
+    - {x: 7, y: 3, z: 6}
+    - {x: 7, y: 3, z: 7}
+    - {x: 7, y: 4, z: 0}
+    - {x: 7, y: 4, z: 1}
+    - {x: 7, y: 4, z: 2}
+    - {x: 7, y: 4, z: 3}
+    - {x: 7, y: 4, z: 4}
+    - {x: 7, y: 4, z: 5}
+    - {x: 7, y: 4, z: 6}
+    - {x: 7, y: 4, z: 7}
+    - {x: 7, y: 5, z: 0}
+    - {x: 7, y: 5, z: 1}
+    - {x: 7, y: 5, z: 2}
+    - {x: 7, y: 5, z: 3}
+    - {x: 7, y: 5, z: 4}
+    - {x: 7, y: 5, z: 5}
+    - {x: 7, y: 5, z: 6}
+    - {x: 7, y: 5, z: 7}
+    - {x: 7, y: 6, z: 0}
+    - {x: 7, y: 6, z: 1}
+    - {x: 7, y: 6, z: 2}
+    - {x: 7, y: 6, z: 3}
+    - {x: 7, y: 6, z: 4}
+    - {x: 7, y: 6, z: 5}
+    - {x: 7, y: 6, z: 6}
+    - {x: 7, y: 6, z: 7}
+    - {x: 7, y: 7, z: 0}
+    - {x: 7, y: 7, z: 1}
+    - {x: 7, y: 7, z: 2}
+    - {x: 7, y: 7, z: 3}
+  - blockName: Level 1 Room
+    isSolid: 1
+    backFaceTexture: 0
+    frontFaceTexture: 0
+    topFaceTexture: 0
+    bottomFaceTexture: 0
+    leftFaceTexture: 0
+    rightFaceTexture: 0
+    subBlockIDs: 090101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
+    subBlockLocs:
+    - {x: 3, y: 1, z: 3}
+    - {x: 0, y: 2, z: 7}
+    - {x: 0, y: 7, z: 3}
+    - {x: 0, y: 2, z: 0}
+    - {x: 0, y: 1, z: 7}
+    - {x: 0, y: 6, z: 2}
+    - {x: 0, y: 6, z: 1}
+    - {x: 0, y: 1, z: 2}
+    - {x: 0, y: 5, z: 1}
+    - {x: 0, y: 2, z: 1}
+    - {x: 0, y: 4, z: 1}
+    - {x: 0, y: 7, z: 5}
+    - {x: 0, y: 1, z: 0}
+    - {x: 0, y: 3, z: 7}
+    - {x: 0, y: 3, z: 2}
+    - {x: 0, y: 6, z: 7}
+    - {x: 0, y: 4, z: 4}
+    - {x: 0, y: 5, z: 6}
+    - {x: 0, y: 7, z: 0}
+    - {x: 0, y: 6, z: 4}
+    - {x: 0, y: 4, z: 0}
+    - {x: 0, y: 6, z: 0}
+    - {x: 0, y: 3, z: 6}
+    - {x: 0, y: 2, z: 5}
+    - {x: 0, y: 2, z: 6}
+    - {x: 0, y: 5, z: 5}
+    - {x: 0, y: 6, z: 3}
+    - {x: 0, y: 2, z: 2}
+    - {x: 0, y: 5, z: 4}
+    - {x: 0, y: 4, z: 5}
+    - {x: 0, y: 5, z: 2}
+    - {x: 0, y: 1, z: 6}
+    - {x: 0, y: 5, z: 3}
+    - {x: 0, y: 5, z: 7}
+    - {x: 0, y: 1, z: 5}
+    - {x: 0, y: 5, z: 0}
+    - {x: 0, y: 4, z: 7}
+    - {x: 0, y: 3, z: 1}
+    - {x: 0, y: 7, z: 7}
+    - {x: 0, y: 3, z: 5}
+    - {x: 0, y: 7, z: 1}
+    - {x: 0, y: 7, z: 2}
+    - {x: 0, y: 4, z: 2}
+    - {x: 0, y: 7, z: 6}
+    - {x: 0, y: 4, z: 6}
+    - {x: 0, y: 6, z: 5}
+    - {x: 0, y: 3, z: 0}
+    - {x: 0, y: 1, z: 1}
+    - {x: 0, y: 7, z: 4}
+    - {x: 0, y: 4, z: 3}
+    - {x: 0, y: 6, z: 6}
+    - {x: 5, y: 7, z: 5}
+    - {x: 2, y: 7, z: 1}
+    - {x: 3, y: 7, z: 4}
+    - {x: 5, y: 7, z: 2}
+    - {x: 2, y: 7, z: 5}
+    - {x: 4, y: 7, z: 4}
+    - {x: 1, y: 7, z: 1}
+    - {x: 2, y: 7, z: 6}
+    - {x: 6, y: 7, z: 5}
+    - {x: 1, y: 7, z: 3}
+    - {x: 3, y: 7, z: 5}
+    - {x: 6, y: 7, z: 2}
+    - {x: 4, y: 7, z: 6}
+    - {x: 3, y: 7, z: 2}
+    - {x: 6, y: 7, z: 4}
+    - {x: 3, y: 7, z: 6}
+    - {x: 1, y: 7, z: 2}
+    - {x: 6, y: 7, z: 6}
+    - {x: 1, y: 7, z: 5}
+    - {x: 1, y: 7, z: 6}
+    - {x: 2, y: 7, z: 2}
+    - {x: 5, y: 7, z: 6}
+    - {x: 4, y: 7, z: 1}
+    - {x: 5, y: 7, z: 1}
+    - {x: 3, y: 7, z: 3}
+    - {x: 4, y: 7, z: 5}
+    - {x: 5, y: 7, z: 3}
+    - {x: 2, y: 7, z: 3}
+    - {x: 6, y: 7, z: 3}
+    - {x: 4, y: 7, z: 2}
+    - {x: 3, y: 7, z: 1}
+    - {x: 5, y: 7, z: 4}
+    - {x: 6, y: 7, z: 1}
+    - {x: 2, y: 7, z: 4}
+    - {x: 1, y: 7, z: 4}
+    - {x: 4, y: 7, z: 3}
+    - {x: 2, y: 1, z: 0}
+    - {x: 7, y: 7, z: 3}
+    - {x: 6, y: 0, z: 7}
+    - {x: 4, y: 3, z: 0}
+    - {x: 2, y: 7, z: 7}
+    - {x: 7, y: 2, z: 5}
+    - {x: 4, y: 0, z: 3}
+    - {x: 7, y: 4, z: 7}
+    - {x: 7, y: 0, z: 5}
+    - {x: 7, y: 6, z: 2}
+    - {x: 1, y: 4, z: 0}
+    - {x: 2, y: 2, z: 7}
+    - {x: 7, y: 7, z: 6}
+    - {x: 7, y: 4, z: 2}
+    - {x: 1, y: 5, z: 7}
+    - {x: 6, y: 0, z: 0}
+    - {x: 7, y: 0, z: 0}
+    - {x: 6, y: 1, z: 0}
+    - {x: 7, y: 2, z: 2}
+    - {x: 2, y: 7, z: 0}
+    - {x: 3, y: 2, z: 0}
+    - {x: 7, y: 5, z: 4}
+    - {x: 4, y: 5, z: 0}
+    - {x: 3, y: 6, z: 7}
+    - {x: 7, y: 2, z: 6}
+    - {x: 2, y: 4, z: 0}
+    - {x: 2, y: 1, z: 7}
+    - {x: 7, y: 1, z: 6}
+    - {x: 6, y: 5, z: 7}
+    - {x: 7, y: 4, z: 0}
+    - {x: 7, y: 2, z: 0}
+    - {x: 6, y: 6, z: 7}
+    - {x: 1, y: 0, z: 4}
+    - {x: 3, y: 2, z: 7}
+    - {x: 7, y: 4, z: 1}
+    - {x: 2, y: 0, z: 4}
+    - {x: 0, y: 0, z: 7}
+    - {x: 6, y: 0, z: 1}
+    - {x: 3, y: 4, z: 0}
+    - {x: 5, y: 0, z: 4}
+    - {x: 3, y: 0, z: 1}
+    - {x: 7, y: 3, z: 3}
+    - {x: 7, y: 1, z: 7}
+    - {x: 7, y: 6, z: 7}
+    - {x: 4, y: 0, z: 2}
+    - {x: 6, y: 0, z: 3}
+    - {x: 5, y: 2, z: 0}
+    - {x: 7, y: 1, z: 4}
+    - {x: 2, y: 6, z: 7}
+    - {x: 7, y: 0, z: 3}
+    - {x: 2, y: 0, z: 3}
+    - {x: 2, y: 0, z: 0}
+    - {x: 7, y: 3, z: 2}
+    - {x: 1, y: 1, z: 7}
+    - {x: 0, y: 0, z: 6}
+    - {x: 5, y: 0, z: 0}
+    - {x: 5, y: 5, z: 0}
+    - {x: 7, y: 6, z: 0}
+    - {x: 5, y: 3, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: 7, y: 5, z: 2}
+    - {x: 5, y: 4, z: 0}
+    - {x: 6, y: 2, z: 7}
+    - {x: 5, y: 7, z: 7}
+    - {x: 5, y: 0, z: 3}
+    - {x: 5, y: 6, z: 7}
+    - {x: 5, y: 6, z: 0}
+    - {x: 4, y: 4, z: 7}
+    - {x: 6, y: 5, z: 0}
+    - {x: 3, y: 0, z: 0}
+    - {x: 7, y: 3, z: 4}
+    - {x: 7, y: 3, z: 5}
+    - {x: 4, y: 0, z: 5}
+    - {x: 1, y: 2, z: 0}
+    - {x: 3, y: 0, z: 3}
+    - {x: 0, y: 0, z: 2}
+    - {x: 3, y: 0, z: 7}
+    - {x: 7, y: 1, z: 3}
+    - {x: 6, y: 2, z: 0}
+    - {x: 5, y: 0, z: 1}
+    - {x: 4, y: 7, z: 0}
+    - {x: 2, y: 0, z: 7}
+    - {x: 7, y: 5, z: 0}
+    - {x: 6, y: 6, z: 0}
+    - {x: 3, y: 7, z: 7}
+    - {x: 4, y: 0, z: 1}
+    - {x: 3, y: 3, z: 7}
+    - {x: 7, y: 0, z: 2}
+    - {x: 7, y: 0, z: 6}
+    - {x: 3, y: 7, z: 0}
+    - {x: 5, y: 0, z: 6}
+    - {x: 3, y: 5, z: 0}
+    - {x: 5, y: 2, z: 7}
+    - {x: 2, y: 3, z: 7}
+    - {x: 5, y: 7, z: 0}
+    - {x: 4, y: 0, z: 0}
+    - {x: 7, y: 7, z: 4}
+    - {x: 2, y: 0, z: 2}
+    - {x: 3, y: 3, z: 0}
+    - {x: 1, y: 0, z: 6}
+    - {x: 7, y: 6, z: 3}
+    - {x: 3, y: 4, z: 7}
+    - {x: 6, y: 3, z: 0}
+    - {x: 7, y: 3, z: 0}
+    - {x: 1, y: 0, z: 5}
+    - {x: 6, y: 7, z: 7}
+    - {x: 6, y: 0, z: 6}
+    - {x: 1, y: 0, z: 2}
+    - {x: 3, y: 0, z: 6}
+    - {x: 7, y: 0, z: 4}
+    - {x: 0, y: 0, z: 5}
+    - {x: 6, y: 0, z: 4}
+    - {x: 5, y: 1, z: 7}
+    - {x: 7, y: 6, z: 4}
+    - {x: 6, y: 3, z: 7}
+    - {x: 3, y: 0, z: 2}
+    - {x: 3, y: 1, z: 0}
+    - {x: 4, y: 0, z: 6}
+    - {x: 5, y: 0, z: 7}
+    - {x: 7, y: 6, z: 5}
+    - {x: 7, y: 5, z: 5}
+    - {x: 6, y: 1, z: 7}
+    - {x: 6, y: 0, z: 2}
+    - {x: 7, y: 7, z: 7}
+    - {x: 6, y: 4, z: 0}
+    - {x: 3, y: 0, z: 5}
+    - {x: 4, y: 2, z: 0}
+    - {x: 0, y: 0, z: 4}
+    - {x: 7, y: 7, z: 0}
+    - {x: 0, y: 0, z: 1}
+    - {x: 7, y: 5, z: 6}
+    - {x: 4, y: 4, z: 0}
+    - {x: 1, y: 0, z: 3}
+    - {x: 1, y: 7, z: 0}
+    - {x: 1, y: 6, z: 0}
+    - {x: 6, y: 7, z: 0}
+    - {x: 7, y: 4, z: 5}
+    - {x: 1, y: 6, z: 7}
+    - {x: 1, y: 5, z: 0}
+    - {x: 7, y: 1, z: 1}
+    - {x: 1, y: 2, z: 7}
+    - {x: 7, y: 2, z: 4}
+    - {x: 6, y: 4, z: 7}
+    - {x: 4, y: 1, z: 7}
+    - {x: 5, y: 3, z: 7}
+    - {x: 4, y: 1, z: 0}
+    - {x: 7, y: 3, z: 7}
+    - {x: 7, y: 7, z: 5}
+    - {x: 6, y: 0, z: 5}
+    - {x: 2, y: 0, z: 6}
+    - {x: 3, y: 6, z: 0}
+    - {x: 4, y: 6, z: 7}
+    - {x: 1, y: 0, z: 0}
+    - {x: 7, y: 7, z: 2}
+    - {x: 0, y: 0, z: 0}
+    - {x: 7, y: 4, z: 4}
+    - {x: 7, y: 6, z: 1}
+    - {x: 1, y: 3, z: 0}
+    - {x: 4, y: 2, z: 7}
+    - {x: 1, y: 0, z: 1}
+    - {x: 7, y: 7, z: 1}
+    - {x: 7, y: 1, z: 2}
+    - {x: 4, y: 7, z: 7}
+    - {x: 4, y: 3, z: 7}
+    - {x: 4, y: 0, z: 4}
+    - {x: 2, y: 5, z: 7}
+    - {x: 7, y: 5, z: 3}
+    - {x: 2, y: 2, z: 0}
+    - {x: 5, y: 1, z: 0}
+    - {x: 2, y: 0, z: 5}
+    - {x: 5, y: 5, z: 7}
+    - {x: 4, y: 6, z: 0}
+    - {x: 7, y: 4, z: 3}
+    - {x: 7, y: 2, z: 7}
+    - {x: 7, y: 1, z: 5}
+    - {x: 5, y: 0, z: 2}
+    - {x: 3, y: 5, z: 7}
+    - {x: 1, y: 7, z: 7}
+    - {x: 4, y: 0, z: 7}
+    - {x: 7, y: 3, z: 6}
+    - {x: 4, y: 5, z: 7}
+    - {x: 7, y: 5, z: 7}
+    - {x: 7, y: 1, z: 0}
+    - {x: 7, y: 2, z: 1}
+    - {x: 2, y: 3, z: 0}
+    - {x: 1, y: 3, z: 7}
+    - {x: 7, y: 0, z: 1}
+    - {x: 7, y: 4, z: 6}
+    - {x: 5, y: 4, z: 7}
+    - {x: 7, y: 3, z: 1}
+    - {x: 3, y: 1, z: 7}
+    - {x: 7, y: 2, z: 3}
+    - {x: 3, y: 0, z: 4}
+    - {x: 2, y: 0, z: 1}
+    - {x: 0, y: 0, z: 3}
+    - {x: 7, y: 5, z: 1}
+    - {x: 2, y: 6, z: 0}
+    - {x: 7, y: 6, z: 6}
+    - {x: 1, y: 4, z: 7}
+    - {x: 7, y: 0, z: 7}
+    - {x: 5, y: 0, z: 5}
+    - {x: 2, y: 4, z: 7}
+    - {x: 1, y: 0, z: 7}
+    - {x: 2, y: 5, z: 0}
+  - blockName: Field with Level 1
+    isSolid: 1
+    backFaceTexture: 0
+    frontFaceTexture: 0
+    topFaceTexture: 0
+    bottomFaceTexture: 0
+    leftFaceTexture: 0
+    rightFaceTexture: 0
+    subBlockIDs: 0505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050509050505050505050505050505050505050505
+    subBlockLocs:
+    - {x: 6, y: 0, z: 3}
+    - {x: 4, y: 0, z: 5}
+    - {x: 0, y: 0, z: 3}
+    - {x: 1, y: 0, z: 1}
+    - {x: 5, y: 0, z: 4}
+    - {x: 2, y: 0, z: 4}
+    - {x: 7, y: 0, z: 2}
+    - {x: 7, y: 0, z: 5}
+    - {x: 7, y: 0, z: 1}
+    - {x: 2, y: 0, z: 2}
+    - {x: 3, y: 0, z: 0}
+    - {x: 3, y: 0, z: 2}
+    - {x: 4, y: 0, z: 3}
+    - {x: 3, y: 0, z: 6}
+    - {x: 3, y: 0, z: 1}
+    - {x: 4, y: 0, z: 6}
+    - {x: 1, y: 0, z: 5}
+    - {x: 4, y: 0, z: 2}
+    - {x: 7, y: 0, z: 6}
+    - {x: 7, y: 0, z: 7}
+    - {x: 5, y: 0, z: 5}
+    - {x: 7, y: 0, z: 3}
+    - {x: 0, y: 0, z: 2}
+    - {x: 2, y: 0, z: 0}
+    - {x: 0, y: 0, z: 5}
+    - {x: 3, y: 0, z: 5}
+    - {x: 2, y: 0, z: 1}
+    - {x: 6, y: 0, z: 1}
+    - {x: 4, y: 0, z: 1}
+    - {x: 5, y: 0, z: 6}
+    - {x: 5, y: 0, z: 2}
+    - {x: 2, y: 0, z: 3}
+    - {x: 5, y: 0, z: 3}
+    - {x: 6, y: 0, z: 2}
+    - {x: 7, y: 0, z: 4}
+    - {x: 0, y: 0, z: 7}
+    - {x: 3, y: 0, z: 7}
+    - {x: 4, y: 0, z: 4}
+    - {x: 3, y: 0, z: 4}
+    - {x: 6, y: 0, z: 4}
+    - {x: 4, y: 0, z: 7}
+    - {x: 1, y: 0, z: 2}
+    - {x: 0, y: 0, z: 0}
+    - {x: 5, y: 0, z: 7}
+    - {x: 2, y: 0, z: 5}
+    - {x: 6, y: 0, z: 6}
+    - {x: 3, y: 1, z: 3}
+    - {x: 7, y: 0, z: 0}
+    - {x: 4, y: 0, z: 0}
+    - {x: 2, y: 0, z: 7}
+    - {x: 6, y: 0, z: 0}
+    - {x: 3, y: 0, z: 3}
+    - {x: 5, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 3}
+    - {x: 2, y: 0, z: 6}
+    - {x: 6, y: 0, z: 7}
+    - {x: 0, y: 0, z: 4}
+    - {x: 0, y: 0, z: 6}
+    - {x: 1, y: 0, z: 6}
+    - {x: 1, y: 0, z: 4}
+    - {x: 1, y: 0, z: 7}
+    - {x: 5, y: 0, z: 1}
+    - {x: 6, y: 0, z: 5}
+    - {x: 0, y: 0, z: 1}
+  startingBlockID: 10
+  playerShrink: {fileID: 2055560554}
+  subdivisionSpeed: 50
+--- !u!4 &1384101382
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384101380}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1860023507 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6348943409298749910, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+  m_PrefabInstance: {fileID: 1077767159}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f13b82831f1bb4093e691558a9ca1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2055560554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+  m_PrefabInstance: {fileID: 1092844200}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63fc6ab117efa4d88831d5e041d99600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1384101382}
+  - {fileID: 983161326}
+  - {fileID: 1077767159}
+  - {fileID: 1092844200}

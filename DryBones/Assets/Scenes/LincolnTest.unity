@@ -243,7 +243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &512647883
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +528,107 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715870596}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &840831411
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 855058675373446476, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 855058675373446476, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: _playerInputHandler
+      value: 
+      objectReference: {fileID: 986641020}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1742499168}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 855058675373446476, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 840831414}
+  m_SourcePrefab: {fileID: 100100000, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+--- !u!1 &840831412 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 855058675373446476, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+  m_PrefabInstance: {fileID: 840831411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &840831413 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1806111379553152084, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+  m_PrefabInstance: {fileID: 840831411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &840831414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840831412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63fc6ab117efa4d88831d5e041d99600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minScale: 3
+  maxScale: 0
+  startingSize: 0
+  world: {fileID: 1259499763}
+  worldComponent: {fileID: 1259499764}
+  worldParent: {fileID: 1742499167}
+  scrollSensitivity: 0.009
+  chunkDepth: 2
 --- !u!1 &927784612
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,6 +754,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &986641019
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6242250982411599607, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_Name
+      value: InputHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242250982411599607, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -188.73352
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -59.23044
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 116.35646
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919238357553206299, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+--- !u!114 &986641020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6348943409298749910, guid: 9f6eb5375e5d4bf4da91649e1a8d05a2, type: 3}
+  m_PrefabInstance: {fileID: 986641019}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f13b82831f1bb4093e691558a9ca1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1259499763
 GameObject:
   m_ObjectHideFlags: 0
@@ -2095,270 +2268,75 @@ MonoBehaviour:
     bottomFaceTexture: 0
     leftFaceTexture: 0
     rightFaceTexture: 0
-    subBlockIDs: 0101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
+    subBlockIDs: 0101010101010101010101010101010104010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
     subBlockLocs:
-    - {x: 7, y: 6, z: 4}
-    - {x: 3, y: 0, z: 2}
-    - {x: 7, y: 2, z: 5}
-    - {x: 4, y: 3, z: 7}
-    - {x: 7, y: 2, z: 2}
-    - {x: 2, y: 3, z: 0}
-    - {x: 1, y: 1, z: 0}
-    - {x: 1, y: 0, z: 1}
-    - {x: 7, y: 4, z: 5}
-    - {x: 7, y: 7, z: 6}
-    - {x: 2, y: 2, z: 7}
-    - {x: 5, y: 6, z: 0}
-    - {x: 5, y: 1, z: 7}
-    - {x: 3, y: 0, z: 7}
-    - {x: 5, y: 6, z: 7}
-    - {x: 5, y: 5, z: 0}
-    - {x: 2, y: 5, z: 0}
-    - {x: 0, y: 3, z: 3}
-    - {x: 6, y: 2, z: 0}
-    - {x: 1, y: 0, z: 2}
-    - {x: 1, y: 5, z: 7}
-    - {x: 7, y: 3, z: 6}
-    - {x: 5, y: 1, z: 0}
-    - {x: 5, y: 0, z: 7}
-    - {x: 0, y: 5, z: 7}
-    - {x: 7, y: 1, z: 7}
-    - {x: 7, y: 1, z: 0}
-    - {x: 1, y: 0, z: 3}
-    - {x: 0, y: 7, z: 6}
-    - {x: 0, y: 4, z: 1}
-    - {x: 0, y: 6, z: 0}
-    - {x: 3, y: 7, z: 7}
-    - {x: 2, y: 2, z: 0}
-    - {x: 1, y: 6, z: 0}
-    - {x: 6, y: 0, z: 1}
-    - {x: 1, y: 6, z: 7}
-    - {x: 5, y: 0, z: 3}
-    - {x: 0, y: 7, z: 7}
-    - {x: 0, y: 2, z: 7}
-    - {x: 5, y: 4, z: 0}
-    - {x: 0, y: 1, z: 7}
-    - {x: 3, y: 0, z: 6}
-    - {x: 3, y: 3, z: 7}
-    - {x: 1, y: 0, z: 7}
-    - {x: 1, y: 0, z: 4}
-    - {x: 3, y: 4, z: 0}
-    - {x: 0, y: 7, z: 5}
-    - {x: 0, y: 0, z: 7}
-    - {x: 0, y: 6, z: 6}
-    - {x: 7, y: 0, z: 3}
-    - {x: 7, y: 5, z: 4}
-    - {x: 7, y: 5, z: 1}
-    - {x: 7, y: 4, z: 7}
-    - {x: 7, y: 7, z: 4}
-    - {x: 6, y: 2, z: 7}
-    - {x: 2, y: 6, z: 0}
-    - {x: 7, y: 5, z: 6}
-    - {x: 7, y: 3, z: 5}
-    - {x: 3, y: 3, z: 0}
-    - {x: 0, y: 4, z: 7}
-    - {x: 7, y: 6, z: 1}
-    - {x: 7, y: 2, z: 3}
-    - {x: 4, y: 4, z: 0}
-    - {x: 7, y: 7, z: 0}
-    - {x: 7, y: 2, z: 1}
-    - {x: 0, y: 2, z: 6}
-    - {x: 0, y: 0, z: 1}
-    - {x: 0, y: 2, z: 4}
-    - {x: 4, y: 7, z: 0}
-    - {x: 6, y: 0, z: 6}
-    - {x: 0, y: 7, z: 4}
-    - {x: 4, y: 3, z: 0}
-    - {x: 4, y: 4, z: 7}
-    - {x: 2, y: 1, z: 0}
-    - {x: 3, y: 7, z: 0}
-    - {x: 0, y: 1, z: 5}
-    - {x: 0, y: 4, z: 5}
-    - {x: 3, y: 1, z: 0}
-    - {x: 7, y: 0, z: 0}
-    - {x: 7, y: 4, z: 1}
-    - {x: 0, y: 1, z: 6}
-    - {x: 4, y: 2, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 7, y: 5, z: 2}
-    - {x: 1, y: 4, z: 7}
-    - {x: 0, y: 2, z: 5}
-    - {x: 5, y: 0, z: 6}
-    - {x: 0, y: 0, z: 2}
-    - {x: 6, y: 3, z: 7}
-    - {x: 7, y: 6, z: 6}
-    - {x: 6, y: 1, z: 0}
-    - {x: 5, y: 3, z: 0}
-    - {x: 0, y: 4, z: 3}
-    - {x: 0, y: 3, z: 1}
-    - {x: 0, y: 5, z: 0}
-    - {x: 7, y: 6, z: 7}
-    - {x: 7, y: 3, z: 4}
-    - {x: 7, y: 0, z: 4}
-    - {x: 7, y: 2, z: 6}
-    - {x: 3, y: 0, z: 4}
-    - {x: 4, y: 6, z: 7}
-    - {x: 2, y: 0, z: 4}
-    - {x: 7, y: 6, z: 5}
-    - {x: 2, y: 0, z: 2}
-    - {x: 2, y: 4, z: 0}
-    - {x: 2, y: 0, z: 3}
-    - {x: 7, y: 2, z: 7}
-    - {x: 0, y: 5, z: 2}
-    - {x: 3, y: 5, z: 7}
-    - {x: 4, y: 0, z: 4}
-    - {x: 3, y: 2, z: 0}
-    - {x: 4, y: 5, z: 0}
-    - {x: 7, y: 0, z: 7}
-    - {x: 4, y: 0, z: 2}
-    - {x: 6, y: 4, z: 0}
-    - {x: 0, y: 2, z: 3}
-    - {x: 1, y: 4, z: 0}
-    - {x: 2, y: 0, z: 5}
-    - {x: 0, y: 2, z: 2}
-    - {x: 5, y: 4, z: 7}
-    - {x: 0, y: 4, z: 6}
-    - {x: 0, y: 6, z: 3}
-    - {x: 4, y: 0, z: 3}
-    - {x: 3, y: 5, z: 0}
-    - {x: 5, y: 5, z: 7}
-    - {x: 5, y: 3, z: 7}
-    - {x: 7, y: 7, z: 1}
-    - {x: 0, y: 3, z: 5}
-    - {x: 3, y: 0, z: 0}
-    - {x: 3, y: 0, z: 5}
-    - {x: 7, y: 1, z: 6}
-    - {x: 6, y: 5, z: 7}
-    - {x: 7, y: 3, z: 2}
-    - {x: 6, y: 0, z: 0}
     - {x: 3, y: 0, z: 3}
-    - {x: 0, y: 3, z: 0}
-    - {x: 7, y: 4, z: 0}
-    - {x: 1, y: 7, z: 0}
-    - {x: 7, y: 4, z: 6}
-    - {x: 0, y: 7, z: 3}
-    - {x: 6, y: 1, z: 7}
-    - {x: 1, y: 5, z: 0}
-    - {x: 0, y: 2, z: 1}
-    - {x: 5, y: 2, z: 0}
-    - {x: 0, y: 6, z: 7}
-    - {x: 0, y: 5, z: 1}
-    - {x: 2, y: 0, z: 6}
-    - {x: 0, y: 7, z: 2}
-    - {x: 7, y: 7, z: 3}
-    - {x: 4, y: 2, z: 7}
-    - {x: 0, y: 5, z: 5}
-    - {x: 6, y: 5, z: 0}
-    - {x: 2, y: 3, z: 7}
-    - {x: 6, y: 4, z: 7}
-    - {x: 0, y: 6, z: 1}
-    - {x: 7, y: 1, z: 3}
-    - {x: 0, y: 6, z: 5}
-    - {x: 0, y: 4, z: 2}
-    - {x: 7, y: 3, z: 3}
-    - {x: 7, y: 1, z: 5}
-    - {x: 0, y: 0, z: 5}
-    - {x: 1, y: 0, z: 5}
-    - {x: 0, y: 3, z: 4}
-    - {x: 7, y: 1, z: 4}
-    - {x: 0, y: 7, z: 1}
-    - {x: 7, y: 0, z: 6}
-    - {x: 4, y: 0, z: 1}
-    - {x: 7, y: 2, z: 0}
-    - {x: 7, y: 3, z: 7}
-    - {x: 6, y: 7, z: 7}
-    - {x: 5, y: 0, z: 1}
-    - {x: 7, y: 4, z: 4}
-    - {x: 0, y: 1, z: 0}
-    - {x: 0, y: 5, z: 4}
-    - {x: 0, y: 1, z: 3}
-    - {x: 5, y: 7, z: 7}
-    - {x: 4, y: 0, z: 5}
-    - {x: 0, y: 6, z: 2}
-    - {x: 2, y: 1, z: 7}
-    - {x: 6, y: 0, z: 4}
-    - {x: 6, y: 0, z: 3}
-    - {x: 0, y: 0, z: 3}
-    - {x: 3, y: 6, z: 0}
-    - {x: 4, y: 7, z: 7}
-    - {x: 5, y: 0, z: 4}
-    - {x: 7, y: 2, z: 4}
-    - {x: 7, y: 4, z: 2}
-    - {x: 7, y: 1, z: 2}
-    - {x: 7, y: 5, z: 0}
-    - {x: 3, y: 6, z: 7}
-    - {x: 7, y: 0, z: 5}
-    - {x: 0, y: 1, z: 1}
-    - {x: 3, y: 2, z: 7}
-    - {x: 0, y: 3, z: 6}
-    - {x: 1, y: 1, z: 7}
+    - {x: 4, y: 0, z: 2}
     - {x: 1, y: 0, z: 6}
-    - {x: 7, y: 3, z: 1}
-    - {x: 0, y: 0, z: 6}
-    - {x: 3, y: 0, z: 1}
-    - {x: 1, y: 2, z: 0}
+    - {x: 2, y: 0, z: 4}
+    - {x: 3, y: 0, z: 6}
     - {x: 5, y: 0, z: 5}
-    - {x: 7, y: 0, z: 1}
-    - {x: 6, y: 6, z: 0}
-    - {x: 4, y: 0, z: 6}
-    - {x: 3, y: 4, z: 7}
-    - {x: 7, y: 6, z: 2}
-    - {x: 0, y: 3, z: 7}
-    - {x: 0, y: 0, z: 4}
-    - {x: 2, y: 7, z: 0}
-    - {x: 1, y: 0, z: 0}
-    - {x: 2, y: 5, z: 7}
-    - {x: 7, y: 5, z: 5}
-    - {x: 6, y: 3, z: 0}
-    - {x: 6, y: 0, z: 7}
-    - {x: 1, y: 7, z: 7}
-    - {x: 7, y: 0, z: 2}
-    - {x: 2, y: 4, z: 7}
-    - {x: 4, y: 1, z: 7}
-    - {x: 7, y: 6, z: 0}
-    - {x: 4, y: 1, z: 0}
-    - {x: 7, y: 5, z: 7}
-    - {x: 0, y: 1, z: 4}
-    - {x: 6, y: 7, z: 0}
-    - {x: 1, y: 2, z: 7}
-    - {x: 7, y: 7, z: 7}
-    - {x: 2, y: 0, z: 0}
-    - {x: 4, y: 6, z: 0}
-    - {x: 0, y: 5, z: 6}
-    - {x: 6, y: 6, z: 7}
-    - {x: 7, y: 7, z: 2}
-    - {x: 2, y: 0, z: 1}
-    - {x: 0, y: 3, z: 2}
-    - {x: 5, y: 0, z: 2}
-    - {x: 5, y: 2, z: 7}
-    - {x: 3, y: 1, z: 7}
-    - {x: 0, y: 2, z: 0}
-    - {x: 1, y: 3, z: 7}
-    - {x: 7, y: 5, z: 3}
-    - {x: 7, y: 3, z: 0}
-    - {x: 4, y: 0, z: 0}
-    - {x: 7, y: 7, z: 5}
-    - {x: 4, y: 5, z: 7}
-    - {x: 0, y: 4, z: 0}
-    - {x: 5, y: 0, z: 0}
-    - {x: 6, y: 0, z: 5}
-    - {x: 1, y: 3, z: 0}
-    - {x: 2, y: 6, z: 7}
-    - {x: 0, y: 7, z: 0}
-    - {x: 2, y: 7, z: 7}
-    - {x: 0, y: 5, z: 3}
-    - {x: 7, y: 1, z: 1}
-    - {x: 0, y: 6, z: 4}
+    - {x: 1, y: 0, z: 4}
     - {x: 6, y: 0, z: 2}
+    - {x: 4, y: 0, z: 6}
+    - {x: 7, y: 0, z: 7}
+    - {x: 0, y: 0, z: 0}
+    - {x: 5, y: 0, z: 2}
+    - {x: 7, y: 0, z: 6}
+    - {x: 4, y: 0, z: 5}
+    - {x: 0, y: 0, z: 4}
+    - {x: 4, y: 0, z: 0}
+    - {x: 3, y: 1, z: 3}
+    - {x: 1, y: 0, z: 7}
+    - {x: 0, y: 0, z: 1}
     - {x: 2, y: 0, z: 7}
-    - {x: 7, y: 4, z: 3}
-    - {x: 0, y: 1, z: 2}
-    - {x: 7, y: 6, z: 3}
+    - {x: 2, y: 0, z: 1}
+    - {x: 0, y: 0, z: 6}
+    - {x: 2, y: 0, z: 3}
+    - {x: 6, y: 0, z: 5}
+    - {x: 5, y: 0, z: 6}
+    - {x: 3, y: 0, z: 1}
+    - {x: 5, y: 0, z: 7}
+    - {x: 6, y: 0, z: 6}
+    - {x: 2, y: 0, z: 2}
+    - {x: 7, y: 0, z: 4}
+    - {x: 5, y: 0, z: 3}
+    - {x: 3, y: 0, z: 4}
+    - {x: 2, y: 0, z: 5}
+    - {x: 0, y: 0, z: 2}
+    - {x: 7, y: 0, z: 1}
+    - {x: 1, y: 0, z: 0}
+    - {x: 4, y: 0, z: 4}
+    - {x: 1, y: 0, z: 5}
+    - {x: 4, y: 0, z: 1}
+    - {x: 3, y: 0, z: 0}
+    - {x: 4, y: 0, z: 3}
+    - {x: 5, y: 0, z: 1}
+    - {x: 6, y: 0, z: 0}
+    - {x: 6, y: 0, z: 4}
+    - {x: 0, y: 0, z: 7}
+    - {x: 7, y: 0, z: 0}
+    - {x: 6, y: 0, z: 1}
+    - {x: 1, y: 0, z: 2}
+    - {x: 6, y: 0, z: 3}
+    - {x: 7, y: 0, z: 3}
+    - {x: 3, y: 0, z: 2}
     - {x: 4, y: 0, z: 7}
-    - {x: 0, y: 4, z: 4}
-    - {x: 5, y: 7, z: 0}
+    - {x: 3, y: 0, z: 7}
+    - {x: 5, y: 0, z: 4}
+    - {x: 7, y: 0, z: 2}
+    - {x: 2, y: 0, z: 0}
+    - {x: 6, y: 0, z: 7}
+    - {x: 5, y: 0, z: 0}
+    - {x: 0, y: 0, z: 5}
+    - {x: 3, y: 0, z: 5}
+    - {x: 2, y: 0, z: 6}
+    - {x: 1, y: 0, z: 1}
+    - {x: 1, y: 0, z: 3}
+    - {x: 7, y: 0, z: 5}
+    - {x: 0, y: 0, z: 3}
   startingBlockID: 7
-  playerShrink: {fileID: 1911790642}
+  playerShrink: {fileID: 840831414}
   subdivisionSpeed: 50
 --- !u!4 &1259499765
 Transform:
@@ -2480,6 +2458,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10}
+--- !u!1 &1742499167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1742499168}
+  m_Layer: 0
+  m_Name: World Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1742499168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742499167}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 840831413}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1911790642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2508,3 +2517,5 @@ SceneRoots:
   - {fileID: 512360169}
   - {fileID: 954147334}
   - {fileID: 1259499765}
+  - {fileID: 986641019}
+  - {fileID: 840831411}
