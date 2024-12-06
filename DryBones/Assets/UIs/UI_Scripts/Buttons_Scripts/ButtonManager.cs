@@ -53,6 +53,11 @@ public class ButtonManager : MonoBehaviour
 
     public static bool _isPause = false;
 
+    public static bool _isSprintBought = false;
+    public static bool _isDoubleJumpBought = false;
+    public static bool _isDashBought = false;
+    public static bool _isWallRunningBought = false;
+
     private void Start()
     {
         MainMenu();
@@ -72,6 +77,50 @@ public class ButtonManager : MonoBehaviour
                 ResumeGame();
             }
         }
+    }
+
+    public void BuySprint()
+    {
+        if(PlayerCollision._coinAmount >= 20)
+        {
+            PlayerCollision._coinAmount -= 20;
+            _isSprintBought = true;
+        }
+        _isSprintBought = true;
+        Debug.Log("BUY SPRINT!");
+    }
+
+    public void BuyDoubleJump()
+    {
+        if (PlayerCollision._coinAmount >= 25)
+        {
+            PlayerCollision._coinAmount -= 25;
+            _isDoubleJumpBought = true;
+        }
+        _isDoubleJumpBought = true;
+        Debug.Log("BUY DOUBLE JUMP!");
+    }
+
+    public void BuyDash()
+    {
+        if (PlayerCollision._coinAmount >= 35)
+        {
+            PlayerCollision._coinAmount -= 35;
+            _isDashBought = true;
+        }
+        _isDashBought = true;
+        Debug.Log("BUY DASH!");
+    }
+
+    public void BuyWallRunning()
+    {
+        if (PlayerCollision._coinAmount >= 45)
+        {
+            PlayerCollision._coinAmount -= 45;
+            _isWallRunningBought = true;
+        }
+        _isWallRunningBought = true;
+        Debug.Log("BUY WALL RUNNING!");
     }
 
     // Method to start playing game

@@ -37,7 +37,7 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private float _doubleJumpMultiplier = 1.5f;
     [SerializeField] private int _maxJump = 3;
 
-    public static bool _isDoubleJump = true;
+    private bool _isDoubleJump = true;
     private int _jumpCount = 0;
 
     [Header("Dash Parameters")]
@@ -102,6 +102,7 @@ public class ThirdPersonController : MonoBehaviour
 
         _currentMovement.x = worldDirection.x * speed;
         _currentMovement.z = worldDirection.z * speed;
+
         CheckForWall();
         WallRunInput();
         HandleJumping();
@@ -134,7 +135,7 @@ public class ThirdPersonController : MonoBehaviour
         }
         else
         {
-            if (_playerInputHandler.JumpTriggered && _isDoubleJump && _jumpCount < _maxJump)
+            if (_playerInputHandler.JumpTriggered && _isDoubleJump && _jumpCount < _maxJump && ButtonManager._isDoubleJumpBought)
             {
                 ++_jumpCount;
                 _currentMovement.y = _jumpForce * _doubleJumpMultiplier;
@@ -150,7 +151,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private IEnumerator HandleDashing()
     {
-        if (!_canDash || (_currentStamina < _dashCost && !_staminaDeducted))
+        if (!_canDash || (_currentStamina < _dashCost && !_staminaDeducted) || !ButtonManager._isDashBought)
         {
             yield break;
         }
@@ -180,7 +181,7 @@ public class ThirdPersonController : MonoBehaviour
             cooldownTimer += Time.deltaTime;
 
             // Check if dash is pressed during cooldown
-            if (_playerInputHandler.DashTriggered && _currentStamina >= _dashCost && _staminaDeducted)
+            if (_playerInputHandler.DashTriggered && _currentStamina >= _dashCost)
             {
                 Debug.Log("Dash pressed during cooldown!");
                 _playerInputHandler.ConsumeDash(); // Reset the dash trigger
@@ -219,7 +220,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private void StartWallRun()
     {
-        if(_currentStamina <= 0)
+        if(_currentStamina <= 0 || !ButtonManager._isWallRunningBought)
         {
             StopWallRun();
             return;
@@ -298,22 +299,28 @@ public class ThirdPersonController : MonoBehaviour
 
     private void CheckForWall()
     {
-        _isWallRight = Physics.Raycast(transform.position, _orientation.right, 1f, _wallLayer);
-        _isWallLeft = Physics.Raycast(transform.position, -_orientation.right, 1f, _wallLayer);
+        if (ButtonManager._isWallRunningBought)
+        {
+            _isWallRight = Physics.Raycast(transform.position, _orientation.right, 1f, _wallLayer);
+            _isWallLeft = Physics.Raycast(transform.position, -_orientation.right, 1f, _wallLayer);
 
-        Debug.DrawRay(transform.position, _orientation.right * 1f, Color.red);   // Right raycast
-        Debug.DrawRay(transform.position, -_orientation.right * 1f, Color.blue); // Left raycast
+            Debug.DrawRay(transform.position, _orientation.right * 1f, Color.red);   // Right raycast
+            Debug.DrawRay(transform.position, -_orientation.right * 1f, Color.blue); // Left raycast
 
-        if (!_isWallRight && !_isWallLeft)
+            if (!_isWallRight && !_isWallLeft)
+            {
+                StopWallRun();
+            }
+
+            // Reset jump count when touching a wall
+            if (_isWallRight || _isWallLeft)
+            {
+                _jumpCount = 1;
+            }
+        }
+        else
         {
             StopWallRun();
         }
-
-        // Reset jump count when touching a wall
-        if (_isWallRight || _isWallLeft)
-        {
-            _jumpCount = 1;
-        }
     }
-
 }
