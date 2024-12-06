@@ -47,6 +47,8 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private float _dashCooldown = 1f;
 
     private bool _canDash = true;
+    private float _dashCost = 5f;
+    private bool _staminaDeducted = false;
 
     [Header("Look Sensitivity")]
     [SerializeField] private float _mouseSensitivity = 2f;
@@ -71,8 +73,23 @@ public class ThirdPersonController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (GameManager._isReplay)
+        {
+            _currentStamina = _maxStamina;
+            GameManager._isReplay = false;
+        }
         HandleMovement();
         HandleRotation();
+    }
+
+    public float GetMaxStamina()
+    {
+        return _maxStamina;
+    }
+
+    public float GetCurrentStamina()
+    {
+        return _currentStamina;
     }
 
     private void HandleMovement()
@@ -133,6 +150,17 @@ public class ThirdPersonController : MonoBehaviour
 
     private IEnumerator HandleDashing()
     {
+        if (!_canDash || (_currentStamina < _dashCost && !_staminaDeducted))
+        {
+            yield break;
+        }
+
+        if (!_staminaDeducted)
+        {
+            _currentStamina -= _dashCost;
+            _staminaDeducted = true;
+        }
+
         Vector3 inputDirection = new Vector3(_playerInputHandler.WalkInput.x, 0f, _playerInputHandler.WalkInput.y);
         Vector3 worldDirection = transform.TransformDirection(inputDirection);
         worldDirection.Normalize();
@@ -152,7 +180,7 @@ public class ThirdPersonController : MonoBehaviour
             cooldownTimer += Time.deltaTime;
 
             // Check if dash is pressed during cooldown
-            if (_playerInputHandler.DashTriggered)
+            if (_playerInputHandler.DashTriggered && _currentStamina >= _dashCost && _staminaDeducted)
             {
                 Debug.Log("Dash pressed during cooldown!");
                 _playerInputHandler.ConsumeDash(); // Reset the dash trigger
@@ -162,6 +190,7 @@ public class ThirdPersonController : MonoBehaviour
         }
         //yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
+        _staminaDeducted = false;
     }
 
     private void HandleRotation()
@@ -178,11 +207,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private void WallRunInput()
     {
-        if (_isWallRight && _playerInputHandler.WalkInput.x > 0)
-        {
-            StartWallRun();
-        }
-        else if (_isWallLeft && _playerInputHandler.WalkInput.x < 0)
+        if (_isWallRight && _playerInputHandler.WalkInput.x > 0 || _isWallLeft && _playerInputHandler.WalkInput.x < 0)
         {
             StartWallRun();
         }
@@ -287,7 +312,7 @@ public class ThirdPersonController : MonoBehaviour
         // Reset jump count when touching a wall
         if (_isWallRight || _isWallLeft)
         {
-            _jumpCount = 0;
+            _jumpCount = 1;
         }
     }
 

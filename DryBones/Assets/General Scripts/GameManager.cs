@@ -12,9 +12,9 @@ public class GameManager : MonoBehaviour
     // Singleton instance
     public static GameManager Instance { get; private set; }
 
-    private bool _hasStartedIngameMusic = false; // Flag to track if the coroutine has started
+    public static bool _isReplay = false;   
 
-    public static int _coinAmount = 0;
+    private bool _hasStartedIngameMusic = false; // Flag to track if the coroutine has started
 
     private void Awake()
     {

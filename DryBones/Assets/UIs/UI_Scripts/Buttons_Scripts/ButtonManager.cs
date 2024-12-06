@@ -21,6 +21,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject _informationMenuCanvas;
     [SerializeField] private GameObject _pauseCanvas;
     [SerializeField] private GameObject _upgradeCanvas;
+    [SerializeField] private GameObject _playerCanvas;
 
     [Header("Button To Show From Pause Menu")]
     [SerializeField] private GameObject _resumeButtonInMainMenu;
@@ -46,8 +47,6 @@ public class ButtonManager : MonoBehaviour
 
     [Header("Respawn Position")] 
     [SerializeField] private Transform _respawnPosition;
-
-    private PlayerInputHandler _playerInputHandler;
 
     private bool _isMasterVolumeInactive = false;
     private bool _isSfxVolumeInactive = false;
@@ -82,6 +81,17 @@ public class ButtonManager : MonoBehaviour
         HideCursor();
         Time.timeScale = 1f;
         TurnOffAllCanvasInMainMenu();
+        _playerCanvas.SetActive(true);
+    }
+
+    public void Replay()
+    {
+        GameManager._isReplay = true;
+        SceneManager.LoadScene(SceneNames.PlayerTest.ToString());
+        HideCursor();
+        Time.timeScale = 1f;
+        TurnOffAllCanvasInMainMenu();
+        _playerCanvas.SetActive(true);
     }
 
     // Method to quit the game
@@ -100,6 +110,7 @@ public class ButtonManager : MonoBehaviour
         _informationMenuCanvas.SetActive(false);
         _pauseCanvas.SetActive(false);
         _upgradeCanvas.SetActive(false);
+        _playerCanvas.SetActive(false);
     }
 
     public void MainMenu()
@@ -112,6 +123,7 @@ public class ButtonManager : MonoBehaviour
     {
         TurnOffAllCanvasInMainMenu();
         _upgradeCanvas.SetActive(true);
+        _playerCanvas.SetActive(true);
     }
 
     // Setting menu
@@ -142,10 +154,6 @@ public class ButtonManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (_playerInputHandler != null)
-        {
-            _playerInputHandler.OnDisable();
-        }
         _isPause = true;
         Time.timeScale = 0f;
         _pauseCanvas.SetActive(true);
@@ -161,6 +169,7 @@ public class ButtonManager : MonoBehaviour
         HideCursor();
         Time.timeScale = 1f;
         TurnOffAllCanvasInMainMenu();
+        _playerCanvas.SetActive(true);
     }
 
     public void ShowCursor()
