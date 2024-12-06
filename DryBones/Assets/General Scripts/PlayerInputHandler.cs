@@ -42,13 +42,21 @@ public class PlayerInputHandler : MonoBehaviour
         RegisterInputActions();
     }
 
+    private void Update()
+    {
+        RegisterInputActions();
+    }
+
     private void RegisterInputActions()
     {
         _walkAction.performed += context => WalkInput = context.ReadValue<Vector2>();
         _walkAction.canceled += context => WalkInput = Vector2.zero;
 
-        _runAction.performed += context => RunValue = context.ReadValue<float>();
-        _runAction.canceled += context => RunValue = 0f;
+        if(ButtonManager._isSprintBought)
+        {
+            _runAction.performed += context => RunValue = context.ReadValue<float>();
+            _runAction.canceled += context => RunValue = 0f;
+        }
 
         _lookAction.performed += context => LookInput = context.ReadValue<Vector2>();
         _lookAction.canceled += context => LookInput = Vector2.zero;
