@@ -11,7 +11,7 @@ public class ButtonManager : MonoBehaviour
     public enum SceneNames
     {
         MainMenu,
-        PlayerTest
+        Main
     }
 
     [Header("Canvases")]
@@ -126,7 +126,7 @@ public class ButtonManager : MonoBehaviour
     // Method to start playing game
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneNames.PlayerTest.ToString());
+        SceneManager.LoadScene(SceneNames.Main.ToString());
         HideCursor();
         Time.timeScale = 1f;
         TurnOffAllCanvasInMainMenu();
@@ -136,7 +136,7 @@ public class ButtonManager : MonoBehaviour
     public void Replay()
     {
         GameManager._isReplay = true;
-        SceneManager.LoadScene(SceneNames.PlayerTest.ToString());
+        SceneManager.LoadScene(SceneNames.Main.ToString());
         HideCursor();
         Time.timeScale = 1f;
         TurnOffAllCanvasInMainMenu();
