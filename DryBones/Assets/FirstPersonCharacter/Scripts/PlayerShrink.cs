@@ -10,7 +10,7 @@ public class PlayerShrink : MonoBehaviour
 
     // positive size increases the player's scale, negative size decreases it
     public int startingSize = 0;
-    public int size { get; private set; }
+    public int size;
     float startingScale;
     public GameObject world;
     public World worldComponent;
@@ -110,6 +110,11 @@ public class PlayerShrink : MonoBehaviour
             }
         }
         UpdateChunkCoord ();
+    }
+
+    public float GetPlayerSize()
+    {
+        return size;
     }
 
     public float GetMinScale()

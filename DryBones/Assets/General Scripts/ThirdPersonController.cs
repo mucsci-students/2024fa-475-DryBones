@@ -61,12 +61,29 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private Camera _firstPersonCamera;
     [SerializeField] private Camera _thirdPersonCamera;
 
+    public class Level
+    {
+        public const float LEVEL1 = -3f;
+        public const float LEVEL2 = -4f;
+        public const float LEVEL3 = -5f;
+        public const float LEVEL4 = -6f;
+        public const float LEVEL5 = -7f;
+        public const float LEVEL6 = -8f;
+        public const float LEVEL7 = -9f;
+        public const float LEVEL8 = -10f;
+        public const float LEVEL9 = -11f;
+    }
+
+    PlayerShrink _playerShrinkData;
+    [SerializeField] private GameObject[] _levelList;
+
     private CharacterController _characterController;
     
     // Start is called before the first frame update
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _playerShrinkData = gameObject.GetComponent<PlayerShrink>();
         _thirdPersonCamera = Camera.main;
         _currentStamina = _maxStamina;
     }
@@ -82,6 +99,7 @@ public class ThirdPersonController : MonoBehaviour
         HandleMovement();
         HandleRotation();
         SwitchCamera();
+        ShowLevelPlatform();
     }
 
     public float GetMaxStamina()
@@ -349,5 +367,22 @@ public class ThirdPersonController : MonoBehaviour
             _thirdPersonCamera.enabled = true;
             _thirdPersonCamera = Camera.main;
         }
+    }
+
+    private void ShowLevelPlatform()
+    {
+        float currentPlayerSize = _playerShrinkData.GetPlayerSize();
+        if (currentPlayerSize == Level.LEVEL1)
+        {
+            _levelList[0].SetActive(true);
+        }
+        else
+        {
+            _levelList[0].SetActive(false);
+        }
+        //else if (currentPlayerSize == Level.LEVEL2)
+        //{
+        //    _levelList[1].SetActive(true);
+        //}
     }
 }
