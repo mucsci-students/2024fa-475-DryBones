@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class ThirdPersonController : MonoBehaviour
 {
-    [Header("Camera")]
-    [SerializeField] private Camera _firstPersonCamera;
-    [SerializeField] private Camera _thirdPersonCamera;
-
     [Header("Movement Speeds")]
     [SerializeField] private float _walkSpeed = 10f;
     [SerializeField] private float _runSpeedMultiplier = 1.5f;
@@ -62,7 +58,8 @@ public class ThirdPersonController : MonoBehaviour
 
     [Header("Player Input Handler And Camera")]
     [SerializeField] private PlayerInputHandler _playerInputHandler;
-    [SerializeField] private Camera _mainCamera;
+    [SerializeField] private Camera _firstPersonCamera;
+    [SerializeField] private Camera _thirdPersonCamera;
 
     private CharacterController _characterController;
     
@@ -70,7 +67,7 @@ public class ThirdPersonController : MonoBehaviour
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
-        _mainCamera = Camera.main;
+        _thirdPersonCamera = Camera.main;
         _currentStamina = _maxStamina;
     }
 
@@ -206,7 +203,14 @@ public class ThirdPersonController : MonoBehaviour
 
         _verticalRotation -= _playerInputHandler.LookInput.y * _mouseSensitivity;
         _verticalRotation = Mathf.Clamp(_verticalRotation, -_updownRange, _updownRange);
-        _mainCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+        if (_playerInputHandler.CameraSwitched)
+        {
+            _firstPersonCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+        }
+        else
+        {
+            _thirdPersonCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+        } 
     }
 
     /* Wall Running */
