@@ -46,10 +46,10 @@ public class PlayerInputHandler : MonoBehaviour
         RegisterInputActions();
     }
 
-    //private void Update()
-    //{
-    //    RegisterInputActions();
-    //}
+    private void Update()
+    {
+        RegisterInputActions();
+    }
 
     private void RegisterInputActions()
     {
