@@ -627,21 +627,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1384101380}
     - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
-      propertyPath: maxScale
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
-      propertyPath: minScale
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: worldComponent
       value: 
       objectReference: {fileID: 1384101381}
-    - target: {fileID: 8331370650383300582, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: _playerInputHandler
       value: 

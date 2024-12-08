@@ -144,7 +144,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706410615226810357}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
@@ -446,8 +446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65a49c06d8a8bc4fba8c9e7999aa7fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstPersonCamera: {fileID: 8331370650383300582}
-  _thirdPersonCamera: {fileID: 4834465558051665317}
   _walkSpeed: 10
   _runSpeedMultiplier: 1.5
   _orientation: {fileID: 2704247328886966458}
@@ -471,7 +469,8 @@ MonoBehaviour:
   _mouseSensitivity: 0.6
   _updownRange: 70
   _playerInputHandler: {fileID: 0}
-  _mainCamera: {fileID: 8331370650383300582}
+  _firstPersonCamera: {fileID: 8331370650383300582}
+  _thirdPersonCamera: {fileID: 4834465558051665317}
 --- !u!114 &4168324264829350999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,8 +626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fc6ab117efa4d88831d5e041d99600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScale: 5
-  maxScale: 0
+  minScale: -3
+  maxScale: -2
   startingSize: -2
   world: {fileID: 0}
   worldComponent: {fileID: 0}
