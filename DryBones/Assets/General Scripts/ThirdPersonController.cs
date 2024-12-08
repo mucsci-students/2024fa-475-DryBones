@@ -340,12 +340,14 @@ public class ThirdPersonController : MonoBehaviour
             Debug.Log("Switching to First Person Camera");
             _firstPersonCamera.enabled = true;
             _thirdPersonCamera.enabled = false;
+            _firstPersonCamera = Camera.main;
         }
         else
         {
             Debug.Log("Switching to Third Person Camera");
             _firstPersonCamera.enabled = false;
             _thirdPersonCamera.enabled = true;
+            _thirdPersonCamera = Camera.main;
         }
     }
 }
