@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class ThirdPersonController : MonoBehaviour
 {
+    [Header("Camera")]
+    [SerializeField] private Camera _firstPersonCamera;
+    [SerializeField] private Camera _thirdPersonCamera;
+
     [Header("Movement Speeds")]
     [SerializeField] private float _walkSpeed = 10f;
     [SerializeField] private float _runSpeedMultiplier = 1.5f;
@@ -80,6 +84,7 @@ public class ThirdPersonController : MonoBehaviour
         }
         HandleMovement();
         HandleRotation();
+        SwitchCamera();
     }
 
     public float GetMaxStamina()
@@ -321,6 +326,22 @@ public class ThirdPersonController : MonoBehaviour
         else
         {
             StopWallRun();
+        }
+    }
+
+    private void SwitchCamera()
+    {
+        if (_playerInputHandler.CameraSwitched)
+        {
+            Debug.Log("Switching to First Person Camera");
+            _firstPersonCamera.enabled = true;
+            _thirdPersonCamera.enabled = false;
+        }
+        else
+        {
+            Debug.Log("Switching to Third Person Camera");
+            _firstPersonCamera.enabled = false;
+            _thirdPersonCamera.enabled = true;
         }
     }
 }
