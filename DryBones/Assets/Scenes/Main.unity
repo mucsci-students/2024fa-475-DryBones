@@ -6801,6 +6801,10 @@ PrefabInstance:
       propertyPath: worldComponent
       value: 
       objectReference: {fileID: 1384101381}
+    - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: scrollSensitivity
+      value: 0.09
+      objectReference: {fileID: 0}
     - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: _playerInputHandler
       value: 

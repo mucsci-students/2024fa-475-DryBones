@@ -51,7 +51,7 @@ public class PlayerShrink : MonoBehaviour
            }
            timeOfLastScroll = Time.unscaledTime;
            Time.timeScale = 0f;
-           scrollAmt = Mathf.Clamp (scrollAmt, -0.05f - sizeChange - (size + minScale), 0.05f - sizeChange - size + maxScale);
+           scrollAmt = Mathf.Clamp (scrollAmt, -0.05f - sizeChange - (size - minScale), 0.05f - sizeChange - size + maxScale);
            sizeChange += scrollAmt;
            worldParent.transform.localScale *=  Mathf.Pow (8f, -scrollAmt);
 
