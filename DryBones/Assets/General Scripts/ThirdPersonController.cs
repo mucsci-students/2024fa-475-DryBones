@@ -37,7 +37,7 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private float _doubleJumpMultiplier = 1.5f;
     [SerializeField] private int _maxJump = 3;
 
-    public static bool _isDoubleJump = true;
+    private bool _isDoubleJump = true;
     private int _jumpCount = 0;
 
     [Header("Dash Parameters")]
@@ -47,6 +47,8 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private float _dashCooldown = 1f;
 
     private bool _canDash = true;
+    private float _dashCost = 5f;
+    private bool _staminaDeducted = false;
 
     [Header("Look Sensitivity")]
     [SerializeField] private float _mouseSensitivity = 2f;
@@ -56,7 +58,24 @@ public class ThirdPersonController : MonoBehaviour
 
     [Header("Player Input Handler And Camera")]
     [SerializeField] private PlayerInputHandler _playerInputHandler;
-    [SerializeField] private Camera _mainCamera;
+    [SerializeField] private Camera _firstPersonCamera;
+    [SerializeField] private Camera _thirdPersonCamera;
+
+    public class Level
+    {
+        public const float LEVEL1 = -3f;
+        public const float LEVEL2 = -4f;
+        public const float LEVEL3 = -5f;
+        public const float LEVEL4 = -6f;
+        public const float LEVEL5 = -7f;
+        public const float LEVEL6 = -8f;
+        public const float LEVEL7 = -9f;
+        public const float LEVEL8 = -10f;
+        public const float LEVEL9 = -11f;
+    }
+
+    PlayerShrink _playerShrinkData;
+    [SerializeField] private GameObject[] _levelList;
 
     private CharacterController _characterController;
     
@@ -64,15 +83,33 @@ public class ThirdPersonController : MonoBehaviour
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
-        _mainCamera = Camera.main;
+        _playerShrinkData = gameObject.GetComponent<PlayerShrink>();
+        _thirdPersonCamera = Camera.main;
         _currentStamina = _maxStamina;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (GameManager._isReplay)
+        {
+            _currentStamina = _maxStamina;
+            GameManager._isReplay = false;
+        }
         HandleMovement();
         HandleRotation();
+        SwitchCamera();
+        ShowLevelPlatform();
+    }
+
+    public float GetMaxStamina()
+    {
+        return _maxStamina;
+    }
+
+    public float GetCurrentStamina()
+    {
+        return _currentStamina;
     }
 
     private void HandleMovement()
@@ -85,6 +122,7 @@ public class ThirdPersonController : MonoBehaviour
 
         _currentMovement.x = worldDirection.x * speed;
         _currentMovement.z = worldDirection.z * speed;
+
         CheckForWall();
         WallRunInput();
         HandleJumping();
@@ -117,7 +155,7 @@ public class ThirdPersonController : MonoBehaviour
         }
         else
         {
-            if (_playerInputHandler.JumpTriggered && _isDoubleJump && _jumpCount < _maxJump)
+            if (_playerInputHandler.JumpTriggered && _isDoubleJump && _jumpCount < _maxJump && ButtonManager._isDoubleJumpBought)
             {
                 ++_jumpCount;
                 _currentMovement.y = _jumpForce * _doubleJumpMultiplier;
@@ -133,6 +171,17 @@ public class ThirdPersonController : MonoBehaviour
 
     private IEnumerator HandleDashing()
     {
+        if (!_canDash || (_currentStamina < _dashCost && !_staminaDeducted) || !ButtonManager._isDashBought)
+        {
+            yield break;
+        }
+
+        if (!_staminaDeducted)
+        {
+            _currentStamina -= _dashCost;
+            _staminaDeducted = true;
+        }
+
         Vector3 inputDirection = new Vector3(_playerInputHandler.WalkInput.x, 0f, _playerInputHandler.WalkInput.y);
         Vector3 worldDirection = transform.TransformDirection(inputDirection);
         worldDirection.Normalize();
@@ -152,7 +201,7 @@ public class ThirdPersonController : MonoBehaviour
             cooldownTimer += Time.deltaTime;
 
             // Check if dash is pressed during cooldown
-            if (_playerInputHandler.DashTriggered)
+            if (_playerInputHandler.DashTriggered && _currentStamina >= _dashCost)
             {
                 Debug.Log("Dash pressed during cooldown!");
                 _playerInputHandler.ConsumeDash(); // Reset the dash trigger
@@ -162,6 +211,7 @@ public class ThirdPersonController : MonoBehaviour
         }
         //yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
+        _staminaDeducted = false;
     }
 
     private void HandleRotation()
@@ -171,18 +221,21 @@ public class ThirdPersonController : MonoBehaviour
 
         _verticalRotation -= _playerInputHandler.LookInput.y * _mouseSensitivity;
         _verticalRotation = Mathf.Clamp(_verticalRotation, -_updownRange, _updownRange);
-        _mainCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+        if (_playerInputHandler.CameraSwitched)
+        {
+            _firstPersonCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+        }
+        else
+        {
+            _thirdPersonCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+        } 
     }
 
     /* Wall Running */
 
     private void WallRunInput()
     {
-        if (_isWallRight && _playerInputHandler.WalkInput.x > 0)
-        {
-            StartWallRun();
-        }
-        else if (_isWallLeft && _playerInputHandler.WalkInput.x < 0)
+        if (_isWallRight && _playerInputHandler.WalkInput.x > 0 || _isWallLeft && _playerInputHandler.WalkInput.x < 0)
         {
             StartWallRun();
         }
@@ -194,7 +247,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private void StartWallRun()
     {
-        if(_currentStamina <= 0)
+        if(_currentStamina <= 0 || !ButtonManager._isWallRunningBought)
         {
             StopWallRun();
             return;
@@ -273,22 +326,63 @@ public class ThirdPersonController : MonoBehaviour
 
     private void CheckForWall()
     {
-        _isWallRight = Physics.Raycast(transform.position, _orientation.right, 1f, _wallLayer);
-        _isWallLeft = Physics.Raycast(transform.position, -_orientation.right, 1f, _wallLayer);
+        if (ButtonManager._isWallRunningBought)
+        {
+            _isWallRight = Physics.Raycast(transform.position, _orientation.right, 1f, _wallLayer);
+            _isWallLeft = Physics.Raycast(transform.position, -_orientation.right, 1f, _wallLayer);
 
-        Debug.DrawRay(transform.position, _orientation.right * 1f, Color.red);   // Right raycast
-        Debug.DrawRay(transform.position, -_orientation.right * 1f, Color.blue); // Left raycast
+            Debug.DrawRay(transform.position, _orientation.right * 1f, Color.red);   // Right raycast
+            Debug.DrawRay(transform.position, -_orientation.right * 1f, Color.blue); // Left raycast
 
-        if (!_isWallRight && !_isWallLeft)
+            if (!_isWallRight && !_isWallLeft)
+            {
+                StopWallRun();
+            }
+
+            // Reset jump count when touching a wall
+            if (_isWallRight || _isWallLeft)
+            {
+                _jumpCount = 1;
+            }
+        }
+        else
         {
             StopWallRun();
         }
+    }
 
-        // Reset jump count when touching a wall
-        if (_isWallRight || _isWallLeft)
+    private void SwitchCamera()
+    {
+        if (_playerInputHandler.CameraSwitched)
         {
-            _jumpCount = 0;
+            Debug.Log("Switching to First Person Camera");
+            _firstPersonCamera.enabled = true;
+            _thirdPersonCamera.enabled = false;
+            _firstPersonCamera = Camera.main;
+        }
+        else
+        {
+            Debug.Log("Switching to Third Person Camera");
+            _firstPersonCamera.enabled = false;
+            _thirdPersonCamera.enabled = true;
+            _thirdPersonCamera = Camera.main;
         }
     }
 
+    private void ShowLevelPlatform()
+    {
+        float currentPlayerSize = _playerShrinkData.GetPlayerSize();
+        if (currentPlayerSize == Level.LEVEL1)
+        {
+            _levelList[0].SetActive(true);
+        }
+        else
+        {
+            _levelList[0].SetActive(false);
+        }
+        //else if (currentPlayerSize == Level.LEVEL2)
+        //{
+        //    _levelList[1].SetActive(true);
+        //}
+    }
 }

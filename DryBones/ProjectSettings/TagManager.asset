@@ -8,6 +8,8 @@ TagManager:
   - InputHandler
   - Ground
   - Wall
+  - FxTemporaire
+  - ShrinkOrb
   layers:
   - Default
   - TransparentFX

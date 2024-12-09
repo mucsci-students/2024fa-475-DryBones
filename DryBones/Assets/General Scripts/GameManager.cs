@@ -6,15 +6,15 @@ public class GameManager : MonoBehaviour
     public enum SceneNames
     {
         MainMenu,
-        PlayerTest
+        Main
     }
 
     // Singleton instance
     public static GameManager Instance { get; private set; }
 
-    private bool _hasStartedIngameMusic = false; // Flag to track if the coroutine has started
+    public static bool _isReplay = false;   
 
-    public static int _coinAmount = 0;
+    private bool _hasStartedIngameMusic = false; // Flag to track if the coroutine has started
 
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     private void SceneCheck()
     {
         Scene currentScene = SceneManager.GetActiveScene();
-        if (currentScene.name == SceneNames.PlayerTest.ToString() && !_hasStartedIngameMusic)
+        if (currentScene.name == SceneNames.Main.ToString() && !_hasStartedIngameMusic)
         {
             _hasStartedIngameMusic = true; // Set the flag
             StartCoroutine(PlayIngameMusicAfterDelay());

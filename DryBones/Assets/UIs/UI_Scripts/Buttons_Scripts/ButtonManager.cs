@@ -4,14 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
+//using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ButtonManager : MonoBehaviour
 {
     public enum SceneNames
     {
         MainMenu,
-        PlayerTest
+        Main
     }
 
     [Header("Canvases")]
@@ -21,6 +21,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject _informationMenuCanvas;
     [SerializeField] private GameObject _pauseCanvas;
     [SerializeField] private GameObject _upgradeCanvas;
+    [SerializeField] private GameObject _playerCanvas;
 
     [Header("Button To Show From Pause Menu")]
     [SerializeField] private GameObject _resumeButtonInMainMenu;
@@ -47,12 +48,15 @@ public class ButtonManager : MonoBehaviour
     [Header("Respawn Position")] 
     [SerializeField] private Transform _respawnPosition;
 
-    private PlayerInputHandler _playerInputHandler;
-
     private bool _isMasterVolumeInactive = false;
     private bool _isSfxVolumeInactive = false;
 
     public static bool _isPause = false;
+
+    public static bool _isSprintBought = false;
+    public static bool _isDoubleJumpBought = false;
+    public static bool _isDashBought = false;
+    public static bool _isWallRunningBought = false;
 
     private void Start()
     {
@@ -75,13 +79,68 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
+    public void BuySprint()
+    {
+        if(PlayerCollision._coinAmount >= 20)
+        {
+            PlayerCollision._coinAmount -= 20;
+            _isSprintBought = true;
+        }
+        _isSprintBought = true;
+        Debug.Log("BUY SPRINT!");
+    }
+
+    public void BuyDoubleJump()
+    {
+        if (PlayerCollision._coinAmount >= 25)
+        {
+            PlayerCollision._coinAmount -= 25;
+            _isDoubleJumpBought = true;
+        }
+        _isDoubleJumpBought = true;
+        Debug.Log("BUY DOUBLE JUMP!");
+    }
+
+    public void BuyDash()
+    {
+        if (PlayerCollision._coinAmount >= 35)
+        {
+            PlayerCollision._coinAmount -= 35;
+            _isDashBought = true;
+        }
+        _isDashBought = true;
+        Debug.Log("BUY DASH!");
+    }
+
+    public void BuyWallRunning()
+    {
+        if (PlayerCollision._coinAmount >= 45)
+        {
+            PlayerCollision._coinAmount -= 45;
+            _isWallRunningBought = true;
+        }
+        _isWallRunningBought = true;
+        Debug.Log("BUY WALL RUNNING!");
+    }
+
     // Method to start playing game
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneNames.PlayerTest.ToString());
+        SceneManager.LoadScene(SceneNames.Main.ToString());
         HideCursor();
         Time.timeScale = 1f;
         TurnOffAllCanvasInMainMenu();
+        _playerCanvas.SetActive(true);
+    }
+
+    public void Replay()
+    {
+        GameManager._isReplay = true;
+        SceneManager.LoadScene(SceneNames.Main.ToString());
+        HideCursor();
+        Time.timeScale = 1f;
+        TurnOffAllCanvasInMainMenu();
+        _playerCanvas.SetActive(true);
     }
 
     // Method to quit the game
@@ -100,6 +159,7 @@ public class ButtonManager : MonoBehaviour
         _informationMenuCanvas.SetActive(false);
         _pauseCanvas.SetActive(false);
         _upgradeCanvas.SetActive(false);
+        _playerCanvas.SetActive(false);
     }
 
     public void MainMenu()
@@ -112,6 +172,7 @@ public class ButtonManager : MonoBehaviour
     {
         TurnOffAllCanvasInMainMenu();
         _upgradeCanvas.SetActive(true);
+        _playerCanvas.SetActive(true);
     }
 
     // Setting menu
@@ -142,10 +203,6 @@ public class ButtonManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (_playerInputHandler != null)
-        {
-            _playerInputHandler.OnDisable();
-        }
         _isPause = true;
         Time.timeScale = 0f;
         _pauseCanvas.SetActive(true);
@@ -161,6 +218,7 @@ public class ButtonManager : MonoBehaviour
         HideCursor();
         Time.timeScale = 1f;
         TurnOffAllCanvasInMainMenu();
+        _playerCanvas.SetActive(true);
     }
 
     public void ShowCursor()

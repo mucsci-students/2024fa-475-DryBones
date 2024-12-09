@@ -10,7 +10,7 @@ public class PlayerShrink : MonoBehaviour
 
     // positive size increases the player's scale, negative size decreases it
     public int startingSize = 0;
-    public int size { get; private set; }
+    public int size;
     float startingScale;
     public GameObject world;
     public World worldComponent;
@@ -78,8 +78,10 @@ public class PlayerShrink : MonoBehaviour
         //ShrinkTest();
         if (Input.GetKeyDown (KeyCode.G))
         {
-            if (size != -minScale)
+            if (size > minScale)
             {
+                Debug.Log("Shrinking! Current size " + size);
+                Debug.Log("Current min scale " + (-minScale));
                 StopCoroutine("InterpolateToCurrentScale");
                 world.transform.parent = worldParent.transform;
                 Time.timeScale = 0f;
@@ -88,11 +90,16 @@ public class PlayerShrink : MonoBehaviour
                 scrolling = false;
                 StartCoroutine ("InterpolateToCurrentScale");
             }
+            else
+            {
+                Debug.Log("Can't shrink! Current size " + size);
+            }
         }
         else if (Input.GetKeyDown (KeyCode.H))
         {
-            if (size != maxScale)
+            if (size < maxScale)
             {
+                Debug.Log("Growing! Current size " + size);
                 StopCoroutine("InterpolateToCurrentScale");
                 world.transform.parent = worldParent.transform;
                 Time.timeScale = 0f;
@@ -103,6 +110,31 @@ public class PlayerShrink : MonoBehaviour
             }
         }
         UpdateChunkCoord ();
+    }
+
+    public float GetPlayerSize()
+    {
+        return size;
+    }
+
+    public float GetMinScale()
+    {
+        return minScale;
+    }
+
+    public float GetMaxScale() 
+    { 
+        return maxScale; 
+    }
+
+    public void SetMinScale(float newScale)
+    {
+        minScale = newScale;
+    }
+
+    public void SetMaxScale(float newScale)
+    {
+        maxScale = newScale;
     }
 
 /*
