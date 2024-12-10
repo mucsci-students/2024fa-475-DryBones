@@ -551,7 +551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3219211917888368995, guid: 6903fe691171c4915b0f79dae5d7800d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3219211917888368995, guid: 6903fe691171c4915b0f79dae5d7800d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6207,15 +6207,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block:
-    blockName: Joshua's Level
+    blockName: Joshua's Level (Level 3)
     isSolid: 1
     backFaceTexture: 9
-    frontFaceTexture: 0
+    frontFaceTexture: 10
     topFaceTexture: 9
     bottomFaceTexture: 9
     leftFaceTexture: 9
     rightFaceTexture: 9
-    subBlockIDs: 0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b000b
+    subBlockIDs: 0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b190b0b0b0b2525252525250b0b0b0b2626262626260b0b0b0b272727272727
     subBlockLocs:
     - {x: 1, y: 0, z: 0}
     - {x: 2, y: 0, z: 0}
@@ -6476,7 +6476,36 @@ MonoBehaviour:
     - {x: 6, y: 7, z: 6}
     - {x: 6, y: 7, z: 7}
     - {x: 5, y: 7, z: 6}
-    - {x: 0, y: 0, z: 0}
+    - {x: 6, y: 1, z: 7}
+    - {x: 5, y: 1, z: 7}
+    - {x: 6, y: 2, z: 7}
+    - {x: 6, y: 1, z: 6}
+    - {x: 6, y: 1, z: 5}
+    - {x: 5, y: 1, z: 6}
+    - {x: 4, y: 1, z: 7}
+    - {x: 6, y: 3, z: 7}
+    - {x: 6, y: 2, z: 6}
+    - {x: 5, y: 2, z: 7}
+    - {x: 1, y: 1, z: 1}
+    - {x: 1, y: 1, z: 2}
+    - {x: 2, y: 1, z: 1}
+    - {x: 1, y: 2, z: 1}
+    - {x: 3, y: 1, z: 1}
+    - {x: 2, y: 1, z: 2}
+    - {x: 1, y: 1, z: 3}
+    - {x: 2, y: 2, z: 1}
+    - {x: 1, y: 2, z: 2}
+    - {x: 1, y: 3, z: 1}
+    - {x: 1, y: 7, z: 1}
+    - {x: 1, y: 7, z: 2}
+    - {x: 2, y: 7, z: 1}
+    - {x: 1, y: 6, z: 1}
+    - {x: 3, y: 7, z: 1}
+    - {x: 2, y: 7, z: 2}
+    - {x: 1, y: 7, z: 3}
+    - {x: 2, y: 6, z: 1}
+    - {x: 1, y: 6, z: 2}
+    - {x: 1, y: 5, z: 1}
 --- !u!4 &706409603
 Transform:
   m_ObjectHideFlags: 0
@@ -11014,7 +11043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3219211917888368995, guid: 6903fe691171c4915b0f79dae5d7800d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3219211917888368995, guid: 6903fe691171c4915b0f79dae5d7800d, type: 3}
       propertyPath: m_LocalPosition.y
