@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThirdPersonController : MonoBehaviour
 {
@@ -49,12 +50,6 @@ public class ThirdPersonController : MonoBehaviour
     private bool _canDash = true;
     private float _dashCost = 5f;
     private bool _staminaDeducted = false;
-
-    [Header("Look Sensitivity")]
-    [SerializeField] private float _mouseSensitivity = 2f;
-    [SerializeField] private float _updownRange = 90f;
-
-    private float _verticalRotation;
 
     [Header("Player Input Handler And Camera")]
     [SerializeField] private PlayerInputHandler _playerInputHandler;
@@ -216,18 +211,18 @@ public class ThirdPersonController : MonoBehaviour
 
     private void HandleRotation()
     {
-        float mouseXRotation = _playerInputHandler.LookInput.x * _mouseSensitivity;
+        float mouseXRotation = _playerInputHandler.LookInput.x * ButtonManager._mouseSensitivity;
         transform.Rotate(0f, mouseXRotation, 0f);
 
-        _verticalRotation -= _playerInputHandler.LookInput.y * _mouseSensitivity;
-        _verticalRotation = Mathf.Clamp(_verticalRotation, -_updownRange, _updownRange);
+        ButtonManager._verticalRotation -= _playerInputHandler.LookInput.y * ButtonManager._mouseSensitivity;
+        ButtonManager._verticalRotation = Mathf.Clamp(ButtonManager._verticalRotation, -ButtonManager._updownRange, ButtonManager._updownRange);
         if (_playerInputHandler.CameraSwitched)
         {
-            _firstPersonCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+            _firstPersonCamera.transform.localRotation = Quaternion.Euler(ButtonManager._verticalRotation, 0f, 0f);
         }
         else
         {
-            _thirdPersonCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+            _thirdPersonCamera.transform.localRotation = Quaternion.Euler(ButtonManager._verticalRotation, 0f, 0f);
         } 
     }
 
@@ -375,14 +370,17 @@ public class ThirdPersonController : MonoBehaviour
         if (currentPlayerSize == Level.LEVEL1)
         {
             _levelList[0].SetActive(true);
+            _levelList[1].SetActive(false);
+        }
+        else if(currentPlayerSize == Level.LEVEL2)
+        {
+            _levelList[0].SetActive(false);
+            _levelList[1].SetActive(true);
         }
         else
         {
             _levelList[0].SetActive(false);
+            _levelList[1].SetActive(false);
         }
-        //else if (currentPlayerSize == Level.LEVEL2)
-        //{
-        //    _levelList[1].SetActive(true);
-        //}
     }
 }

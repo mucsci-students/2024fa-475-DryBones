@@ -363,12 +363,13 @@ MonoBehaviour:
   _dashSpeed: 50
   _dashDuration: 0.2
   _dashCooldown: 1.5
-  _mouseSensitivity: 0.6
+  _mouseSensitivity: 0.2
   _updownRange: 70
   _playerInputHandler: {fileID: 0}
   _firstPersonCamera: {fileID: 8331370650383300582}
   _thirdPersonCamera: {fileID: 4834465558051665317}
   _levelList:
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &4168324264829350999
 MonoBehaviour:
@@ -525,14 +526,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fc6ab117efa4d88831d5e041d99600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScale: -3
-  maxScale: -2
+  minScale: -10
+  maxScale: -1
   startingSize: -2
   size: 0
   world: {fileID: 0}
   worldComponent: {fileID: 0}
   worldParent: {fileID: 3648382430453033664}
-  scrollSensitivity: 0.009
+  scrollSensitivity: 0.09
   chunkDepth: 2
 --- !u!1 &1245514098791395490
 GameObject:
@@ -864,7 +865,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 66
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -889,7 +890,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9064807436672154644}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!124 &612001598892401153
 Behaviour:
   m_ObjectHideFlags: 0

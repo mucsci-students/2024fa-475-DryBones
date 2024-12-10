@@ -48,6 +48,11 @@ public class ButtonManager : MonoBehaviour
     [Header("Respawn Position")] 
     [SerializeField] private Transform _respawnPosition;
 
+    public static float _mouseSensitivity = 0.5f;
+    public static float _updownRange = 90f;
+    public static float _verticalRotation;
+    [SerializeField] private Slider _mouseSensitivitySlider;
+
     private bool _isMasterVolumeInactive = false;
     private bool _isSfxVolumeInactive = false;
 
@@ -62,6 +67,7 @@ public class ButtonManager : MonoBehaviour
     {
         MainMenu();
         Cursor.SetCursor(_crosshairTexture, Vector2.zero, CursorMode.Auto);
+        _mouseSensitivitySlider.value = _mouseSensitivity;
     }
 
     private void Update()
@@ -77,6 +83,11 @@ public class ButtonManager : MonoBehaviour
                 ResumeGame();
             }
         }
+    }
+
+    public void MouseSentitivity()
+    {
+        _mouseSensitivity = _mouseSensitivitySlider.value;
     }
 
     public void BuySprint()
@@ -240,7 +251,7 @@ public class ButtonManager : MonoBehaviour
         _renderObjectSliderPanel.SetActive(true);
         _masterVolumeSliderPanel.SetActive(false);
         _sfxVolumeSliderPanel.SetActive(false);
-        _renderObjectSliderText.text = "Adjusts how many objects are rendered in the game. Higher values show more objects, while lower values show fewer.";
+        _renderObjectSliderText.text = "Adjusts mouse sensitivity, the values are between 0.1 and 1.";
     }
 
     public void MasterVolumeInfoButton()
