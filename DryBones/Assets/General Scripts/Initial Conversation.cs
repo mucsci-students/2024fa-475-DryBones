@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DialogueEditor;
+using UnityStandardAssets.Characters.FirstPerson;
 
-public class Conversationinteractions : MonoBehaviour
+public class InitialConversation : MonoBehaviour
 {
     public NPCConversation startingConvo;
+
+    public FirstPersonController fpsScript;
 
     public void Start(){
         ConversationManager.Instance.StartConversation(startingConvo);
         
+        fpsScript = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
+
+        fpsScript.enabled = false;
     }
 
     public void Update(){
         
         if(ConversationManager.Instance.IsConversationActive){
+            
+
             GameObject.Find("ThirdPersonCharacter").transform.LookAt(GameObject.Find("Scientist").transform);
             if (Input.GetKeyDown(KeyCode.Return) && ConversationManager.Instance.GetInt("triggerNum") != 2)
                 ConversationManager.Instance.PressSelectedOption();
@@ -36,8 +44,10 @@ public class Conversationinteractions : MonoBehaviour
     }
 
     private void triggerWorldSwap(){
-        if(ConversationManager.Instance.IsConversationActive)
+        if(ConversationManager.Instance.IsConversationActive){
             ConversationManager.Instance.EndConversation();
+        }
+        
         //implement world switch later
     }
         

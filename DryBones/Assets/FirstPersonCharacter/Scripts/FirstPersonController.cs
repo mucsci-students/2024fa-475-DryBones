@@ -60,11 +60,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
-                if(!ConversationManager.Instance.IsConversationActive){
-                    m_Jump = Input.GetButtonDown("Jump");
-                    m_TimeOfJumpPress = Time.time;
-                }
-                    
+                m_Jump = Input.GetButtonDown("Jump");
+                m_TimeOfJumpPress = Time.time;  
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
@@ -179,13 +176,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void GetInput(out float speed)
         {
             // Read input
-            float horizontal = 0f;
-            float vertical = 0f;
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
 
-            if(!ConversationManager.Instance.IsConversationActive){
-            horizontal = Input.GetAxis("Horizontal");
-            vertical = Input.GetAxis("Vertical");
-            }
+            
             bool waswalking = m_IsWalking;
 
 #if !MOBILE_INPUT
