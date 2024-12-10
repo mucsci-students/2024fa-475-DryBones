@@ -363,12 +363,13 @@ MonoBehaviour:
   _dashSpeed: 50
   _dashDuration: 0.2
   _dashCooldown: 1.5
-  _mouseSensitivity: 0.6
+  _mouseSensitivity: 0.2
   _updownRange: 70
   _playerInputHandler: {fileID: 0}
   _firstPersonCamera: {fileID: 8331370650383300582}
   _thirdPersonCamera: {fileID: 4834465558051665317}
   _levelList:
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &4168324264829350999
 MonoBehaviour:
