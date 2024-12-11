@@ -137,70 +137,11 @@ public class PlayerShrink : MonoBehaviour
         maxScale = newScale;
     }
 
-/*
-    void ShrinkTest()
-    {
-        float zoomAmount = 0f;
-
-        // Check for shrink (G key) or grow (H key)
-        if (Input.GetKey(KeyCode.G))
-        {
-            zoomAmount = -scrollSensitivity; // Shrink
-        }
-        else if (Input.GetKey(KeyCode.H))
-        {
-            zoomAmount = scrollSensitivity; // Grow
-        }
-
-        if (zoomAmount != 0)
-        {
-            // Shrinking begins, time freezes
-            if (!scrolling)
-            {
-                StopCoroutine("InterpolateToCurrentScale");
-                world.transform.parent = worldParent.transform;
-                scrolling = true;
-            }
-            timeOfLastScroll = Time.unscaledTime;
-            Time.timeScale = 0f;
-
-            // Calculate the new scale and clamp it
-            float currentScale = worldParent.transform.localScale.x;
-            float targetScale = Mathf.Clamp(
-                currentScale * Mathf.Pow(8f, -zoomAmount),
-                startingScale * Mathf.Pow(8f, -minScale),
-                startingScale * Mathf.Pow(8f, maxScale)
-            );
-
-            // Apply the clamped scale
-            worldParent.transform.localScale = new Vector3(targetScale, targetScale, targetScale);
-
-            // Adjust sizeChange and update size
-            sizeChange += zoomAmount;
-            if (sizeChange > 0.5f && size < maxScale)
-            {
-                size++;
-                sizeChange -= 1f;
-            }
-            else if (sizeChange < -0.5f && size > -minScale)
-            {
-                size--;
-                sizeChange += 1f;
-            }
-        }
-        else if (scrolling && timeOfLastScroll + scrollingCooldown < Time.unscaledTime)
-        {
-            // End zooming process
-            scrolling = false;
-            StartCoroutine("InterpolateToCurrentScale");
-        }
-    }
-*/
-
     void UpdateChunkCoord ()
     {
-        Vector3 posRelativeToWorld = transform.position - world.transform.position;
+        Vector3 posRelativeToWorld = transform.position - worldComponent.position;
         currChunkCoord = new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth), (int) (posRelativeToWorld.z / BlockData.chunkWidth), size);
+        print (currChunkCoord);
         if (Time.timeScale == 1f && (!currChunkCoord.Equals (oldChunkCoord)))
         {
             List<ChunkCoord> coords = new List<ChunkCoord> ();
@@ -253,6 +194,7 @@ public class PlayerShrink : MonoBehaviour
         worldParent.transform.localScale = CurrentScale ();
         Time.timeScale = 1f;
         world.transform.parent = null;
+        worldComponent.Recenter();
         // shrinking ends, time resumes
     }
 }

@@ -47,7 +47,8 @@ public class Chunk
         // set material, parent, location, scale, name
         rend.material = world.material;
         obj.transform.SetParent (parent);
-        obj.transform.position = world.transform.position + coord.ToVector3 () * Mathf.Pow (BlockData.chunkWidth, -(world.GetCurrentSize () - coord.size - 1f));
+        obj.transform.position = parent.transform.position + new Vector3 (coord.ToVector3().x % 8, coord.ToVector3().y % 8, coord.ToVector3().z % 8) * Mathf.Pow (BlockData.chunkWidth, -(world.GetCurrentSize () - coord.size - 1f));
+        //world.position + coord.ToVector3 () * Mathf.Pow (BlockData.chunkWidth, -(world.GetCurrentSize () - coord.size - 1f));
         obj.transform.localScale = new Vector3 (1f / BlockData.chunkWidth, 1f / BlockData.chunkWidth, 1f / BlockData.chunkWidth);
         obj.name = coord.ToString ();
         isSolid = type.isSolid;
@@ -174,6 +175,7 @@ public class Chunk
     {
         bool subdivide = false;
         bool reunite = false;
+        bool iAmTheCoord = false; //debug
         foreach (ChunkCoord c in activeCoords)
         {
             if (c.size >= coord.size)
@@ -182,6 +184,8 @@ public class Chunk
             }
             if (coord.Contains (c))
             {
+                //debug
+                iAmTheCoord = true;
                 subdivide = true;
             }
         }
@@ -206,6 +210,20 @@ public class Chunk
                 }
             }
         }
+        
+        if (iAmTheCoord)
+        {
+            Material materialColored = new Material(rend.material);
+            materialColored.color = Color.red;
+            rend.material = materialColored;
+        }
+        else
+        {
+            Material materialColored = new Material(rend.material);
+            materialColored.color = Color.white;
+            rend.material = materialColored;
+        }
+        
         
     }
 

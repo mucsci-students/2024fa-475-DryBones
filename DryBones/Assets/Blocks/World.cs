@@ -18,6 +18,10 @@ public class World : MonoBehaviour
     public List<List<Chunk>> chunksToInit = new List<List<Chunk>> ();
     public List<Chunk> chunksToHide = new List<Chunk> ();
     bool runningCoroutine = false;
+    private Vector3 center = new Vector3 (0f, 0f, 0f);
+    public Vector3 position {
+        get { return transform.position + center; }
+    }
 
     [SerializeField] private PlayerShrink playerShrink;
     [SerializeField] private int subdivisionSpeed; // how many chunks are subdivided per frame (probably 10-100)
@@ -59,6 +63,9 @@ public class World : MonoBehaviour
         temp.Add (startingChunk);
         InitChunks (temp);
     }
+
+    void Update ()
+    { Debug.Log (position); }
 
     // call the Init() function on a bunch of chunks, in a coroutine
     public void InitChunks (List<Chunk> chunks, Chunk parentChunk)
@@ -123,6 +130,28 @@ public class World : MonoBehaviour
         return playerShrink.size;
     }
 
+    public void Recenter()
+    {
+        Transform[] children = new Transform[transform.childCount];
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            children[i] = transform.GetChild(i);
+        }
+
+        foreach (Transform child in children)
+        {
+            child.SetParent(null);
+        }
+
+        center += transform.position;
+        transform.position = Vector3.zero;
+        foreach (Transform child in children)
+        {
+            child.SetParent(transform);
+        }
+    }
+
+    // debug
     public string toStringList<T> (List<T> things)
     {
         string str = "[";
