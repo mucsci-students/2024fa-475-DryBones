@@ -184,9 +184,15 @@ public class Chunk
             }
             if (coord.Contains (c))
             {
+                
+                subdivide = true;
+            }
+            if (coord.size < c.size)
+            {
                 //debug
                 iAmTheCoord = true;
-                subdivide = true;
+                //Debug.Log ("iAmTheChunkCoord: " + coord);
+                //Debug.Log (coord + " is smaller than " + c);
             }
         }
         if (subdivide)

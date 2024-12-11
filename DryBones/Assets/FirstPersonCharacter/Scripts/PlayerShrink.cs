@@ -39,6 +39,7 @@ public class PlayerShrink : MonoBehaviour
 
     void Update()
     {
+        // player scrolls:
         float scrollAmt = Input.GetAxis ("Mouse ScrollWheel") * scrollSensitivity;
         if (scrollAmt != 0)
         {
@@ -60,22 +61,20 @@ public class PlayerShrink : MonoBehaviour
            {
                ++size;
                --sizeChange;
-               //print (size);
            }
            else if (sizeChange < -0.5f)
            {
                --size;
                ++sizeChange;
-               //print (size);
            }
         }
         else if (scrolling && timeOfLastScroll + scrollingCooldown < Time.unscaledTime)
         {
            scrolling = false;
            StartCoroutine ("InterpolateToCurrentScale");
-           //print (size);
         }
-        //ShrinkTest();
+
+        // player presses G or H:
         if (Input.GetKeyDown (KeyCode.G))
         {
             if (size > minScale)
@@ -141,7 +140,7 @@ public class PlayerShrink : MonoBehaviour
     {
         Vector3 posRelativeToWorld = transform.position - worldComponent.position;
         currChunkCoord = new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth), (int) (posRelativeToWorld.z / BlockData.chunkWidth), size);
-        print (currChunkCoord);
+        //print (currChunkCoord);
         if (Time.timeScale == 1f && (!currChunkCoord.Equals (oldChunkCoord)))
         {
             List<ChunkCoord> coords = new List<ChunkCoord> ();
@@ -170,7 +169,6 @@ public class PlayerShrink : MonoBehaviour
     }
 
     // get the player's current scale based on their size
-    // increases or decreases the return value based on the offset
     Vector3 CurrentScale ()
     {
         return new Vector3 (1f, 1f, 1f) * startingScale * Mathf.Pow (8f, -size);
