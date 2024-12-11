@@ -371,16 +371,25 @@ public class ThirdPersonController : MonoBehaviour
         {
             _levelList[0].SetActive(true);
             _levelList[1].SetActive(false);
+            _levelList[2].SetActive(false);
         }
         else if(currentPlayerSize == Level.LEVEL2)
         {
             _levelList[0].SetActive(false);
             _levelList[1].SetActive(true);
+            _levelList[2].SetActive(false);
+        }
+        else if (currentPlayerSize == Level.LEVEL3)
+        {
+            _levelList[0].SetActive(false);
+            _levelList[1].SetActive(false);
+            _levelList[2].SetActive(true);
         }
         else
         {
             _levelList[0].SetActive(false);
             _levelList[1].SetActive(false);
+            _levelList[2].SetActive(false);
         }
     }
 }

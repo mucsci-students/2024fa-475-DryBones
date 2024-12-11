@@ -8,6 +8,8 @@ public class PlayerCollision : MonoBehaviour
 
     PlayerShrink _playerShrinkData;
 
+    public static bool _isLifting = false;
+
     private void Start()
     {
         _playerShrinkData = gameObject.GetComponent<PlayerShrink>();
