@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _walkSpeed: 10
-  _runSpeedMultiplier: 1.5
+  _runSpeedMultiplier: 1.2
   _orientation: {fileID: 2704247328886966458}
   _wallLayer:
     serializedVersion: 2
@@ -354,7 +354,7 @@ MonoBehaviour:
   _staminaRecoveryAmount: 1
   _staminaLossRate: 0.3
   _staminaRecoveryRate: 0.4
-  _jumpForce: 13
+  _jumpForce: 11
   _gravity: 9.81
   _doubleJumpMultiplier: 1.1
   _maxJump: 2
