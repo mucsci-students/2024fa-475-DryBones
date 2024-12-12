@@ -64,7 +64,10 @@ public class MainDialogue : MonoBehaviour
                     skipDialogue = true;
 
             dialogueStarted = true;
-            ConversationManager.Instance.StartConversation(worldIntro);
+            if(!skipDialogue){
+                ConversationManager.Instance.StartConversation(worldIntro);
+            }
+            
 
         
     }
@@ -111,7 +114,7 @@ public class MainDialogue : MonoBehaviour
 
 
 
-            if(!skipDialogue && dialogueStarted){
+            if(!skipTutorial && dialogueStarted){
                 if(!ConversationManager.Instance.IsConversationActive){
                     startTutorial = true;
                 }
