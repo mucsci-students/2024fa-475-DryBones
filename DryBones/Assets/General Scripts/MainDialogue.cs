@@ -93,24 +93,15 @@ public class MainDialogue : MonoBehaviour
                 }
             }
 
-            if(ConversationManager.Instance.IsConversationActive){
-                if(Input.GetKeyDown(KeyCode.Return)){
-                    if(ConversationManager.Instance.GetBool("finish")){
+            if(Input.GetKeyDown(KeyCode.Return))
                         ConversationManager.Instance.PressSelectedOption();
-                        ConversationManager.Instance.SetBool("finish", false);
-                        hasFinished = true;
-                        ConversationManager.Instance.StartConversation(returnOptions);
-                        
-                    }else{
-                        ConversationManager.Instance.PressSelectedOption();
-                    }
-                }
+                
                 if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
                     ConversationManager.Instance.SelectNextOption();
 
                 if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
                     ConversationManager.Instance.SelectPreviousOption();
-            }
+            
 
 
 
@@ -135,8 +126,14 @@ public class MainDialogue : MonoBehaviour
 
 
             
-            if(!skipDialogue && PlayerPrefs.HasKey("shrink") && currentSize != PlayerPrefs.GetInt("shrink")){
+            if( PlayerPrefs.HasKey("shrink") && currentSize != PlayerPrefs.GetInt("shrink")){
                 currentSize = PlayerPrefs.GetInt("shrink");
+                if(currentSize == 4 && !skipDialogue){
+                    hasFinished = true;
+                }
+            }
+
+            if(!skipDialogue){
                 if(currentSize == 1){
                     PlayerPrefs.SetInt("hasPlayed",1);
                     ConversationManager.Instance.StartConversation(collected1Orb);
@@ -145,6 +142,7 @@ public class MainDialogue : MonoBehaviour
                 }else if(currentSize == 3){
                     ConversationManager.Instance.StartConversation(collected3Orb);
                 }else if(currentSize == 4){
+                    hasFinished = true;
                     ConversationManager.Instance.StartConversation(collected4Orb);
                 }else if(currentSize == 0){
                     ConversationManager.Instance.StartConversation(collectedTOrb);
