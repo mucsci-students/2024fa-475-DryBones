@@ -86,15 +86,17 @@ public class MainDialogue : MonoBehaviour
             if(hasFinished){
                 if(Input.GetKeyDown(KeyCode.Backspace)){
                     ConversationManager.Instance.StartConversation(returnOptions);
+                    ConversationManager.Instance.SetBool("finish", false);
                 }
 
-                if(ConversationManager.Instance.GetBool("finish")){
-                    Invoke("triggerCanvas", 5f);
-                }
+                
             }
 
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetKeyDown(KeyCode.Return)){
                         ConversationManager.Instance.PressSelectedOption();
+                        if(hasFinished && ConversationManager.Instance.GetBool("finish"))
+                            Invoke("triggerCanvas", 5f);
+                }
                 
                 if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
                     ConversationManager.Instance.SelectNextOption();
@@ -126,9 +128,9 @@ public class MainDialogue : MonoBehaviour
 
 
             
-            if( PlayerPrefs.HasKey("shrink") && currentSize != PlayerPrefs.GetInt("shrink")){
+            if(PlayerPrefs.HasKey("shrink") && currentSize != PlayerPrefs.GetInt("shrink")){
                 currentSize = PlayerPrefs.GetInt("shrink");
-                if(currentSize == 4 && !skipDialogue){
+                if(currentSize == 4){
                     hasFinished = true;
                 }
             }
@@ -142,7 +144,6 @@ public class MainDialogue : MonoBehaviour
                 }else if(currentSize == 3){
                     ConversationManager.Instance.StartConversation(collected3Orb);
                 }else if(currentSize == 4){
-                    hasFinished = true;
                     ConversationManager.Instance.StartConversation(collected4Orb);
                 }else if(currentSize == 0){
                     ConversationManager.Instance.StartConversation(collectedTOrb);
