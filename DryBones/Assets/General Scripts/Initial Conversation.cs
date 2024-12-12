@@ -48,8 +48,10 @@ public class InitialConversation : MonoBehaviour
         if(ConversationManager.Instance.IsConversationActive){
             ConversationManager.Instance.EndConversation();
         }
+
+        PlayerPrefs.SetInt("startDialogue", 1);
         
-        SceneManager.LoadScene("", LoadSceneMode.Single);
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
         
 }

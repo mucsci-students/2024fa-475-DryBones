@@ -137,11 +137,16 @@ public class ButtonManager : MonoBehaviour
     // Method to start playing game
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneNames.Main.ToString());
+        //SceneManager.LoadScene(SceneNames.Main.ToString());
         HideCursor();
         Time.timeScale = 1f;
         TurnOffAllCanvasInMainMenu();
         _playerCanvas.SetActive(true);
+        if(!PlayerPrefs.HasKey("hasPlayed")){
+            SceneManager.LoadScene("JoshTest");
+        }else{
+            GameObject.Find("Dialogues").GetComponent<MainDialogue>().skipD();
+        }
     }
 
     public void Replay()
