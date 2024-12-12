@@ -29,14 +29,26 @@ public class PlayerCollision : MonoBehaviour
             float currentMinScale = _playerShrinkData.GetMinScale();
             _playerShrinkData.SetMinScale(--currentMinScale);
             Destroy(other.gameObject);
+
+            if(other.name == "ShrinkOrbLevel1")
+                PlayerPrefs.SetInt("shrink", 1);
+
+            if(other.name == "ShrinkOrb(Clone)")
+                PlayerPrefs.SetInt("shrink", 2);
+            if(other.name == "ShrinkOrb(Clone) (2)")
+                PlayerPrefs.SetInt("shrink",3);
         }else if(other.CompareTag("FinalOrb")){
             float currentMinScale = _playerShrinkData.GetMinScale();
             _playerShrinkData.SetMinScale(--currentMinScale);
             Destroy(other.gameObject);
+
+            PlayerPrefs.SetInt("shrink", 4);
         }else if(other.CompareTag("TutorialOrb")){
             float currentMinScale = _playerShrinkData.GetMinScale();
             _playerShrinkData.SetMinScale(--currentMinScale);
             Destroy(other.gameObject);
+
+            PlayerPrefs.SetInt("shrink", 0);
         }
     }
 }

@@ -15,6 +15,7 @@ public class MainDialogue : MonoBehaviour
     public NPCConversation collected2Orb;
     public NPCConversation collected3Orb;
     public NPCConversation collected4Orb;
+    public NPCConversation collectedTOrb;
     public NPCConversation DJ;
     public NPCConversation sprint;
     public NPCConversation wallRun;
@@ -24,7 +25,7 @@ public class MainDialogue : MonoBehaviour
 
     bool hasFinished = false;
 
-    float currentSize = 0f;
+    int currentSize = -1;
 
     PlayerShrink scale;
 
@@ -51,18 +52,16 @@ public class MainDialogue : MonoBehaviour
 
     bool dashNotBought = true;
 
-    bool wallRunNotBought = true;
+    bool wallRunNotBought = true; 
 
     void Start(){
-        fpsScript = GameObject.Find("Player").GetComponent<ThirdPersonController>();
-            scale = GameObject.Find("Player").GetComponent<PlayerShrink>();
-            currentSize = scale.minScale;
-
-            if(PlayerPrefs.GetInt("skipTutorial") == 1)
-                skipTutorial = true;
-
-            if(PlayerPrefs.GetInt("skipDialogue") == 1)
-                skipDialogue = true;
+            
+                if(PlayerPrefs.GetInt("skipTutorial") == 1)
+                    skipTutorial = true;
+        
+            
+                if(PlayerPrefs.GetInt("skipDialogue") == 1)
+                    skipDialogue = true;
 
             dialogueStarted = true;
             ConversationManager.Instance.StartConversation(worldIntro);
@@ -132,19 +131,21 @@ public class MainDialogue : MonoBehaviour
             }
 
 
-
-            if(currentSize != scale.minScale && !skipDialogue){
-                if(scale.minScale == -11){
+            
+            if(!skipDialogue && PlayerPrefs.HasKey("shrink") && currentSize != PlayerPrefs.GetInt("shrink")){
+                currentSize = PlayerPrefs.GetInt("shrink");
+                if(currentSize == 1){
                     PlayerPrefs.SetInt("hasPlayed",1);
                     ConversationManager.Instance.StartConversation(collected1Orb);
-                }else if(scale.minScale == -12){
+                }else if(currentSize == 2){
                     ConversationManager.Instance.StartConversation(collected2Orb);
-                }else if(scale.minScale == -13){
+                }else if(currentSize == 3){
                     ConversationManager.Instance.StartConversation(collected3Orb);
-                }else{
+                }else if(currentSize == 4){
                     ConversationManager.Instance.StartConversation(collected4Orb);
+                }else if(currentSize == 0){
+                    ConversationManager.Instance.StartConversation(collectedTOrb);
                 }
-                currentSize = scale.minScale;
             }
 
 

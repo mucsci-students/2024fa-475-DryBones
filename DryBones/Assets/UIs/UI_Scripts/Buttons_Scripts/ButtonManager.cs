@@ -143,8 +143,10 @@ public class ButtonManager : MonoBehaviour
         TurnOffAllCanvasInMainMenu();
         _playerCanvas.SetActive(true);
         if(!PlayerPrefs.HasKey("hasPlayed")){
+            PlayerPrefs.DeleteAll();
             SceneManager.LoadScene("JoshTest");
         }else{
+            PlayerPrefs.DeleteAll();
             if(SceneManager.GetActiveScene().name == "MainMenu"){
                 GameObject.Find("Title_Dialogue").GetComponent<TitleConversation>().startConvo();
             }
