@@ -30,7 +30,7 @@ public class PlayerCollision : MonoBehaviour
             _playerShrinkData.SetMinScale(--currentMinScale);
             Destroy(other.gameObject);
 
-            if(other.name == "ShrinkOrbLevel1")
+            if(other.name == "ShrinkOrbLevel1 (2)")
                 PlayerPrefs.SetInt("shrink", 1);
 
             if(other.name == "ShrinkOrb(Clone)")
