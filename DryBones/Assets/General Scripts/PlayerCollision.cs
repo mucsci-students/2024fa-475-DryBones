@@ -25,8 +25,9 @@ public class PlayerCollision : MonoBehaviour
             //Debug.Log($"Coin amount: {GameManager._coinAmount}");
             Destroy(other.gameObject);
         }
-        else if (other.CompareTag("ShrinkOrb"))
+        else if (other.CompareTag("ShrinkOrb") || other.CompareTag("TutorialOrb"))
         {
+            AudioManager.Instance.PlaySFX("OrbSFX");
             float currentMinScale = _playerShrinkData.GetMinScale();
             _playerShrinkData.SetMinScale(--currentMinScale);
             Destroy(other.gameObject);

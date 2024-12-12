@@ -14084,7 +14084,7 @@ PrefabInstance:
       objectReference: {fileID: 6230899799888155489}
     - target: {fileID: 5331747462058755436, guid: a8b6ebe9951881244a157b1d7d6a1ac7, type: 3}
       propertyPath: _sfxAudio.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5331747462058755436, guid: a8b6ebe9951881244a157b1d7d6a1ac7, type: 3}
       propertyPath: _sfxAudio.Array.data[0]._audioClip
@@ -14093,6 +14093,14 @@ PrefabInstance:
     - target: {fileID: 5331747462058755436, guid: a8b6ebe9951881244a157b1d7d6a1ac7, type: 3}
       propertyPath: _sfxAudio.Array.data[0]._audioName
       value: CoinSFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331747462058755436, guid: a8b6ebe9951881244a157b1d7d6a1ac7, type: 3}
+      propertyPath: _sfxAudio.Array.data[1]._audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 69a3ca07127e4144ebf6982175ca8ccd, type: 3}
+    - target: {fileID: 5331747462058755436, guid: a8b6ebe9951881244a157b1d7d6a1ac7, type: 3}
+      propertyPath: _sfxAudio.Array.data[1]._audioName
+      value: OrbSFX
       objectReference: {fileID: 0}
     - target: {fileID: 5437621370550660435, guid: a8b6ebe9951881244a157b1d7d6a1ac7, type: 3}
       propertyPath: m_LocalPosition.x
