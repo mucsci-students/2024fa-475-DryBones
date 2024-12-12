@@ -173,8 +173,8 @@ public class MainDialogue : MonoBehaviour
     }
 
 
-    private void triggerCanvas(){
-        
-        //happy birthday
+    private void triggerCanvas()
+    {
+        ButtonManager._isEnded = true;
     }
 }
