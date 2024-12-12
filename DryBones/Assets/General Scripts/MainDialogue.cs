@@ -86,7 +86,7 @@ public class MainDialogue : MonoBehaviour
                 }
 
                 if(ConversationManager.Instance.GetBool("finish")){
-                    Invoke("triggerWorldSwap", 5f);
+                    Invoke("triggerCanvas", 5f);
                 }
             }
 
@@ -172,8 +172,8 @@ public class MainDialogue : MonoBehaviour
     }
 
 
-    private void triggerWorldSwap(){
+    private void triggerCanvas(){
         
-        SceneManager.LoadScene("JoshTest", LoadSceneMode.Single);
+        //happy birthday
     }
 }
