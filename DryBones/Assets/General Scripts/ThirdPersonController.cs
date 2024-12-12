@@ -58,6 +58,12 @@ public class ThirdPersonController : MonoBehaviour
 
     public class Level
     {
+        public static float LevelSizeOf (int level)
+        {
+            return - 2f - (float) level;
+        }
+        /*
+        public const float LEVEL0 = -2f;
         public const float LEVEL1 = -3f;
         public const float LEVEL2 = -4f;
         public const float LEVEL3 = -5f;
@@ -67,6 +73,7 @@ public class ThirdPersonController : MonoBehaviour
         public const float LEVEL7 = -9f;
         public const float LEVEL8 = -10f;
         public const float LEVEL9 = -11f;
+        */
     }
 
     PlayerShrink _playerShrinkData;
@@ -367,6 +374,15 @@ public class ThirdPersonController : MonoBehaviour
     private void ShowLevelPlatform()
     {
         float currentPlayerSize = _playerShrinkData.GetPlayerSize();
+        for (int level = 0; level < _levelList.Length; ++level)
+        {
+            if (Level.LevelSizeOf (level) == currentPlayerSize)
+                _levelList[level].SetActive (true);
+            else
+                _levelList[level].SetActive (false);
+        }
+
+        /*
         if (currentPlayerSize == Level.LEVEL1)
         {
             _levelList[0].SetActive(true);
@@ -391,5 +407,6 @@ public class ThirdPersonController : MonoBehaviour
             _levelList[1].SetActive(false);
             _levelList[2].SetActive(false);
         }
+        */
     }
 }
