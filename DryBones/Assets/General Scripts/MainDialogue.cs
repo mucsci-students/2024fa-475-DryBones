@@ -95,7 +95,7 @@ public class MainDialogue : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Return)){
                         ConversationManager.Instance.PressSelectedOption();
                         if(hasFinished && ConversationManager.Instance.GetBool("finish"))
-                            Invoke("triggerCanvas", 5f);
+                            Invoke("triggerCanvas", 2f);
                 }
                 
                 if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
