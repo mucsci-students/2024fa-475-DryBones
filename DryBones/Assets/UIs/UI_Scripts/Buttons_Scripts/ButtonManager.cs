@@ -86,6 +86,8 @@ public class ButtonManager : MonoBehaviour
         }
         if (_isEnded)
         {
+            TurnOffAllCanvasInMainMenu();
+            ShowCursor();
             _endingCanvas.SetActive(true);
             _isEnded = false;
         }
