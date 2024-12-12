@@ -24,7 +24,7 @@ public class PlayerShrink : MonoBehaviour
     public GameObject worldParent;
     ChunkCoord currChunkCoord;
     ChunkCoord oldChunkCoord;
-    float startingPos;
+    Vector3 startingPos;
 
     bool scrolling = false;
     float timeOfLastScroll = 0f;
@@ -117,15 +117,16 @@ public class PlayerShrink : MonoBehaviour
                 StartCoroutine ("InterpolateToCurrentScale");
             }
         }
-        if (!InCube (transform.position, currChunkCoord.ToVector3 (), 8f))
-            UpdateChunkCoord ();
+        Vector3 rCube = RelativeCube (transform.position, currChunkCoord.ToVector3 (), BlockData.chunkWidth);
+        if (rCube != Vector3.zero)
+            UpdateChunkCoord ((int) rCube.x, (int) rCube.y, (int) rCube.z, size);
     }
 
-    // returns true if the position would fit inside a cube given a position & a certain length
-    public bool InCube (Vector3 pos1, Vector3 cubePos, float cubeLength)
+    // returns the how the cube needs to change in order to contains a point
+    public Vector3 RelativeCube (Vector3 pos1, Vector3 cubePos, float cubeLength)
     {
         Vector3 diff = pos1 - cubePos;
-        return diff.x <= cubeLength && diff.y >= 0f && diff.y <= cubeLength && diff.y >= 0f && diff.z <= cubeLength && diff.z >= 0f;
+        return new Vector3 (Mathf.Floor(diff.x / cubeLength), Mathf.Floor(diff.y / 8f), Mathf.Floor(diff.z / 8f));
     }
 
     public float GetPlayerSize()
@@ -153,10 +154,27 @@ public class PlayerShrink : MonoBehaviour
         maxScale = newScale;
     }
 
-    void UpdateChunkCoord ()
+    void UpdateChunkCoord (int dX, int dY, int dZ, int newSize)
     {
         //currChunkCoord = new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth), (int) (posRelativeToWorld.z / BlockData.chunkWidth), size);
+        if (dX == 0 && dY == 0 && dZ == 0 && newSize == currChunkCoord.size) Debug.Log ("AAAAHHHH cant all be 0"); //debug
+        if (newSize == currChunkCoord.size)
+            currChunkCoord = new ChunkCoord (currChunkCoord.x + dX, currChunkCoord.y + dY, currChunkCoord.z + dZ, size);
+        else if (newSize < currChunkCoord.size)
+        {
+            if (diff.x != 0 || diff.y != 0 || diff.z != 0) printingCurrChunk ("hmmm this one may be a little suspicious, we are changing size while moving");
+            Vector3 diff = transform.position - currChunkCoord.ToVector3 ();
+            currChunkCoord = new ChunkCoord (currChunkCoord, (int) diff.x, (int) diff.y, (int) diff.z);
+        }
+        else
+        {
+            if (dX != 0 || dY != 0 || dZ != 0) printingCurrChunk ("AHHH all of these should be 0 when we grow");
+            float divisor = Mathf.Pow (BlockData.chunkWidth, size - currChunkCoord.size);
+            currChunkCoord = new ChunkCoord (currChunkCoord.x / divisor, currChunkCoord.x / divisor, currChunkCoord.x / divisor, size);
+        }
+
         if (printingCurrChunk && !currChunkCoord.Equals(oldChunkCoord)) print ("current chunk " + currChunkCoord);
+        if (currChunkCoord.Equals(oldChunkCoord)) print ("AAAAAHHHH what is wrong with meeee");
         if (printingWorldPos && worldComponent.position != oldWorldPosition) print (worldComponent.position);
         oldWorldPosition = worldComponent.position;
         if (Time.timeScale == 1f && (!currChunkCoord.Equals (oldChunkCoord)))
@@ -212,6 +230,7 @@ public class PlayerShrink : MonoBehaviour
         world.transform.parent = null;
         if (usingRecenter)
             worldComponent.Recenter();
+        UpdateChunkCoord (0, 0, 0, size);
         // shrinking ends, time resumes
     }
 }

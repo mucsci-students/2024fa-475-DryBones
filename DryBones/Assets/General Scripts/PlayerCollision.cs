@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public static int _coinAmount = 0;
+    public static int _coinAmount = 1000;
 
     PlayerShrink _playerShrinkData;
 
