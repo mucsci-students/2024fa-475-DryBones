@@ -19,8 +19,9 @@ public class World : MonoBehaviour
     public List<Chunk> chunksToHide = new List<Chunk> ();
     bool runningCoroutine = false;
     private Vector3 center = new Vector3 (0f, 0f, 0f);
+    [SerializeField] Transform worldPos;
     public Vector3 position {
-        get { return transform.position + center; }
+        get { return worldPos.position; }
     }
 
     [SerializeField] private PlayerShrink playerShrink;
@@ -28,35 +29,6 @@ public class World : MonoBehaviour
 
     void Start ()
     {
-        //debug
-        List<ChunkCoord> currT = new List<ChunkCoord> ();
-        ChunkCoord d1 = new ChunkCoord (31, 0, 44, -3);
-        ChunkCoord s1 = new ChunkCoord (256, 7, 351, -3);
-
-        ChunkCoord currChunkCoord = new ChunkCoord (259, 7, 356, -4);
-        int r = 2 / 2;
-        int xOffset = currChunkCoord.x % BlockData.chunkWidth < 4 ? 0 : 1;
-        int yOffset = currChunkCoord.y % BlockData.chunkWidth < 4 ? 0 : 1;
-        int zOffset = currChunkCoord.z % BlockData.chunkWidth < 4 ? 0 : 1;
-        for (int x = xOffset - r; x <= xOffset + r - 1; ++x)
-            for (int y = yOffset - r; y <= yOffset + r - 1; ++y)
-                for (int z = zOffset - r; z <= zOffset + r - 1; ++z)
-                    currT.Add (new ChunkCoord ((int) (currChunkCoord.x / BlockData.chunkWidth) + x, (int) (currChunkCoord.y / BlockData.chunkWidth) + y, (int) (currChunkCoord.z / BlockData.chunkWidth) + z, currChunkCoord.size + 1));
-        
-        foreach (ChunkCoord c in currT)
-        {
-            if (d1.Contains (c))
-                Debug.Log ("divides is in " + c);
-            if (s1.Contains (c))
-                Debug.Log ("should be is in " + c);
-        }
-        foreach (ChunkCoord c in currT)
-        {
-            Debug.Log ("subdividing chunk: " + c);
-        }
-
-
-
         foreach (BlockType b in blockTypes)
         {
             if (b.subBlockLocs.Count == 0 && b.subBlockIDs.Count == 1)

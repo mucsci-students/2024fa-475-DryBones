@@ -32061,6 +32061,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074595023}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1075568459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1075568460}
+  m_Layer: 0
+  m_Name: WorldPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1075568460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075568459}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1384101382}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1077526849
 GameObject:
   m_ObjectHideFlags: 0
@@ -32505,9 +32536,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1384101380}
     - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: usingRecenter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: worldComponent
       value: 
       objectReference: {fileID: 1384101381}
+    - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: printingWorldPos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: printingCurrChunk
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: _playerInputHandler
       value: 
@@ -52558,6 +52601,7 @@ MonoBehaviour:
     - {x: 3, y: 0, z: 0}
     - {x: 4, y: 0, z: 0}
   startingBlockID: 32
+  worldPos: {fileID: 1075568460}
   playerShrink: {fileID: 2055560554}
   subdivisionSpeed: 50
 --- !u!4 &1384101382
@@ -52573,6 +52617,7 @@ Transform:
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1075568460}
   - {fileID: 752667109}
   - {fileID: 624170352}
   - {fileID: 1065092151}

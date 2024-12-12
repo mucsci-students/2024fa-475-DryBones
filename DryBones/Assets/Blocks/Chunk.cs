@@ -175,7 +175,6 @@ public class Chunk
     {
         bool subdivide = false;
         bool reunite = false;
-        bool iAmTheCoord = false; //debug
         foreach (ChunkCoord c in activeCoords)
         {
             if (c.size >= coord.size)
@@ -186,13 +185,6 @@ public class Chunk
             {
                 
                 subdivide = true;
-            }
-            if (coord.size < c.size)
-            {
-                //debug
-                iAmTheCoord = true;
-                //Debug.Log ("iAmTheChunkCoord: " + coord);
-                //Debug.Log (coord + " is smaller than " + c);
             }
         }
         if (subdivide)
@@ -215,22 +207,7 @@ public class Chunk
                     c.UpdateActiveChunks (activeCoords);
                 }
             }
-        }
-        
-        if (iAmTheCoord)
-        {
-            Material materialColored = new Material(rend.material);
-            materialColored.color = Color.red;
-            rend.material = materialColored;
-        }
-        else
-        {
-            Material materialColored = new Material(rend.material);
-            materialColored.color = Color.white;
-            rend.material = materialColored;
-        }
-        
-        
+        }        
     }
 
     // divde this block into many smaller blocks

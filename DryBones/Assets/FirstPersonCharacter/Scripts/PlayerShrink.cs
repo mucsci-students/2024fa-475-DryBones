@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerShrink : MonoBehaviour
 {
+
+    //debug
+    [SerializeField] bool usingRecenter = true;
+    [SerializeField] bool printingCurrChunk = true;
+    [SerializeField] bool printingWorldPos = true;
+    private Vector3 oldWorldPosition = new Vector3 (0f,0f,0f);
+
     // Define constants for level limits
     public float minScale = 1;
     public float maxScale = 1;
@@ -17,6 +24,7 @@ public class PlayerShrink : MonoBehaviour
     public GameObject worldParent;
     ChunkCoord currChunkCoord;
     ChunkCoord oldChunkCoord;
+    float startingPos;
 
     bool scrolling = false;
     float timeOfLastScroll = 0f;
@@ -35,6 +43,7 @@ public class PlayerShrink : MonoBehaviour
         world.transform.parent = worldParent.transform;
         worldParent.transform.localScale = CurrentScale ();
         world.transform.parent = null;
+        startingPos = transform.position;
     }
 
     void Update()
@@ -108,7 +117,15 @@ public class PlayerShrink : MonoBehaviour
                 StartCoroutine ("InterpolateToCurrentScale");
             }
         }
-        UpdateChunkCoord ();
+        if (!InCube (transform.position, currChunkCoord.ToVector3 (), 8f))
+            UpdateChunkCoord ();
+    }
+
+    // returns true if the position would fit inside a cube given a position & a certain length
+    public bool InCube (Vector3 pos1, Vector3 cubePos, float cubeLength)
+    {
+        Vector3 diff = pos1 - cubePos;
+        return diff.x <= cubeLength && diff.y >= 0f && diff.y <= cubeLength && diff.y >= 0f && diff.z <= cubeLength && diff.z >= 0f;
     }
 
     public float GetPlayerSize()
@@ -138,9 +155,10 @@ public class PlayerShrink : MonoBehaviour
 
     void UpdateChunkCoord ()
     {
-        Vector3 posRelativeToWorld = transform.position - worldComponent.position;
-        currChunkCoord = new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth), (int) (posRelativeToWorld.z / BlockData.chunkWidth), size);
-        //print (currChunkCoord);
+        //currChunkCoord = new ChunkCoord ((int) (posRelativeToWorld.x / BlockData.chunkWidth), (int) (posRelativeToWorld.y / BlockData.chunkWidth), (int) (posRelativeToWorld.z / BlockData.chunkWidth), size);
+        if (printingCurrChunk && !currChunkCoord.Equals(oldChunkCoord)) print ("current chunk " + currChunkCoord);
+        if (printingWorldPos && worldComponent.position != oldWorldPosition) print (worldComponent.position);
+        oldWorldPosition = worldComponent.position;
         if (Time.timeScale == 1f && (!currChunkCoord.Equals (oldChunkCoord)))
         {
             List<ChunkCoord> coords = new List<ChunkCoord> ();
@@ -192,7 +210,8 @@ public class PlayerShrink : MonoBehaviour
         worldParent.transform.localScale = CurrentScale ();
         Time.timeScale = 1f;
         world.transform.parent = null;
-        worldComponent.Recenter();
+        if (usingRecenter)
+            worldComponent.Recenter();
         // shrinking ends, time resumes
     }
 }
