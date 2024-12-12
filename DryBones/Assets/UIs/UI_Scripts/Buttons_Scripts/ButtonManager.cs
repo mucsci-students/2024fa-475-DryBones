@@ -114,9 +114,9 @@ public class ButtonManager : MonoBehaviour
 
     public void BuyDash()
     {
-        if (PlayerCollision._coinAmount >= 35)
+        if (PlayerCollision._coinAmount >= 30)
         {
-            PlayerCollision._coinAmount -= 35;
+            PlayerCollision._coinAmount -= 30;
             _isDashBought = true;
         }
         _isDashBought = true;
@@ -125,9 +125,9 @@ public class ButtonManager : MonoBehaviour
 
     public void BuyWallRunning()
     {
-        if (PlayerCollision._coinAmount >= 45)
+        if (PlayerCollision._coinAmount >= 35)
         {
-            PlayerCollision._coinAmount -= 45;
+            PlayerCollision._coinAmount -= 35;
             _isWallRunningBought = true;
         }
         _isWallRunningBought = true;
