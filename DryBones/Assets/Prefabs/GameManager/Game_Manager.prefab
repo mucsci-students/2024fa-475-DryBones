@@ -6154,7 +6154,7 @@ MonoBehaviour:
   _mainMenuCanvas: {fileID: 1478179099325784844}
   _settingMenuCanvas: {fileID: 2648503040442117418}
   _tutorialMenuCanvas: {fileID: 8251992614926944162}
-  _informationMenuCanvas: {fileID: 3906535930586310681}
+  _endingCanvas: {fileID: 3906535930586310681}
   _pauseCanvas: {fileID: 4418845051223414151}
   _upgradeCanvas: {fileID: 2438255909460477158}
   _playerCanvas: {fileID: 6298195225907433971}
