@@ -1,7 +1,7 @@
 # 2024fa-475-DryBones
 
 ## Mr. Pillman and the Scientist's Big Shrink
-One man discovers the world is much bigger than it seems.
+One man discovers that the world is much bigger than it seems.
 
 ## Screenshots
 *TODO
