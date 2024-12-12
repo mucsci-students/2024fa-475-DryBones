@@ -152,7 +152,7 @@ public class ButtonManager : MonoBehaviour
     public void Replay()
     {
         GameManager._isReplay = true;
-        SceneManager.LoadScene(SceneNames.Main.ToString());
+        //SceneManager.LoadScene(SceneNames.Main.ToString());
         HideCursor();
         Time.timeScale = 1f;
         TurnOffAllCanvasInMainMenu();

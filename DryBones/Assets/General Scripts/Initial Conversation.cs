@@ -22,7 +22,7 @@ public class InitialConversation : MonoBehaviour
 
     public void Update(){
         
-        if(ConversationManager.Instance.IsConversationActive){
+        if(ConversationManager.Instance.IsConversationActive && SceneManager.GetActiveScene().name == "JoshTest"){
             
 
             GameObject.Find("ThirdPersonCharacter").transform.LookAt(GameObject.Find("Scientist").transform);
@@ -48,8 +48,6 @@ public class InitialConversation : MonoBehaviour
         if(ConversationManager.Instance.IsConversationActive){
             ConversationManager.Instance.EndConversation();
         }
-
-        PlayerPrefs.SetInt("startDialogue", 1);
         
         SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
