@@ -55,7 +55,7 @@ public class MainDialogue : MonoBehaviour
     bool wallRunNotBought = true; 
 
     void Start(){
-            
+            fpsScript = GameObject.Find("Player").GetComponent<ThirdPersonController>();
                 if(PlayerPrefs.GetInt("skipTutorial") == 1)
                     skipTutorial = true;
         
