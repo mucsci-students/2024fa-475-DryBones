@@ -29,6 +29,14 @@ public class PlayerCollision : MonoBehaviour
             float currentMinScale = _playerShrinkData.GetMinScale();
             _playerShrinkData.SetMinScale(--currentMinScale);
             Destroy(other.gameObject);
+        }else if(other.CompareTag("FinalOrb")){
+            float currentMinScale = _playerShrinkData.GetMinScale();
+            _playerShrinkData.SetMinScale(--currentMinScale);
+            Destroy(other.gameObject);
+        }else if(other.CompareTag("TutorialOrb")){
+            float currentMinScale = _playerShrinkData.GetMinScale();
+            _playerShrinkData.SetMinScale(--currentMinScale);
+            Destroy(other.gameObject);
         }
     }
 }

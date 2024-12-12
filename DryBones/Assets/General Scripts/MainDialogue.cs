@@ -58,6 +58,11 @@ public class MainDialogue : MonoBehaviour
             scale = GameObject.Find("Player").GetComponent<PlayerShrink>();
             currentSize = scale.minScale;
 
+            if(PlayerPrefs.GetInt("skipTutorial") == 1)
+                skipTutorial = true;
+
+            if(PlayerPrefs.GetInt("skipDialogue") == 1)
+                skipDialogue = true;
 
             dialogueStarted = true;
             ConversationManager.Instance.StartConversation(worldIntro);
@@ -73,15 +78,6 @@ public class MainDialogue : MonoBehaviour
                 fpsScript.enabled = false;
             }else{
                 fpsScript.enabled = true;
-            }
-
-            if(skipping){
-                if(!ConversationManager.Instance.IsConversationActive){
-                    skipTutorial = ConversationManager.Instance.GetBool("skipTutorial");
-                    skipDialogue = ConversationManager.Instance.GetBool("skipDialogue");
-                    skipping = false;
-                }
-                
             }
 
 
@@ -178,10 +174,5 @@ public class MainDialogue : MonoBehaviour
     private void triggerWorldSwap(){
         
         SceneManager.LoadScene("JoshTest", LoadSceneMode.Single);
-    }
-
-    public void skipD(){
-        ConversationManager.Instance.StartConversation(GameObject.Find("skip?").GetComponent<NPCConversation>());
-        skipping = true;
     }
 }

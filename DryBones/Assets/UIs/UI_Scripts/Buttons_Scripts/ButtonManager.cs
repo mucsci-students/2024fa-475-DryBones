@@ -145,7 +145,9 @@ public class ButtonManager : MonoBehaviour
         if(!PlayerPrefs.HasKey("hasPlayed")){
             SceneManager.LoadScene("JoshTest");
         }else{
-            GameObject.Find("Dialogues").GetComponent<MainDialogue>().skipD();
+            if(SceneManager.GetActiveScene().name == "MainMenu"){
+                GameObject.Find("Title_Dialogue").GetComponent<TitleConversation>().startConvo();
+            }
         }
     }
 
