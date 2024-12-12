@@ -25,7 +25,7 @@ public class PlayerCollision : MonoBehaviour
             //Debug.Log($"Coin amount: {GameManager._coinAmount}");
             Destroy(other.gameObject);
         }
-        else if (other.CompareTag("ShrinkOrb") || other.CompareTag("TutorialOrb"))
+        else if (other.CompareTag("ShrinkOrb"))
         {
             AudioManager.Instance.PlaySFX("OrbSFX");
             float currentMinScale = _playerShrinkData.GetMinScale();
@@ -40,12 +40,14 @@ public class PlayerCollision : MonoBehaviour
             if(other.name == "ShrinkOrb(Clone) (2)")
                 PlayerPrefs.SetInt("shrink",3);
         }else if(other.CompareTag("FinalOrb")){
+            AudioManager.Instance.PlaySFX("OrbSFX");
             float currentMinScale = _playerShrinkData.GetMinScale();
             _playerShrinkData.SetMinScale(--currentMinScale);
             Destroy(other.gameObject);
 
             PlayerPrefs.SetInt("shrink", 4);
         }else if(other.CompareTag("TutorialOrb")){
+            AudioManager.Instance.PlaySFX("OrbSFX");
             float currentMinScale = _playerShrinkData.GetMinScale();
             _playerShrinkData.SetMinScale(--currentMinScale);
             Destroy(other.gameObject);

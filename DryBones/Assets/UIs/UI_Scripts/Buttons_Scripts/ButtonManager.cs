@@ -18,7 +18,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject _mainMenuCanvas;  
     [SerializeField] private GameObject _settingMenuCanvas;
     [SerializeField] private GameObject _tutorialMenuCanvas;
-    [SerializeField] private GameObject _informationMenuCanvas;
+    [SerializeField] private GameObject _endingCanvas;
     [SerializeField] private GameObject _pauseCanvas;
     [SerializeField] private GameObject _upgradeCanvas;
     [SerializeField] private GameObject _playerCanvas;
@@ -62,6 +62,7 @@ public class ButtonManager : MonoBehaviour
     public static bool _isDoubleJumpBought = false;
     public static bool _isDashBought = false;
     public static bool _isWallRunningBought = false;
+    public static bool _isEnded = false;
 
     private void Start()
     {
@@ -82,6 +83,11 @@ public class ButtonManager : MonoBehaviour
             {
                 ResumeGame();
             }
+        }
+        if (_isEnded)
+        {
+            _endingCanvas.SetActive(true);
+            _isEnded = false;
         }
     }
 
@@ -172,7 +178,7 @@ public class ButtonManager : MonoBehaviour
         _mainMenuCanvas.SetActive(false);
         _settingMenuCanvas.SetActive(false);
         _tutorialMenuCanvas.SetActive(false);
-        _informationMenuCanvas.SetActive(false);
+        _endingCanvas.SetActive(false);
         _pauseCanvas.SetActive(false);
         _upgradeCanvas.SetActive(false);
         _playerCanvas.SetActive(false);
@@ -202,20 +208,20 @@ public class ButtonManager : MonoBehaviour
     // Tutorial menu
     public void TutorialMenu()
     {
-        _informationMenuCanvas.SetActive(false);
+        _endingCanvas.SetActive(false);
         _mainMenuCanvas.SetActive(false);
         _settingMenuCanvas.SetActive(false);
         _tutorialMenuCanvas.SetActive(true);
     }
 
     // Information menu
-    public void InformationMenu()
-    {
-        _mainMenuCanvas.SetActive(false);
-        _settingMenuCanvas.SetActive(false);
-        _tutorialMenuCanvas.SetActive(false);
-        _informationMenuCanvas.SetActive(true);
-    }
+    //public void InformationMenu()
+    //{
+    //    _mainMenuCanvas.SetActive(false);
+    //    _settingMenuCanvas.SetActive(false);
+    //    _tutorialMenuCanvas.SetActive(false);
+    //    _endingCanvas.SetActive(true);
+    //}
 
     public void PauseGame()
     {

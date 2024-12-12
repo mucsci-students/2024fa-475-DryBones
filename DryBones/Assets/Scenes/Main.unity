@@ -57953,12 +57953,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
+      propertyPath: _wallRunForce
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: _playerInputHandler
       value: 
       objectReference: {fileID: 1860023507}
     - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: _runSpeedMultiplier
-      value: 1.15
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 8340234500780270638, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: _doubleJumpMultiplier

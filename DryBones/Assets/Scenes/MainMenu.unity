@@ -569,6 +569,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skip: {fileID: 1827973771}
+--- !u!1 &1416736690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3906535930586310681, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
+  m_PrefabInstance: {fileID: 4444982955372487433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1525197220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1073,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1188327214587984451, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
+      propertyPath: _endingCanvas
+      value: 
+      objectReference: {fileID: 1416736690}
     - target: {fileID: 3971039006065580066, guid: a0b6d9741f3216248be12ba136ed93c1, type: 3}
       propertyPath: m_Name
       value: Game_Manager
