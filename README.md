@@ -7,8 +7,7 @@ One man discovers that the world is much bigger than it seems.
 *TODO
 
 ## Run the game
-- Windows: run ``*TODO.exe``
-- MacOS: run ``*TODO.app``
+coming very soon...
 
 (see releases section)
 
