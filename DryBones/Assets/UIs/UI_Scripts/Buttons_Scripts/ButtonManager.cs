@@ -103,7 +103,7 @@ public class ButtonManager : MonoBehaviour
 
     public void BuyDoubleJump()
     {
-        if (PlayerCollision._coinAmount >= 25 && !_isSprintBought)
+        if (PlayerCollision._coinAmount >= 25 && !_isDoubleJumpBought)
         {
             PlayerCollision._coinAmount -= 25;
             _isDoubleJumpBought = true;
