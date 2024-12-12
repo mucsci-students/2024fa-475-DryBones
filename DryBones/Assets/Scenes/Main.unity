@@ -57937,7 +57937,7 @@ PrefabInstance:
       objectReference: {fileID: 1384101380}
     - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: minScale
-      value: -2
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 8111237908269900216, guid: fd8aa1fb84f220947b630b5605540749, type: 3}
       propertyPath: worldComponent

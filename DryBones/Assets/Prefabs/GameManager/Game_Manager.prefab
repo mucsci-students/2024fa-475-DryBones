@@ -13521,7 +13521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14158,6 +14158,18 @@ PrefabInstance:
       propertyPath: _masterVolumeSlider
       value: 
       objectReference: {fileID: 6230899799888155489}
+    - target: {fileID: 5331747462058755436, guid: a8b6ebe9951881244a157b1d7d6a1ac7, type: 3}
+      propertyPath: _sfxAudio.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331747462058755436, guid: a8b6ebe9951881244a157b1d7d6a1ac7, type: 3}
+      propertyPath: _sfxAudio.Array.data[0]._audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 919e7f0f8a9c4874ca910d8b25acf534, type: 3}
+    - target: {fileID: 5331747462058755436, guid: a8b6ebe9951881244a157b1d7d6a1ac7, type: 3}
+      propertyPath: _sfxAudio.Array.data[0]._audioName
+      value: CoinSFX
+      objectReference: {fileID: 0}
     - target: {fileID: 5437621370550660435, guid: a8b6ebe9951881244a157b1d7d6a1ac7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

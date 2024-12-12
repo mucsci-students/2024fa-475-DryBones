@@ -19,6 +19,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
+            AudioManager.Instance.PlaySFX("CoinSFX");
             // Access the static field directly using the class name
             ++_coinAmount;
             //Debug.Log($"Coin amount: {GameManager._coinAmount}");

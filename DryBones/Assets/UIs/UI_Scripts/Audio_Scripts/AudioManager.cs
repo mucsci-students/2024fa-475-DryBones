@@ -50,6 +50,20 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlaySFX(string audioName)
+    {
+        Sound sounds = Array.Find(_sfxAudio, x => x._audioName == audioName);
+        if (sounds == null)
+        {
+            Debug.Log("Theme Audio Not Found!");
+        }
+        else
+        {
+            _sfxAudioSource.clip = sounds._audioClip;
+            _sfxAudioSource.PlayOneShot(_sfxAudioSource.clip);
+        }
+    }
+
     public void MasterVolume(float volume)
     {
         _themeAudioSource.volume = volume;
