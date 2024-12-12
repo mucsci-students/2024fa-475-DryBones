@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DialogueEditor;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.SceneManagement;
 
 public class InitialConversation : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class InitialConversation : MonoBehaviour
             ConversationManager.Instance.EndConversation();
         }
         
-        //implement world switch later
+        SceneManager.LoadScene("", LoadSceneMode.Single);
     }
         
 }
