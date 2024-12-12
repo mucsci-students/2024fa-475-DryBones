@@ -81,7 +81,7 @@ public class MainDialogue : MonoBehaviour
 
 
             if(hasFinished){
-                if(Input.GetKeyDown(KeyCode.Return)){
+                if(Input.GetKeyDown(KeyCode.Backspace)){
                     ConversationManager.Instance.StartConversation(returnOptions);
                 }
 
