@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     private bool _hasStartedIngameMusic = false; // Flag to track if the coroutine has started
 
+    private Vector2 aspectRatio = Vector2.zero; // desired aspect ratio (e.g., 16:9)
+
     private void Awake()
     {
         // Check if an instance of GameManager already exists
@@ -27,6 +29,13 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject); // Destroy duplicate GameManager
+        }
+
+        if (aspectRatio != Vector2.zero)
+        {
+            float x = Screen.height * (aspectRatio.x / aspectRatio.y);
+            float y = Screen.height;
+            Screen.SetResolution((int)x, (int)y, true); // true for full screen
         }
     }
 
