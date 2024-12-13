@@ -145,6 +145,7 @@ namespace DialogueEditor
 
         public void StartConversation(NPCConversation conversation)
         {
+            Debug.Log ("convo: " + conversation);
             m_conversation = conversation.Deserialize();
             if (OnConversationStarted != null)
                 OnConversationStarted.Invoke();

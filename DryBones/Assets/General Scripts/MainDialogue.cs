@@ -53,6 +53,11 @@ public class MainDialogue : MonoBehaviour
     bool dashNotBought = true;
 
     bool wallRunNotBought = true; 
+    bool orb1done = false;
+    bool orb2done = false;
+    bool orb3done = false;
+    bool orb4done = false;
+    bool orbTdone = false;
 
     void Start(){
             fpsScript = GameObject.Find("Player").GetComponent<ThirdPersonController>();
@@ -136,21 +141,21 @@ public class MainDialogue : MonoBehaviour
             }
 
             if(!skipDialogue && !ConversationManager.Instance.IsConversationActive){
-                if(currentSize == 1){
+                if(!orb1done && currentSize == 1){
                     PlayerPrefs.SetInt("hasPlayed",1);
-                    currentSize = -1;
+                    orb1done = true;
                     ConversationManager.Instance.StartConversation(collected1Orb);
-                }else if(currentSize == 2){
-                    currentSize = -1;
+                }else if(!orb2done && currentSize == 2){
+                    orb2done = true;
                     ConversationManager.Instance.StartConversation(collected2Orb);
-                }else if(currentSize == 3){
-                    currentSize = -1;
+                }else if(!orb3done && currentSize == 3){
+                    orb3done = true;
                     ConversationManager.Instance.StartConversation(collected3Orb);
-                }else if(currentSize == 4){
-                    currentSize = -1;
+                }else if(!orb4done && currentSize == 4){
+                    orb4done = true;
                     ConversationManager.Instance.StartConversation(collected4Orb);
-                }else if(currentSize == 0){
-                    currentSize = -1;
+                }else if(!orbTdone && currentSize == 0){
+                    orbTdone = true;
                     ConversationManager.Instance.StartConversation(collectedTOrb);
                 }
             }
