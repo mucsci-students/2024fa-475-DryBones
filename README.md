@@ -1,7 +1,7 @@
 # 2024fa-475-DryBones
 
 ## Mr. Pillman and the Scientist's Big Shrink
-One man discovers that the world is much bigger than it seems.
+A capsule collider discovers that the world is much bigger than it seems.
 
 ## Screenshots
 ![tutorial_screenshot Image](./85E2B67D-F654-42DD-9637-837E2F6C38F9_1_201_a.jpeg)
