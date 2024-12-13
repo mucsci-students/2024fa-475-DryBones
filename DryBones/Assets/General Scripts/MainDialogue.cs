@@ -135,7 +135,7 @@ public class MainDialogue : MonoBehaviour
                 }
             }
 
-            if(!skipDialogue){
+            if(!skipDialogue && !ConversationManager.Instance.IsConversationActive){
                 if(currentSize == 1){
                     PlayerPrefs.SetInt("hasPlayed",1);
                     ConversationManager.Instance.StartConversation(collected1Orb);
