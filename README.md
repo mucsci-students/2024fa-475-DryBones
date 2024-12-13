@@ -27,6 +27,6 @@ A capsule collider discovers that the world is much larger than it seems.
 - Dash: ``LEFT MOUSE BUTTON``
 
 ## Authors
-- Quang
+- Quang Bui
 - Lincoln Craddock
 - Josh
