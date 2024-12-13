@@ -105,7 +105,6 @@ public class ButtonManager : MonoBehaviour
             PlayerCollision._coinAmount -= 20;
             _isSprintBought = true;
         }
-        _isSprintBought = true;
         Debug.Log("BUY SPRINT!");
     }
 
@@ -116,7 +115,6 @@ public class ButtonManager : MonoBehaviour
             PlayerCollision._coinAmount -= 25;
             _isDoubleJumpBought = true;
         }
-        _isDoubleJumpBought = true;
         Debug.Log("BUY DOUBLE JUMP!");
     }
 
@@ -127,7 +125,6 @@ public class ButtonManager : MonoBehaviour
             PlayerCollision._coinAmount -= 30;
             _isDashBought = true;
         }
-        _isDashBought = true;
         Debug.Log("BUY DASH!");
     }
 
@@ -138,7 +135,6 @@ public class ButtonManager : MonoBehaviour
             PlayerCollision._coinAmount -= 35;
             _isWallRunningBought = true;
         }
-        _isWallRunningBought = true;
         Debug.Log("BUY WALL RUNNING!");
     }
 
