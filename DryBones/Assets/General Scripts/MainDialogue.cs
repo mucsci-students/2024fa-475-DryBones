@@ -76,7 +76,7 @@ public class MainDialogue : MonoBehaviour
     void Update()
     {
         if(ConversationManager.Instance != null && SceneManager.GetActiveScene().name == "Main"){
-            if(ConversationManager.Instance.IsConversationActive){
+            if(ConversationManager.Instance.IsConversationActive && !skipDialogue){
                 fpsScript.enabled = false;
             }else{
                 fpsScript.enabled = true;
