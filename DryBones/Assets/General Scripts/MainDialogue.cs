@@ -138,14 +138,19 @@ public class MainDialogue : MonoBehaviour
             if(!skipDialogue && !ConversationManager.Instance.IsConversationActive){
                 if(currentSize == 1){
                     PlayerPrefs.SetInt("hasPlayed",1);
+                    currentSize = -1;
                     ConversationManager.Instance.StartConversation(collected1Orb);
                 }else if(currentSize == 2){
+                    currentSize = -1;
                     ConversationManager.Instance.StartConversation(collected2Orb);
                 }else if(currentSize == 3){
+                    currentSize = -1;
                     ConversationManager.Instance.StartConversation(collected3Orb);
                 }else if(currentSize == 4){
+                    currentSize = -1;
                     ConversationManager.Instance.StartConversation(collected4Orb);
                 }else if(currentSize == 0){
+                    currentSize = -1;
                     ConversationManager.Instance.StartConversation(collectedTOrb);
                 }
             }
